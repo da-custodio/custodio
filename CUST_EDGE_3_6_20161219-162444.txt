@@ -1,0 +1,184 @@
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show running-config
+Building configuration...
+
+Current configuration : 1503 bytes
+!
+! Last configuration change at 15:37:01 UTC Fri Dec 16 2016
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname CUST_EDGE_3_6
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$L8y3$03SwkDY7IylsSQEDZ1qHl1
+!
+no aaa new-model
+!
+ip cef
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+license udi pid CISCO2901/K9 sn FCZ184492UD
+!
+!
+!
+redundancy
+!
+!
+!
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+interface Tunnel1
+ ip address 10.0.2.6 255.255.255.252
+ tunnel source 128.10.4.2
+ tunnel destination 128.20.2.2
+!
+interface Embedded-Service-Engine0/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/0
+ ip address 128.10.4.5 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ ip address 128.10.4.2 255.255.255.252
+ duplex auto
+ speed auto
+!
+router ospf 1
+ network 128.10.4.0 0.0.0.3 area 0
+ network 128.10.4.4 0.0.0.3 area 0
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+!
+control-plane
+!
+!
+banner login ^CProvide Username and Password and Cookies^C
+banner motd ^CUnauthorized Access is prohibited 4CN^C
+!
+line con 0
+ password 7 094F471A1A0A
+ logging synchronous
+ login
+line aux 0
+line 2
+ no activation-character
+ no exec
+ transport preferred none
+ transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
+ stopbits 1
+line vty 0 4
+ password 7 01100F175804
+ logging synchronous
+ login
+ transport input all
+!
+scheduler allocate 20000 1000
+!
+end
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show version
+Cisco IOS Software, C2900 Software (C2900-UNIVERSALK9-M), Version 15.2(4)M6a, RELEASE SOFTWARE (fc1)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2014 by Cisco Systems, Inc.
+Compiled Tue 15-Apr-14 09:45 by prod_rel_team
+
+ROM: System Bootstrap, Version 15.0(1r)M16, RELEASE SOFTWARE (fc1)
+
+CUST_EDGE_3_6 uptime is 3 days, 1 hour, 52 minutes
+System returned to ROM by reload at 13:15:46 UTC Fri Dec 16 2016
+System image file is "flash0:c2900-universalk9-mz.SPA.152-4.M6a.bin"
+Last reload type: Normal Reload
+Last reload reason: Reload Command
+
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+Cisco CISCO2901/K9 (revision 1.0) with 487424K/36864K bytes of memory.
+Processor board ID FCZ184492UD
+2 Gigabit Ethernet interfaces
+1 terminal line
+1 Virtual Private Network (VPN) Module
+DRAM configuration is 64 bits wide with parity enabled.
+255K bytes of non-volatile configuration memory.
+255488K bytes of ATA System CompactFlash 0 (Read/Write)
+
+
+License Info:
+
+License UDI:
+
+-------------------------------------------------
+Device#	  PID			SN
+-------------------------------------------------
+*0  	  CISCO2901/K9          FCZ184492UD     
+
+
+
+Technology Package License Information for Module:'c2900' 
+
+-----------------------------------------------------------------
+Technology    Technology-package           Technology-package
+              Current       Type           Next reboot  
+------------------------------------------------------------------
+ipbase        ipbasek9      Permanent      ipbasek9
+security      securityk9    Permanent      securityk9
+uc            None          None           None
+data          None          None           None
+
+Configuration register is 0x2102
+
+
+
