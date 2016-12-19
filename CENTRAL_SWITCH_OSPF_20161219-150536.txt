@@ -1,0 +1,162 @@
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show running-config
+Building configuration...
+
+Current configuration : 1419 bytes
+!
+version 12.2
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname CENTRAL_SWITCH_OSPF
+!
+boot-start-marker
+boot-end-marker
+!
+!
+username cisco privilege 15 password 0 cisco
+no aaa new-model
+system mtu routing 1500
+ip subnet-zero
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+!
+interface FastEthernet0/1
+!
+interface FastEthernet0/2
+!
+interface FastEthernet0/3
+!
+interface FastEthernet0/4
+!
+interface FastEthernet0/5
+!
+interface FastEthernet0/6
+!
+interface FastEthernet0/7
+!
+interface FastEthernet0/8
+!
+interface FastEthernet0/9
+!
+interface FastEthernet0/10
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+!
+interface FastEthernet0/23
+!
+interface FastEthernet0/24
+!
+interface GigabitEthernet0/1
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+ip http server
+!
+!
+control-plane
+!
+!
+line con 0
+ logging synchronous
+ login local
+line vty 0 4
+ logging synchronous
+ login local
+line vty 5 15
+ logging synchronous
+ login local
+!
+end
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show version
+Cisco IOS Software, C3560 Software (C3560-IPBASE-M), Version 12.2(50)SE5, RELEASE SOFTWARE (fc1)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2010 by Cisco Systems, Inc.
+Compiled Tue 28-Sep-10 13:21 by prod_rel_team
+Image text-base: 0x01000000, data-base: 0x02700000
+
+ROM: Bootstrap program is C3560 boot loader
+BOOTLDR: C3560 Boot Loader (C3560-HBOOT-M) Version 12.2(53r)SEY4, RELEASE SOFTWARE (fc1)
+
+CENTRAL_SWITCH_OSPF uptime is 2 days, 6 hours, 30 minutes
+System returned to ROM by power-on
+System image file is "flash:/c3560-ipbase-mz.122-50.SE5.bin"
+
+cisco WS-C3560V2-24PS (PowerPC405) processor (revision M0) with 131072K bytes of memory.
+Processor board ID FDO1523Y2AQ
+Last reset from power-on
+1 Virtual Ethernet interface
+24 FastEthernet interfaces
+2 Gigabit Ethernet interfaces
+The password-recovery mechanism is enabled.
+
+512K bytes of flash-simulated non-volatile configuration memory.
+Base ethernet MAC Address       : D0:C2:82:39:60:80
+Motherboard assembly number     : 73-12634-01
+Power supply part number        : 341-0266-03
+Motherboard serial number       : FDO15240GPM
+Power supply serial number      : LIT15200KSF
+Model revision number           : M0
+Motherboard revision number     : B0
+Model number                    : WS-C3560V2-24PS-E
+System serial number            : FDO1523Y2AQ
+Top Assembly Part Number        : 800-33976-02
+Top Assembly Revision Number    : A0
+Version ID                      : V06
+CLEI Code Number                : COMKL10DRA
+Hardware Board Revision Number  : 0x02
+
+
+Switch Ports Model              SW Version            SW Image                 
+------ ----- -----              ----------            ----------               
+*    1 26    WS-C3560V2-24PS    12.2(50)SE5           C3560-IPBASE-M           
+
+
+Configuration register is 0xF
+
+
+

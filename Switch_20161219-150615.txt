@@ -1,0 +1,262 @@
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show running-config
+Building configuration...
+
+Current configuration : 3650 bytes
+!
+version 12.2
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname Switch
+!
+!
+no aaa new-model
+ip subnet-zero
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+!
+interface FastEthernet0/1
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/2
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/3
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/4
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/5
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/6
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/7
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/8
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/9
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/10
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/11
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/12
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/13
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/14
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/15
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/16
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/17
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/18
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/19
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/20
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/21
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/22
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/23
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/24
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/25
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/26
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/27
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/28
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/29
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/30
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/31
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/32
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/33
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/34
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/35
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/36
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/37
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/38
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/39
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/40
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/41
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/42
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/43
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/44
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/45
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/46
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/47
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/48
+ switchport mode dynamic desirable
+!
+interface GigabitEthernet0/1
+ switchport mode dynamic desirable
+!
+interface GigabitEthernet0/2
+ switchport mode dynamic desirable
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+ip http server
+ip http secure-server
+!
+!
+control-plane
+!
+!
+line con 0
+line vty 5 15
+!
+end
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show version
+Cisco IOS Software, C3550 Software (C3550-IPBASEK9-M), Version 12.2(44)SE6, RELEASE SOFTWARE (fc1)
+Copyright (c) 1986-2009 by Cisco Systems, Inc.
+Compiled Mon 09-Mar-09 20:26 by gereddy
+Image text-base: 0x00003000, data-base: 0x00EA3DB8
+
+ROM: Bootstrap program is C3550 boot loader
+
+Switch uptime is 4 days, 22 hours, 58 minutes
+System returned to ROM by power-on
+System image file is "flash:/c3550-ipbasek9-mz.122-44.se6.bin"
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+Cisco WS-C3550-48 (PowerPC) processor (revision D0) with 65526K/8192K bytes of memory.
+Processor board ID CAT0627X06V
+Last reset from warm-reset
+Running Layer2/3 Switching Image
+
+Ethernet-controller 1 has 12 Fast Ethernet/IEEE 802.3 interfaces
+
+Ethernet-controller 2 has 12 Fast Ethernet/IEEE 802.3 interfaces
+
+Ethernet-controller 3 has 12 Fast Ethernet/IEEE 802.3 interfaces
+
+Ethernet-controller 4 has 12 Fast Ethernet/IEEE 802.3 interfaces
+
+Ethernet-controller 5 has 1 Gigabit Ethernet/IEEE 802.3 interface
+
+Ethernet-controller 6 has 1 Gigabit Ethernet/IEEE 802.3 interface
+
+48 FastEthernet interfaces
+2 Gigabit Ethernet interfaces
+
+The password-recovery mechanism is enabled.
+384K bytes of flash-simulated NVRAM.
+Base ethernet MAC Address: 00:0A:41:90:D0:80
+Motherboard assembly number: 73-5701-06
+Power supply part number: 34-0967-01
+Motherboard serial number: CAT06260DHV
+Power supply serial number: DAB06230U06
+Model revision number: D0
+Motherboard revision number: C0
+Model number: WS-C3550-48-SMI
+System serial number: CAT0627X06V
+Configuration register is 0x10F
+
+
+
