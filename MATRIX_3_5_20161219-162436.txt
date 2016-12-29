@@ -78,9 +78,13 @@ interface GigabitEthernet0/1
  speed auto
 !
 router ospf 1
- passive-interface GigabitEthernet0/0
+ passive-interface GigabitEthernet0/1
  network 128.10.3.8 0.0.0.3 area 0
  network 128.10.3.16 0.0.0.15 area 0
+ network 129.10.3.8 0.0.0.3 area 0
+ network 126.10.3.16 0.0.0.15 area 0
+ network 124.10.3.8 0.0.0.3 area 0
+ network 122.10.3.16 0.0.0.15 area 0
 !
 ip forward-protocol nd
 !
