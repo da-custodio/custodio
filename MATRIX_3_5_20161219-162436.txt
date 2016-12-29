@@ -1,6 +1,7 @@
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show running-config
-Building configuration...
+
+Building configuration...
 
 Current configuration : 1570 bytes
 !
@@ -25,6 +26,8 @@ ip cef
 !
 ip dhcp excluded-address 128.10.3.17
 ip dhcp excluded-address 128.10.3.18
+ip dhcp excluded-address 128.10.3.33
+ip dhcp excluded-address 128.10.3.55
 !
 ip dhcp pool KUNDE3
  network 128.10.3.16 255.255.255.240
@@ -116,9 +119,11 @@ scheduler allocate 20000 1000
 end
 
 
-! -------------------------------------------------------------------------------------------------------------------------------- ! 
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show version
-Cisco IOS Software, C2900 Software (C2900-UNIVERSALK9-M), Version 15.2(4)M6a, RELEASE SOFTWARE (fc1)
+
+Cisco IOS Software, C2900 Software (C2900-UNIVERSALK9-M), Version 15.2(4)M6a, RELEASE SOFTWARE (fc1)
 Technical Support: http://www.cisco.com/techsupport
 Copyright (c) 1986-2014 by Cisco Systems, Inc.
 Compiled Tue 15-Apr-14 09:45 by prod_rel_team
@@ -183,4 +188,4 @@ data          None          None           None
 Configuration register is 0x2102
 
 
-
+
