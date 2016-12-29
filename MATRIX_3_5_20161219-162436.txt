@@ -5,6 +5,7 @@ Building configuration...
 
 Current configuration : 1570 bytes
 !
+! Test
 ! Last configuration change at 16:31:09 UTC Fri Dec 16 2016 by cisco
 version 15.2
 service timestamps debug datetime msec
