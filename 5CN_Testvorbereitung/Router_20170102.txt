@@ -3,7 +3,7 @@ show running-config
 Building configuration...
 
 
-Current configuration : 963 bytes
+Current configuration : 978 bytes
 !
 version 12.4
 service timestamps debug datetime msec
@@ -88,8 +88,7 @@ interface Serial0/2/0
  clock rate 2000000
 !
 interface Serial0/2/1
- no ip address
- shutdown
+ ip address 10.5.100.78 255.255.255.252
  clock rate 2000000
 !
 ip forward-protocol nd
@@ -126,11 +125,12 @@ end
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ip int brief
-Interface                  IP-Address      OK? Method Status                Protocol
+*Jan  2 12:00:10.928: %SYS-5-CONFIG_I: Configured from console by consoleshow ip int brief
+Interface                  IP-Address      OK? Method Status                Protocol
 FastEthernet0/0            192.168.1.10    YES manual up                    up      
 FastEthernet0/1            unassigned      YES unset  administratively down down    
 Serial0/2/0                unassigned      YES manual administratively down down    
-Serial0/2/1                unassigned      YES unset  administratively down down    
+Serial0/2/1                10.5.100.78     YES manual down                  down    
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show version
@@ -141,7 +141,7 @@ Compiled Mon 19-Oct-09 17:38 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.4(13r)T11, RELEASE SOFTWARE (fc1)
 
-Router uptime is 1 week, 2 days, 22 hours, 56 minutes
+Router uptime is 1 week, 2 days, 22 hours, 58 minutes
 System returned to ROM by reload at 12:59:28 UTC Fri Dec 23 2016
 System image file is "flash:c2800nm-adventerprisek9-mz.124-24.T2.bin"
 
