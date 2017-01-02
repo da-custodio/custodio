@@ -132,15 +132,14 @@ Serial0/2/1                10.5.100.78     YES manual down                  down
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show version
-*Jan  2 12:11:48.740: %SYS-5-CONFIG_I: Configured from console by consoleshow version
-Cisco IOS Software, 2800 Software (C2800NM-ADVENTERPRISEK9-M), Version 12.4(24)T2, RELEASE SOFTWARE (fc2)
+Cisco IOS Software, 2800 Software (C2800NM-ADVENTERPRISEK9-M), Version 12.4(24)T2, RELEASE SOFTWARE (fc2)
 Technical Support: http://www.cisco.com/techsupport
 Copyright (c) 1986-2009 by Cisco Systems, Inc.
 Compiled Mon 19-Oct-09 17:38 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.4(13r)T11, RELEASE SOFTWARE (fc1)
 
-Router uptime is 1 week, 2 days, 23 hours, 10 minutes
+Router uptime is 1 week, 2 days, 23 hours, 18 minutes
 System returned to ROM by reload at 12:59:28 UTC Fri Dec 23 2016
 System image file is "flash:c2800nm-adventerprisek9-mz.124-24.T2.bin"
 
