@@ -104,8 +104,7 @@ no ip http secure-server
 !
 !
 !
-control-pl
-*Jan  2 09:28:41.425: %SYS-5-CONFIG_I: Configured from console by consoleane
+control-plane
 !
 !
 !
@@ -134,7 +133,7 @@ Compiled Mon 19-Oct-09 17:38 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.4(13r)T11, RELEASE SOFTWARE (fc1)
 
-Router uptime is 1 week, 2 days, 20 hours, 27 minutes
+Router uptime is 1 week, 2 days, 20 hours, 53 minutes
 System returned to ROM by reload at 12:59:28 UTC Fri Dec 23 2016
 System image file is "flash:c2800nm-adventerprisek9-mz.124-24.T2.bin"
 
