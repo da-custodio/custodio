@@ -3,7 +3,7 @@ show running-config
 Building configuration...
 
 
-Current configuration : 978 bytes
+Current configuration : 988 bytes
 !
 version 12.4
 service timestamps debug datetime msec
@@ -82,8 +82,7 @@ interface FastEthernet0/1
  speed auto
 !
 interface Serial0/2/0
- no ip address
- shutdown
+ ip address 10.7.8.9 255.255.255.0
  no fair-queue
  clock rate 2000000
 !
@@ -128,19 +127,20 @@ show ip int brief
 Interface                  IP-Address      OK? Method Status                Protocol
 FastEthernet0/0            192.168.1.10    YES manual up                    up      
 FastEthernet0/1            unassigned      YES unset  administratively down down    
-Serial0/2/0                unassigned      YES manual administratively down down    
+Serial0/2/0                10.7.8.9        YES manual down                  down    
 Serial0/2/1                10.5.100.78     YES manual down                  down    
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show version
-Cisco IOS Software, 2800 Software (C2800NM-ADVENTERPRISEK9-M), Version 12.4(24)T2, RELEASE SOFTWARE (fc2)
+*Jan  2 12:11:48.740: %SYS-5-CONFIG_I: Configured from console by consoleshow version
+Cisco IOS Software, 2800 Software (C2800NM-ADVENTERPRISEK9-M), Version 12.4(24)T2, RELEASE SOFTWARE (fc2)
 Technical Support: http://www.cisco.com/techsupport
 Copyright (c) 1986-2009 by Cisco Systems, Inc.
 Compiled Mon 19-Oct-09 17:38 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.4(13r)T11, RELEASE SOFTWARE (fc1)
 
-Router uptime is 1 week, 2 days, 23 hours, 0 minutes
+Router uptime is 1 week, 2 days, 23 hours, 10 minutes
 System returned to ROM by reload at 12:59:28 UTC Fri Dec 23 2016
 System image file is "flash:c2800nm-adventerprisek9-mz.124-24.T2.bin"
 
