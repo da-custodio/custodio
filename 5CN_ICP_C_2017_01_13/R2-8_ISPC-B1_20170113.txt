@@ -1,0 +1,407 @@
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show running-config
+Building configuration...
+
+Current configuration : 1967 bytes
+!
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname R2-8_ISPC-B1
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 5 $1$Kpe3$cDqbrCF2Mq4ndyrdZ8Xml0
+!
+no aaa new-model
+!
+resource policy
+!
+ip cef
+!
+!
+!
+!
+no ip domain lookup
+!
+!
+!
+voice-card 0
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+username cisco privilege 15 secret 5 $1$OgbR$ockJEguRT/tSqRhprVTXk0
+!
+! 
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 8.1.1.1 255.255.255.0
+!
+interface FastEthernet0/0
+ ip address 190.30.0.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface Serial0/1/0
+ no ip address
+ encapsulation frame-relay
+ no keepalive
+!
+interface Serial0/1/0.102 point-to-point
+ description to R2-2_ISPC
+ ip address 10.30.0.2 255.255.255.252
+ frame-relay interface-dlci 102   
+!
+interface Serial0/1/1
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+router ospf 1
+ log-adjacency-changes
+ redistribute static subnets
+ network 8.1.1.0 0.0.0.255 area 1
+ network 10.30.0.0 0.0.0.3 area 1
+ default-information originate
+!
+router bgp 300
+ no synchronization
+ bgp log-neighbor-changes
+ network 190.30.0.0 mask 255.255.255.0
+ neighbor 9.1.1.1 remote-as 300
+ neighbor 9.1.1.1 update-source Loopback0
+ neighbor 9.1.1.1 next-hop-self
+ no auto-summary
+!
+ip route 10.1.0.0 255.255.255.0 190.30.0.254
+ip route 10.2.0.0 255.255.255.0 190.30.0.254
+ip route 10.3.0.0 255.255.255.0 190.30.0.254
+!
+!
+ip http server
+no ip http secure-server
+!
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+!
+banner motd ^CNot Authorized!^C
+!
+line con 0
+ exec-timeout 0 0
+ password 7 045802150C2E
+ logging synchronous
+ login local
+line aux 0
+line vty 0 4
+ exec-timeout 0 0
+ password 7 110A1016141D
+ logging synchronous
+ login local
+ transport input telnet
+line vty 5 15
+ exec-timeout 0 0
+ password 7 110A1016141D
+ logging synchronous
+ login local
+ transport input telnet
+!
+scheduler allocate 20000 1000
+end
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is 10.30.0.1 to network 0.0.0.0
+
+B    200.3.0.0/24 [200/0] via 100.1.1.1, 00:24:54
+B    200.4.0.0/24 [200/0] via 100.1.1.1, 00:24:55
+B    200.5.0.0/24 [200/0] via 22.1.1.1, 00:24:51
+B    200.7.0.0/24 [200/0] via 100.1.1.1, 00:24:55
+B    200.8.0.0/24 [200/0] via 100.1.1.1, 00:24:55
+B    200.9.0.0/24 [200/0] via 100.1.1.1, 00:24:55
+     190.20.0.0/24 is subnetted, 1 subnets
+B       190.20.0.0 [200/0] via 28.1.1.1, 00:24:55
+     190.30.0.0/24 is subnetted, 1 subnets
+C       190.30.0.0 is directly connected, FastEthernet0/0
+     23.0.0.0/32 is subnetted, 1 subnets
+O       23.1.1.1 [110/129] via 10.30.0.1, 00:25:15, Serial0/1/0.102
+     22.0.0.0/32 is subnetted, 1 subnets
+O       22.1.1.1 [110/129] via 10.30.0.1, 00:25:15, Serial0/1/0.102
+     8.0.0.0/24 is subnetted, 1 subnets
+C       8.1.1.0 is directly connected, Loopback0
+     9.0.0.0/32 is subnetted, 1 subnets
+O       9.1.1.1 [110/65] via 10.30.0.1, 00:25:15, Serial0/1/0.102
+     10.0.0.0/8 is variably subnetted, 7 subnets, 2 masks
+S       10.2.0.0/24 [1/0] via 190.30.0.254
+S       10.3.0.0/24 [1/0] via 190.30.0.254
+S       10.1.0.0/24 [1/0] via 190.30.0.254
+O       10.30.0.4/30 [110/128] via 10.30.0.1, 00:25:15, Serial0/1/0.102
+C       10.30.0.0/30 is directly connected, Serial0/1/0.102
+O       10.30.0.12/30 [110/128] via 10.30.0.1, 00:25:15, Serial0/1/0.102
+O       10.30.0.8/30 [110/128] via 10.30.0.1, 00:25:15, Serial0/1/0.102
+     28.0.0.0/32 is subnetted, 1 subnets
+O       28.1.1.1 [110/129] via 10.30.0.1, 00:25:15, Serial0/1/0.102
+     180.10.0.0/24 is subnetted, 1 subnets
+B       180.10.0.0 [200/0] via 100.1.1.1, 00:24:55
+     180.20.0.0/24 is subnetted, 1 subnets
+B       180.20.0.0 [200/0] via 100.1.1.1, 00:24:57
+     180.30.0.0/24 is subnetted, 1 subnets
+B       180.30.0.0 [200/0] via 9.1.1.1, 00:24:57
+O*E2 0.0.0.0/0 [110/1] via 10.30.0.1, 00:25:18, Serial0/1/0.102
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip int brief
+Interface                  IP-Address      OK? Method Status                Protocol
+FastEthernet0/0            190.30.0.1      YES manual up                    up      
+FastEthernet0/1            unassigned      YES unset  administratively down down    
+Serial0/1/0                unassigned      YES unset  up                    up      
+Serial0/1/0.102            10.30.0.2       YES manual up                    up      
+Serial0/1/1                unassigned      YES unset  administratively down down    
+Loopback0                  8.1.1.1         YES manual up                    up      
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip access-lists
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show cdp neighbors
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+R2-7_ISP_A-B3.cisco.com
+                 Fas 0/0            170         R S I     2801      Fas 0/0
+R2-9_ISPC-B2     Ser 0/1/0.102      167         R S I     2801      Ser 0/1/0.100
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip ospf 1
+ Routing Process "ospf 1" with ID 190.30.0.1
+ Start time: 00:02:30.544, Time elapsed: 23:54:15.804
+ Supports only single TOS(TOS0) routes
+ Supports opaque LSA
+ Supports Link-local Signaling (LLS)
+ Supports area transit capability
+ It is an autonomous system boundary router
+ Redistributing External Routes from,
+    static, includes subnets in redistribution
+ Router is not originating router-LSAs with maximum metric
+ Initial SPF schedule delay 5000 msecs
+ Minimum hold time between two consecutive SPFs 10000 msecs
+ Maximum wait time between two consecutive SPFs 10000 msecs
+ Incremental-SPF disabled
+ Minimum LSA interval 5 secs
+ Minimum LSA arrival 1000 msecs
+ LSA group pacing timer 240 secs
+ Interface flood pacing timer 33 msecs
+ Retransmission pacing timer 66 msecs
+ Number of external LSA 4. Checksum Sum 0x010932
+ Number of opaque AS LSA 0. Checksum Sum 0x000000
+ Number of DCbitless external and opaque AS LSA 0
+ Number of DoNotAge external and opaque AS LSA 0
+ Number of areas in this router is 1. 1 normal 0 stub 0 nssa
+ Number of areas transit capable is 0
+ External flood list length 0
+ IETF NSF helper support enabled
+ Cisco NSF helper support enabled
+    Area 1
+	Number of interfaces in this area is 2 (1 loopback)
+	Area has no authentication
+	SPF algorithm last executed 00:25:20.300 ago
+	SPF algorithm executed 40 times
+	Area ranges are
+	Number of LSA 5. Checksum Sum 0x01BFD1
+	Number of opaque link LSA 0. Checksum Sum 0x000000
+	Number of DCbitless LSA 0
+	Number of indication LSA 0
+	Number of DoNotAge LSA 0
+	Flood list length 0
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip bgp summary
+BGP router identifier 190.30.0.1, local AS number 300
+BGP table version is 72, main routing table version 72
+11 network entries using 1419 bytes of memory
+11 path entries using 572 bytes of memory
+5/4 BGP path/bestpath attribute entries using 620 bytes of memory
+2 BGP rrinfo entries using 48 bytes of memory
+2 BGP AS-PATH entries using 48 bytes of memory
+0 BGP route-map cache entries using 0 bytes of memory
+0 BGP filter-list cache entries using 0 bytes of memory
+BGP using 2707 total bytes of memory
+BGP activity 19/8 prefixes, 41/30 paths, scan interval 60 secs
+
+Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+9.1.1.1         4   300     177     146       72    0    0 00:25:01       10
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+sh ip bgp neighbor
+BGP neighbor is 9.1.1.1,  remote AS 300, internal link
+  BGP version 4, remote router ID 9.1.1.1
+  BGP state = Established, up for 00:25:02
+  Last read 00:00:02, last write 00:00:02, hold time is 180, keepalive interval is 60 seconds
+  Neighbor capabilities:
+    Route refresh: advertised and received(old & new)
+    Address family IPv4 Unicast: advertised and received
+  Message statistics:
+    InQ depth is 0
+    OutQ depth is 0
+                         Sent       Rcvd
+    Opens:                  3          3
+    Notifications:          0          0
+    Updates:                3         34
+    Keepalives:           140        140
+    Route Refresh:          0          0
+    Total:                146        177
+  Default minimum time between advertisement runs is 0 seconds
+
+ For address family: IPv4 Unicast
+  BGP table version 72, neighbor version 72/0
+ Output queue size : 0
+  Index 1, Offset 0, Mask 0x2
+  1 update-group member
+  NEXT_HOP is always this router
+                                 Sent       Rcvd
+  Prefix activity:               ----       ----
+    Prefixes Current:               1         10 (Consumes 520 bytes)
+    Prefixes Total:                 1         10
+    Implicit Withdraw:              0          0
+    Explicit Withdraw:              0          0
+    Used as bestpath:             n/a         10
+    Used as multipath:            n/a          0
+
+                                   Outbound    Inbound
+  Local Policy Denied Prefixes:    --------    -------
+    ORIGINATOR loop:                    n/a          1
+    Bestpath from this peer:             10        n/a
+    Total:                               10          1
+  Number of NLRIs in the update sent: max 1, min 1
+
+  Connections established 3; dropped 2
+  Last reset 00:25:22, due to Peer closed the session
+Connection state is ESTAB, I/O status: 1, unread input bytes: 0            
+Connection is ECN Disabled, Mininum incoming TTL 0, Outgoing TTL 255
+Local host: 8.1.1.1, Local port: 179
+Foreign host: 9.1.1.1, Foreign port: 60954
+Connection tableid (VRF): 0
+
+Enqueued packets for retransmit: 0, input: 0  mis-ordered: 0 (0 bytes)
+
+Event Timers (current time is 0x5237C6C):
+Timer          Starts    Wakeups            Next
+Retrans            29          0             0x0
+TimeWait            0          0             0x0
+AckHold            30          2             0x0
+SendWnd             0          0             0x0
+KeepAlive           0          0             0x0
+GiveUp              0          0             0x0
+PmtuAger            0          0             0x0
+DeadWait            0          0             0x0
+Linger              0          0             0x0
+ProcessQ            0          0             0x0
+
+iss:  699861485  snduna:  699862118  sndnxt:  699862118     sndwnd:  16289
+irs:  475908508  rcvnxt:  475909488  rcvwnd:      15947  delrcvwnd:    437
+
+SRTT: 294 ms, RTTO: 346 ms, RTV: 52 ms, KRTT: 0 ms
+minRTT: 4 ms, maxRTT: 300 ms, ACK hold: 200 ms
+Status Flags: passive open, gen tcbs
+Option Flags: nagle
+IP Precedence value : 6
+
+Datagrams (max data segment is 536 bytes):
+Rcvd: 58 (out of order: 0), with data: 31, total data bytes: 979
+Sent: 32 (retransmit: 0, fastretransmit: 0, partialack: 0, Second Congestion: 0), with data: 28, total data bytes: 632
+ Packets received in fast path: 0, fast processed: 0, slow path: 0
+ fast lock acquisition failures: 0, slow path: 0
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show version
+Cisco IOS Software, 2801 Software (C2801-ADVENTERPRISEK9-M), Version 12.4(9)T3, RELEASE SOFTWARE (fc3)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2007 by Cisco Systems, Inc.
+Compiled Fri 23-Mar-07 19:08 by prod_rel_team
+
+ROM: System Bootstrap, Version 12.3(8r)T9, RELEASE SOFTWARE (fc1)
+
+R2-8_ISPC-B1 uptime is 23 hours, 56 minutes
+System returned to ROM by reload at 20:37:23 UTC Thu Apr 16 2015
+System image file is "flash:c2801-adventerprisek9-mz.124-9.T3.bin"
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+Cisco 2801 (revision 6.0) with 119808K/11264K bytes of memory.
+Processor board ID FCZ110812PZ
+2 FastEthernet interfaces
+2 Serial(sync/async) interfaces
+1 Virtual Private Network (VPN) Module
+DRAM configuration is 64 bits wide with parity disabled.
+191K bytes of NVRAM.
+62720K bytes of ATA CompactFlash (Read/Write)
+
+Configuration register is 0x2102
+
+
+
