@@ -1,0 +1,986 @@
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show running-config
+Building configuration...
+
+Current configuration : 7890 bytes
+!
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname R2-9_ISPC-B2
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 5 $1$dMMc$KMf9WWJhzqNcILOHtPXRk1
+!
+no aaa new-model
+!
+resource policy
+!
+ip cef
+!
+!
+!
+!
+no ip domain lookup
+!
+!
+!
+voice-card 0
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+username cisco privilege 15 secret 5 $1$UUBA$dT7n35EXKj0R7swIxC6nH.
+!
+! 
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 9.1.1.1 255.255.255.0
+!
+interface FastEthernet0/0
+ ip address 180.30.0.1 255.255.255.0
+ ip access-group f00_IN in
+ ip access-group f00_OUT out
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface Serial0/1/0
+ description to_R2_3
+ no ip address
+ encapsulation frame-relay
+ no keepalive
+!
+interface Serial0/1/0.100 point-to-point
+ description to_R2_8_ISPC-B1
+ ip address 10.30.0.1 255.255.255.252
+ ip access-group s010_100_IN in
+ ip access-group s010_100_OUT out
+ frame-relay interface-dlci 100   
+!
+interface Serial0/1/0.200 point-to-point
+ description to_R2_22_ISPC-B5
+ ip address 10.30.0.5 255.255.255.252
+ ip access-group s010_200_IN in
+ ip access-group s010_200_OUT out
+ frame-relay interface-dlci 200   
+!
+interface Serial0/1/0.300 point-to-point
+ description to_R2_28_ISPC-B2
+ ip address 10.30.0.9 255.255.255.252
+ ip access-group s010_300_IN in
+ ip access-group s010_300_OUT out
+ frame-relay interface-dlci 300   
+!
+interface Serial0/1/0.400 point-to-point
+ description to_R2_23_ISPC-B2
+ ip address 10.30.0.13 255.255.255.252
+ ip access-group s010_400_IN in
+ ip access-group s010_400_OUT out
+ frame-relay interface-dlci 400   
+!
+interface Serial0/1/1
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+router ospf 1
+ router-id 30.1.1.1
+ log-adjacency-changes
+ network 9.1.1.1 0.0.0.0 area 1
+ network 10.30.0.0 0.0.0.3 area 1
+ network 10.30.0.4 0.0.0.3 area 1
+ network 10.30.0.8 0.0.0.3 area 1
+ network 10.30.0.12 0.0.0.3 area 1
+ default-information originate
+!
+router bgp 300
+ no synchronization
+ bgp log-neighbor-changes
+ network 180.30.0.0 mask 255.255.255.0
+ neighbor 8.1.1.1 remote-as 300
+ neighbor 8.1.1.1 update-source Loopback0
+ neighbor 8.1.1.1 route-reflector-client
+ neighbor 22.1.1.1 remote-as 300
+ neighbor 22.1.1.1 update-source Loopback0
+ neighbor 22.1.1.1 route-reflector-client
+ neighbor 23.1.1.1 remote-as 300
+ neighbor 23.1.1.1 update-source Loopback0
+ neighbor 23.1.1.1 route-reflector-client
+ neighbor 28.1.1.1 remote-as 300
+ neighbor 28.1.1.1 update-source Loopback0
+ neighbor 28.1.1.1 route-reflector-client
+ neighbor 100.1.1.1 remote-as 20
+ neighbor 100.1.1.1 ebgp-multihop 255
+ neighbor 100.1.1.1 update-source Loopback0
+ neighbor 100.1.1.1 next-hop-self
+ no auto-summary
+!
+ip route 0.0.0.0 0.0.0.0 180.30.0.254
+ip route 100.1.1.0 255.255.255.0 180.30.0.254
+!
+!
+ip http server
+no ip http secure-server
+!
+ip access-list extended f00_IN
+ permit icmp any 200.5.0.0 0.0.0.255
+ permit tcp host 100.1.1.1 host 9.1.1.1 eq bgp
+ip access-list extended f00_OUT
+ permit icmp 200.5.0.0 0.0.0.255 any
+ permit tcp host 9.1.1.1 host 100.1.1.1 eq bgp
+ip access-list extended s010_100_IN
+ permit icmp 200.5.0.0 0.0.0.255 any
+ permit tcp host 8.1.1.1 host 9.1.1.1 eq bgp
+ permit tcp host 8.1.1.1 eq bgp host 9.1.1.1
+ permit ospf host 10.30.0.2 host 10.30.0.1
+ permit ospf host 10.30.0.2 host 224.0.0.5
+ permit ospf host 10.30.0.2 host 224.0.0.6
+ip access-list extended s010_100_OUT
+ permit icmp any 200.5.0.0 0.0.0.255
+ permit tcp host 9.1.1.1 host 8.1.1.1 eq bgp
+ permit tcp host 9.1.1.1 eq bgp host 8.1.1.1
+ permit ospf host 10.30.0.1 host 10.30.0.2
+ permit ospf host 224.0.0.5 host 10.30.0.2
+ permit ospf host 224.0.0.6 host 10.30.0.2
+ip access-list extended s010_200_IN
+ permit icmp 200.5.0.0 0.0.0.255 any
+ permit tcp host 22.1.1.1 host 9.1.1.1 eq bgp
+ permit tcp host 22.1.1.1 eq bgp host 9.1.1.1
+ permit ospf host 10.30.0.6 host 10.30.0.5
+ permit ospf host 10.30.0.6 host 224.0.0.5
+ permit ospf host 10.30.0.6 host 224.0.0.6
+ip access-list extended s010_200_OUT
+ permit icmp any 200.5.0.0 0.0.0.255
+ permit tcp host 9.1.1.1 host 22.1.1.1 eq bgp
+ permit tcp host 9.1.1.1 eq bgp host 22.1.1.1
+ permit ospf host 10.30.0.5 host 10.30.0.6
+ permit ospf host 224.0.0.5 host 10.30.0.6
+ permit ospf host 224.0.0.6 host 10.30.0.6
+ip access-list extended s010_300_IN
+ permit icmp any 200.5.0.0 0.0.0.255
+ permit tcp host 28.1.1.1 host 9.1.1.1 eq bgp
+ permit tcp host 28.1.1.1 eq bgp host 9.1.1.1
+ permit ospf host 10.30.0.10 host 10.30.0.5
+ permit ospf host 10.30.0.10 host 224.0.0.5
+ permit ospf host 10.30.0.10 host 224.0.0.6
+ip access-list extended s010_300_OUT
+ permit icmp 200.5.0.0 0.0.0.255 any
+ permit tcp host 9.1.1.1 host 28.1.1.1 eq bgp
+ permit tcp host 9.1.1.1 eq bgp host 28.1.1.1
+ permit ospf host 10.30.0.5 host 10.30.0.10
+ permit ospf host 224.0.0.5 host 10.30.0.10
+ permit ospf host 224.0.0.6 host 10.30.0.10
+ip access-list extended s010_400_IN
+ permit icmp any 200.5.0.0 0.0.0.255
+ permit tcp host 23.1.1.1 host 9.1.1.1 eq bgp
+ permit tcp host 23.1.1.1 eq bgp host 9.1.1.1
+ permit ospf host 10.30.0.14 host 10.30.0.5
+ permit ospf host 10.30.0.14 host 224.0.0.5
+ permit ospf host 10.30.0.14 host 224.0.0.6
+ip access-list extended s010_400_OUT
+ permit icmp 200.5.0.0 0.0.0.255 any
+ permit tcp host 9.1.1.1 host 23.1.1.1 eq bgp
+ permit tcp host 9.1.1.1 eq bgp host 23.1.1.1
+ permit ospf host 10.30.0.5 host 10.30.0.14
+ permit ospf host 224.0.0.5 host 10.30.0.14
+ permit ospf host 224.0.0.6 host 10.30.0.14
+ip access-list extended s10_100_IN
+ permit icmp any 200.5.0.0 0.0.0.255
+ permit tcp host 8.1.1.1 host 9.1.1.1 eq bgp
+ permit ospf host 10.30.0.2 host 10.30.0.1
+ permit ospf host 10.30.0.2 host 224.0.0.5
+ permit ospf host 10.30.0.2 host 224.0.0.6
+ip access-list extended s10_100_OUT
+ permit icmp 200.5.0.0 0.0.0.255 any
+ permit tcp host 9.1.1.1 host 8.1.1.1 eq bgp
+ permit ospf host 10.30.0.1 host 10.30.0.2
+ permit ospf host 224.0.0.5 host 10.30.0.2
+ permit ospf host 224.0.0.6 host 10.30.0.2
+ip access-list extended s10_200_IN
+ permit icmp any 200.5.0.0 0.0.0.255
+ permit tcp host 22.1.1.1 host 9.1.1.1 eq bgp
+ permit ospf host 10.30.0.6 host 10.30.0.5
+ permit ospf host 10.30.0.6 host 224.0.0.5
+ permit ospf host 10.30.0.6 host 224.0.0.6
+ip access-list extended s10_200_OUT
+ permit icmp 200.5.0.0 0.0.0.255 any
+ permit tcp host 9.1.1.1 host 22.1.1.1 eq bgp
+ permit ospf host 10.30.0.5 host 10.30.0.6
+ permit ospf host 224.0.0.5 host 10.30.0.6
+ permit ospf host 224.0.0.6 host 10.30.0.6
+ip access-list extended s10_300_IN
+ permit icmp any 200.5.0.0 0.0.0.255
+ permit tcp host 28.1.1.1 host 9.1.1.1 eq bgp
+ permit ospf host 10.30.0.10 host 10.30.0.5
+ permit ospf host 10.30.0.10 host 224.0.0.5
+ permit ospf host 10.30.0.10 host 224.0.0.6
+ip access-list extended s10_300_OUT
+ permit icmp 200.5.0.0 0.0.0.255 any
+ permit tcp host 9.1.1.1 host 28.1.1.1 eq bgp
+ permit ospf host 10.30.0.5 host 10.30.0.10
+ permit ospf host 224.0.0.5 host 10.30.0.10
+ permit ospf host 224.0.0.6 host 10.30.0.10
+ip access-list extended s10_400_IN
+ permit icmp any 200.5.0.0 0.0.0.255
+ permit tcp host 23.1.1.1 host 9.1.1.1 eq bgp
+ permit ospf host 10.30.0.14 host 10.30.0.5
+ permit ospf host 10.30.0.14 host 224.0.0.5
+ permit ospf host 10.30.0.14 host 224.0.0.6
+ip access-list extended s10_400_OUT
+ permit icmp 200.5.0.0 0.0.0.255 any
+ permit tcp host 9.1.1.1 host 23.1.1.1 eq bgp
+ permit ospf host 10.30.0.5 host 10.30.0.14
+ permit ospf host 224.0.0.5 host 10.30.0.14
+ permit ospf host 224.0.0.6 host 10.30.0.14
+!
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+!
+banner motd ^CNot Authorized!^C
+!
+line con 0
+ exec-timeout 0 0
+ password 7 02050D480809
+ logging synchronous
+ login local
+line aux 0
+line vty 0 4
+ exec-timeout 0 0
+ password 7 1511021F0725
+ logging synchronous
+ login local
+ transport input telnet
+line vty 5 15
+ exec-timeout 0 0
+ password 7 1511021F0725
+ logging synchronous
+ login local
+ transport input telnet
+!
+scheduler allocate 20000 1000
+end
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is 180.30.0.254 to network 0.0.0.0
+
+     100.0.0.0/24 is subnetted, 1 subnets
+S       100.1.1.0 [1/0] via 180.30.0.254
+B    200.3.0.0/24 [20/0] via 100.1.1.1, 00:27:04
+B    200.4.0.0/24 [20/0] via 100.1.1.1, 00:27:04
+B    200.5.0.0/24 [200/0] via 22.1.1.1, 00:26:48
+B    200.7.0.0/24 [20/0] via 100.1.1.1, 00:27:04
+B    200.8.0.0/24 [20/0] via 100.1.1.1, 00:27:04
+B    200.9.0.0/24 [20/0] via 100.1.1.1, 00:27:04
+     190.20.0.0/24 is subnetted, 1 subnets
+B       190.20.0.0 [200/0] via 28.1.1.1, 00:26:52
+     190.30.0.0/24 is subnetted, 1 subnets
+B       190.30.0.0 [200/0] via 8.1.1.1, 00:26:52
+     23.0.0.0/32 is subnetted, 1 subnets
+O       23.1.1.1 [110/65] via 10.30.0.14, 00:27:12, Serial0/1/0.400
+     22.0.0.0/32 is subnetted, 1 subnets
+O       22.1.1.1 [110/65] via 10.30.0.6, 00:27:12, Serial0/1/0.200
+     8.0.0.0/32 is subnetted, 1 subnets
+O       8.1.1.1 [110/65] via 10.30.0.2, 00:27:12, Serial0/1/0.100
+     9.0.0.0/24 is subnetted, 1 subnets
+C       9.1.1.0 is directly connected, Loopback0
+     10.0.0.0/8 is variably subnetted, 7 subnets, 2 masks
+O E2    10.2.0.0/24 [110/20] via 10.30.0.2, 00:27:12, Serial0/1/0.100
+O E2    10.3.0.0/24 [110/20] via 10.30.0.2, 00:27:12, Serial0/1/0.100
+O E2    10.1.0.0/24 [110/20] via 10.30.0.2, 00:27:12, Serial0/1/0.100
+C       10.30.0.4/30 is directly connected, Serial0/1/0.200
+C       10.30.0.0/30 is directly connected, Serial0/1/0.100
+C       10.30.0.12/30 is directly connected, Serial0/1/0.400
+C       10.30.0.8/30 is directly connected, Serial0/1/0.300
+     28.0.0.0/32 is subnetted, 1 subnets
+O       28.1.1.1 [110/65] via 10.30.0.10, 00:27:14, Serial0/1/0.300
+     180.10.0.0/24 is subnetted, 1 subnets
+B       180.10.0.0 [20/0] via 100.1.1.1, 00:27:06
+     180.20.0.0/24 is subnetted, 1 subnets
+B       180.20.0.0 [20/0] via 100.1.1.1, 00:27:06
+     180.30.0.0/24 is subnetted, 1 subnets
+C       180.30.0.0 is directly connected, FastEthernet0/0
+S*   0.0.0.0/0 [1/0] via 180.30.0.254
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip int brief
+Interface                  IP-Address      OK? Method Status                Protocol
+FastEthernet0/0            180.30.0.1      YES manual up                    up      
+FastEthernet0/1            unassigned      YES unset  administratively down down    
+Serial0/1/0                unassigned      YES unset  up                    up      
+Serial0/1/0.100            10.30.0.1       YES manual up                    up      
+Serial0/1/0.200            10.30.0.5       YES manual up                    up      
+Serial0/1/0.300            10.30.0.9       YES manual up                    up      
+Serial0/1/0.400            10.30.0.13      YES manual up                    up      
+Serial0/1/1                unassigned      YES unset  administratively down down    
+Loopback0                  9.1.1.1         YES manual up                    up      
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip access-lists
+Extended IP access list f00_IN
+    10 permit icmp any 200.5.0.0 0.0.0.255 (1598 matches)
+    20 permit tcp host 100.1.1.1 host 9.1.1.1 eq bgp (207 matches)
+Extended IP access list f00_OUT
+    10 permit icmp 200.5.0.0 0.0.0.255 any (1605 matches)
+    20 permit tcp host 9.1.1.1 host 100.1.1.1 eq bgp
+Extended IP access list s010_100_IN
+    10 permit icmp 200.5.0.0 0.0.0.255 any
+    20 permit tcp host 8.1.1.1 host 9.1.1.1 eq bgp
+    30 permit tcp host 8.1.1.1 eq bgp host 9.1.1.1 (108 matches)
+    40 permit ospf host 10.30.0.2 host 10.30.0.1
+    50 permit ospf host 10.30.0.2 host 224.0.0.5 (182 matches)
+    60 permit ospf host 10.30.0.2 host 224.0.0.6
+Extended IP access list s010_100_OUT
+    10 permit icmp any 200.5.0.0 0.0.0.255
+    20 permit tcp host 9.1.1.1 host 8.1.1.1 eq bgp
+    30 permit tcp host 9.1.1.1 eq bgp host 8.1.1.1
+    40 permit ospf host 10.30.0.1 host 10.30.0.2
+    50 permit ospf host 224.0.0.5 host 10.30.0.2
+    60 permit ospf host 224.0.0.6 host 10.30.0.2
+Extended IP access list s010_200_IN
+    10 permit icmp 200.5.0.0 0.0.0.255 any (1610 matches)
+    20 permit tcp host 22.1.1.1 host 9.1.1.1 eq bgp
+    30 permit tcp host 22.1.1.1 eq bgp host 9.1.1.1 (186 matches)
+    40 permit ospf host 10.30.0.6 host 10.30.0.5
+    50 permit ospf host 10.30.0.6 host 224.0.0.5 (194 matches)
+    60 permit ospf host 10.30.0.6 host 224.0.0.6
+Extended IP access list s010_200_OUT
+    10 permit icmp any 200.5.0.0 0.0.0.255 (1598 matches)
+    20 permit tcp host 9.1.1.1 host 22.1.1.1 eq bgp
+    30 permit tcp host 9.1.1.1 eq bgp host 22.1.1.1
+    40 permit ospf host 10.30.0.5 host 10.30.0.6
+    50 permit ospf host 224.0.0.5 host 10.30.0.6
+    60 permit ospf host 224.0.0.6 host 10.30.0.6
+Extended IP access list s010_300_IN
+    10 permit icmp any 200.5.0.0 0.0.0.255
+    20 permit tcp host 28.1.1.1 host 9.1.1.1 eq bgp (12 matches)
+    30 permit tcp host 28.1.1.1 eq bgp host 9.1.1.1 (141 matches)
+    40 permit ospf host 10.30.0.10 host 10.30.0.5
+    50 permit ospf host 10.30.0.10 host 224.0.0.5 (182 matches)
+    60 permit ospf host 10.30.0.10 host 224.0.0.6
+Extended IP access list s010_300_OUT
+    10 permit icmp 200.5.0.0 0.0.0.255 any
+    20 permit tcp host 9.1.1.1 host 28.1.1.1 eq bgp
+    30 permit tcp host 9.1.1.1 eq bgp host 28.1.1.1
+    40 permit ospf host 10.30.0.5 host 10.30.0.10
+    50 permit ospf host 224.0.0.5 host 10.30.0.10
+    60 permit ospf host 224.0.0.6 host 10.30.0.10
+Extended IP access list s010_400_IN
+    10 permit icmp any 200.5.0.0 0.0.0.255
+    20 permit tcp host 23.1.1.1 host 9.1.1.1 eq bgp (12 matches)
+    30 permit tcp host 23.1.1.1 eq bgp host 9.1.1.1 (171 matches)
+    40 permit ospf host 10.30.0.14 host 10.30.0.5
+    50 permit ospf host 10.30.0.14 host 224.0.0.5 (197 matches)
+    60 permit ospf host 10.30.0.14 host 224.0.0.6
+Extended IP access list s010_400_OUT
+    10 permit icmp 200.5.0.0 0.0.0.255 any
+    20 permit tcp host 9.1.1.1 host 23.1.1.1 eq bgp
+    30 permit tcp host 9.1.1.1 eq bgp host 23.1.1.1
+    40 permit ospf host 10.30.0.5 host 10.30.0.14
+    50 permit ospf host 224.0.0.5 host 10.30.0.14
+    60 permit ospf host 224.0.0.6 host 10.30.0.14
+Extended IP access list s10_100_IN
+    10 permit icmp any 200.5.0.0 0.0.0.255
+    20 permit tcp host 8.1.1.1 host 9.1.1.1 eq bgp
+    30 permit ospf host 10.30.0.2 host 10.30.0.1
+    40 permit ospf host 10.30.0.2 host 224.0.0.5
+    50 permit ospf host 10.30.0.2 host 224.0.0.6
+Extended IP access list s10_100_OUT
+    10 permit icmp 200.5.0.0 0.0.0.255 any
+    20 permit tcp host 9.1.1.1 host 8.1.1.1 eq bgp
+    30 permit ospf host 10.30.0.1 host 10.30.0.2
+    40 permit ospf host 224.0.0.5 host 10.30.0.2
+    50 permit ospf host 224.0.0.6 host 10.30.0.2
+Extended IP access list s10_200_IN
+    10 permit icmp any 200.5.0.0 0.0.0.255
+    20 permit tcp host 22.1.1.1 host 9.1.1.1 eq bgp
+    30 permit ospf host 10.30.0.6 host 10.30.0.5
+    40 permit ospf host 10.30.0.6 host 224.0.0.5
+    50 permit ospf host 10.30.0.6 host 224.0.0.6
+Extended IP access list s10_200_OUT
+    10 permit icmp 200.5.0.0 0.0.0.255 any
+    20 permit tcp host 9.1.1.1 host 22.1.1.1 eq bgp
+    30 permit ospf host 10.30.0.5 host 10.30.0.6
+    40 permit ospf host 224.0.0.5 host 10.30.0.6
+    50 permit ospf host 224.0.0.6 host 10.30.0.6
+Extended IP access list s10_300_IN
+    10 permit icmp any 200.5.0.0 0.0.0.255
+    20 permit tcp host 28.1.1.1 host 9.1.1.1 eq bgp
+    30 permit ospf host 10.30.0.10 host 10.30.0.5
+    40 permit ospf host 10.30.0.10 host 224.0.0.5
+    50 permit ospf host 10.30.0.10 host 224.0.0.6
+Extended IP access list s10_300_OUT
+    10 permit icmp 200.5.0.0 0.0.0.255 any
+    20 permit tcp host 9.1.1.1 host 28.1.1.1 eq bgp
+    30 permit ospf host 10.30.0.5 host 10.30.0.10
+    40 permit ospf host 224.0.0.5 host 10.30.0.10
+    50 permit ospf host 224.0.0.6 host 10.30.0.10
+Extended IP access list s10_400_IN
+    10 permit icmp any 200.5.0.0 0.0.0.255
+    20 permit tcp host 23.1.1.1 host 9.1.1.1 eq bgp
+    30 permit ospf host 10.30.0.14 host 10.30.0.5
+    40 permit ospf host 10.30.0.14 host 224.0.0.5
+    50 permit ospf host 10.30.0.14 host 224.0.0.6
+Extended IP access list s10_400_OUT
+    10 permit icmp 200.5.0.0 0.0.0.255 any
+    20 permit tcp host 9.1.1.1 host 23.1.1.1 eq bgp
+    30 permit ospf host 10.30.0.5 host 10.30.0.14
+    40 permit ospf host 224.0.0.5 host 10.30.0.14
+    50 permit ospf host 224.0.0.6 host 10.30.0.14
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show cdp neighbors
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+R2-22_ISPC-B5    Ser 0/1/0.200      131         R S I     2811      Ser 0/2/0.202
+R2-23_ISPC-B6    Ser 0/1/0.400      177         R S I     2811      Ser 0/1/0.402
+R2-1_ISPC-B3     Ser 0/1/0.300      166          R S      2621XM    Ser 0/1.301
+R3-8_CIX         Fas 0/0            140         R S I     CISCO2901 Gig 0/0/3
+R2-8_ISPC-B1     Ser 0/1/0.100      177         R S I     2801      Ser 0/1/0.102
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip ospf 1
+ Routing Process "ospf 1" with ID 30.1.1.1
+ Start time: 00:13:59.440, Time elapsed: 23:32:04.668
+ Supports only single TOS(TOS0) routes
+ Supports opaque LSA
+ Supports Link-local Signaling (LLS)
+ Supports area transit capability
+ It is an autonomous system boundary router
+ Redistributing External Routes from,
+ Router is not originating router-LSAs with maximum metric
+ Initial SPF schedule delay 5000 msecs
+ Minimum hold time between two consecutive SPFs 10000 msecs
+ Maximum wait time between two consecutive SPFs 10000 msecs
+ Incremental-SPF disabled
+ Minimum LSA interval 5 secs
+ Minimum LSA arrival 1000 msecs
+ LSA group pacing timer 240 secs
+ Interface flood pacing timer 33 msecs
+ Retransmission pacing timer 66 msecs
+ Number of external LSA 4. Checksum Sum 0x030297
+ Number of opaque AS LSA 0. Checksum Sum 0x000000
+ Number of DCbitless external and opaque AS LSA 0
+ Number of DoNotAge external and opaque AS LSA 0
+ Number of areas in this router is 1. 1 normal 0 stub 0 nssa
+ Number of areas transit capable is 0
+ External flood list length 0
+ IETF NSF helper support enabled
+ Cisco NSF helper support enabled
+    Area 1
+	Number of interfaces in this area is 5 (1 loopback)
+	Area has no authentication
+	SPF algorithm last executed 00:27:24.040 ago
+	SPF algorithm executed 2 times
+	Area ranges are
+	Number of LSA 5. Checksum Sum 0x05C773
+	Number of opaque link LSA 0. Checksum Sum 0x000000
+	Number of DCbitless LSA 0
+	Number of indication LSA 0
+	Number of DoNotAge LSA 0
+	Flood list length 0
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip bgp summary
+BGP router identifier 9.1.1.1, local AS number 300
+BGP table version is 61, main routing table version 61
+11 network entries using 1419 bytes of memory
+13 path entries using 676 bytes of memory
+5/4 BGP path/bestpath attribute entries using 620 bytes of memory
+2 BGP AS-PATH entries using 48 bytes of memory
+0 BGP route-map cache entries using 0 bytes of memory
+0 BGP filter-list cache entries using 0 bytes of memory
+BGP using 2763 total bytes of memory
+BGP activity 19/8 prefixes, 40/27 paths, scan interval 60 secs
+
+Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+8.1.1.1         4   300     148     179       61    0    0 00:27:05        1
+22.1.1.1        4   300     148     186       61    0    0 00:27:01        1
+23.1.1.1        4   300     140     179       61    0    0 00:27:03        0
+28.1.1.1        4   300     149     179       61    0    0 00:27:05        1
+100.1.1.1       4    20     175     158       61    0    0 00:27:17        9
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+sh ip bgp neighbor
+BGP neighbor is 8.1.1.1,  remote AS 300, internal link
+  BGP version 4, remote router ID 190.30.0.1
+  BGP state = Established, up for 00:27:06
+  Last read 00:00:06, last write 00:00:06, hold time is 180, keepalive interval is 60 seconds
+  Neighbor capabilities:
+    Route refresh: advertised and received(old & new)
+    Address family IPv4 Unicast: advertised and received
+  Message statistics:
+    InQ depth is 0
+    OutQ depth is 0
+                         Sent       Rcvd
+    Opens:                  3          3
+    Notifications:          0          0
+    Updates:               34          3
+    Keepalives:           142        142
+    Route Refresh:          0          0
+    Total:                179        148
+  Default minimum time between advertisement runs is 0 seconds
+
+ For address family: IPv4 Unicast
+  BGP table version 61, neighbor version 61/0
+ Output queue size : 0
+  Index 2, Offset 0, Mask 0x4
+  Route-Reflector Client
+  2 update-group member
+                                 Sent       Rcvd
+  Prefix activity:               ----       ----
+    Prefixes Current:              11          1 (Consumes 52 bytes)
+    Prefixes Total:                11          1
+    Implicit Withdraw:              9          0
+    Explicit Withdraw:              0          0
+    Used as bestpath:             n/a          1
+    Used as multipath:            n/a          0
+
+                                   Outbound    Inbound
+  Local Policy Denied Prefixes:    --------    -------
+    Total:                                0          0
+  Number of NLRIs in the update sent: max 5, min 0
+
+  Connections established 3; dropped 2
+  Last reset 00:27:36, due to User reset
+Connection state is ESTAB, I/O status: 1, unread input bytes: 0            
+Connection is ECN Disabled, Mininum incoming TTL 0, Outgoing TTL 255
+Local host: 9.1.1.1, Local port: 60954
+Foreign host: 8.1.1.1, Foreign port: 179
+Connection tableid (VRF): 0
+
+Enqueued packets for retransmit: 0, input: 0  mis-ordered: 0 (0 bytes)
+
+Event Timers (current time is 0x519A75C):
+Timer          Starts    Wakeups            Next
+Retrans            33          0             0x0
+TimeWait            0          0             0x0
+AckHold            30         26             0x0
+SendWnd             0          0             0x0
+KeepAlive           0          0             0x0
+GiveUp              0          0             0x0
+PmtuAger            0          0             0x0
+DeadWait            0          0             0x0
+Linger              0          0             0x0
+ProcessQ            0          0             0x0
+
+iss:  475908508  snduna:  475909526  sndnxt:  475909526     sndwnd:  15909
+irs:  699861485  rcvnxt:  699862156  rcvwnd:      16251  delrcvwnd:    133
+
+SRTT: 296 ms, RTTO: 327 ms, RTV: 31 ms, KRTT: 0 ms
+minRTT: 4 ms, maxRTT: 300 ms, ACK hold: 200 ms
+Status Flags: active open
+Option Flags: nagle
+IP Precedence value : 6
+
+Datagrams (max data segment is 536 bytes):
+Rcvd: 34 (out of order: 0), with data: 30, total data bytes: 670
+Sent: 62 (retransmit: 0, fastretransmit: 0, partialack: 0, Second Congestion: 0), with data: 33, total data bytes: 1017
+ Packets received in fast path: 0, fast processed: 0, slow path: 0
+ fast lock acquisition failures: 0, slow path: 0
+
+BGP neighbor is 22.1.1.1,  remote AS 300, internal link
+  BGP version 4, remote router ID 22.1.1.1
+  BGP state = Established, up for 00:27:05
+  Last read 00:00:55, last write 00:00:05, hold time is 180, keepalive interval is 60 seconds
+  Neighbor capabilities:
+    Route refresh: advertised and received(old & new)
+    Address family IPv4 Unicast: advertised and received
+  Message statistics:
+    InQ depth is 0
+    OutQ depth is 0
+                         Sent       Rcvd
+    Opens:                  4          4
+    Notifications:          0          0
+    Updates:               38          6
+    Keepalives:           144        138
+    Route Refresh:          0          0
+    Total:                186        148
+  Default minimum time between advertisement runs is 0 seconds
+
+ For address family: IPv4 Unicast
+  BGP table version 61, neighbor version 61/0
+ Output queue size : 0
+  Index 2, Offset 0, Mask 0x4
+  Route-Reflector Client
+  2 update-group member
+                                 Sent       Rcvd
+  Prefix activity:               ----       ----
+    Prefixes Current:              11          1 (Consumes 52 bytes)
+    Prefixes Total:                11          1
+    Implicit Withdraw:             10          0
+    Explicit Withdraw:              0          0
+    Used as bestpath:             n/a          1
+    Used as multipath:            n/a          0
+
+                                   Outbound    Inbound
+  Local Policy Denied Prefixes:    --------    -------
+    Total:                                0          0
+  Number of NLRIs in the update sent: max 6, min 0
+
+  Connections established 4; dropped 3
+  Last reset 00:27:41, due to User reset
+Connection state is ESTAB, I/O status: 1, unread input bytes: 0            
+Connection is ECN Disabled, Mininum incoming TTL 0, Outgoing TTL 255
+Local host: 9.1.1.1, Local port: 15633
+Foreign host: 22.1.1.1, Foreign port: 179
+Connection tableid (VRF): 0
+
+Enqueued packets for retransmit: 0, input: 0  mis-ordered: 0 (0 bytes)
+
+Event Timers (current time is 0x519B9E8):
+Timer          Starts    Wakeups            Next
+Retrans            32          0             0x0
+TimeWait            0          0             0x0
+AckHold            29         24             0x0
+SendWnd             0          0             0x0
+KeepAlive           0          0             0x0
+GiveUp              0          0             0x0
+PmtuAger            0          0             0x0
+DeadWait            0          0             0x0
+Linger              0          0             0x0
+ProcessQ            0          0             0x0
+
+iss: 2806259829  snduna: 2806260847  sndnxt: 2806260847     sndwnd:  15909
+irs:  825425512  rcvnxt:  825426153  rcvwnd:      16289  delrcvwnd:     95
+
+SRTT: 296 ms, RTTO: 331 ms, RTV: 35 ms, KRTT: 0 ms
+minRTT: 4 ms, maxRTT: 300 ms, ACK hold: 200 ms
+Status Flags: active open
+Option Flags: nagle
+IP Precedence value : 6
+
+Datagrams (max data segment is 536 bytes):
+Rcvd: 59 (out of order: 0), with data: 30, total data bytes: 640
+Sent: 59 (retransmit: 0, fastretransmit: 0, partialack: 0, Second Congestion: 0), with data: 32, total data bytes: 1017
+ Packets received in fast path: 0, fast processed: 0, slow path: 0
+ fast lock acquisition failures: 0, slow path: 0
+
+BGP neighbor is 23.1.1.1,  remote AS 300, internal link
+  BGP version 4, remote router ID 23.1.1.1
+  BGP state = Established, up for 00:27:11
+  Last read 00:00:00, last write 00:00:10, hold time is 180, keepalive interval is 60 seconds
+  Neighbor capabilities:
+    Route refresh: advertised and received(old & new)
+    Address family IPv4 Unicast: advertised and received
+  Message statistics:
+    InQ depth is 0
+    OutQ depth is 0
+                         Sent       Rcvd
+    Opens:                  3          3
+    Notifications:          0          0
+    Updates:               34          0
+    Keepalives:           142        138
+    Route Refresh:          0          0
+    Total:                179        141
+  Default minimum time between advertisement runs is 0 seconds
+
+ For address family: IPv4 Unicast
+  BGP table version 61, neighbor version 61/0
+ Output queue size : 0
+  Index 2, Offset 0, Mask 0x4
+  Route-Reflector Client
+  2 update-group member
+                                 Sent       Rcvd
+  Prefix activity:               ----       ----
+    Prefixes Current:              11          0
+    Prefixes Total:                11          0
+    Implicit Withdraw:             10          0
+    Explicit Withdraw:              0          0
+    Used as bestpath:             n/a          0
+    Used as multipath:            n/a          0
+
+                                   Outbound    Inbound
+  Local Policy Denied Prefixes:    --------    -------
+    Total:                                0          0
+  Number of NLRIs in the update sent: max 6, min 0
+
+  Connections established 3; dropped 2
+  Last reset 00:27:46, due to User reset
+Connection state is ESTAB, I/O status: 1, unread input bytes: 0            
+Connection is ECN Disabled, Mininum incoming TTL 0, Outgoing TTL 255
+Local host: 9.1.1.1, Local port: 62238
+Foreign host: 23.1.1.1, Foreign port: 179
+Connection tableid (VRF): 0
+
+Enqueued packets for retransmit: 0, input: 0  mis-ordered: 0 (0 bytes)
+
+Event Timers (current time is 0x519CC70):
+Timer          Starts    Wakeups            Next
+Retrans            32          0             0x0
+TimeWait            0          0             0x0
+AckHold            29         24             0x0
+SendWnd             0          0             0x0
+KeepAlive           0          0             0x0
+GiveUp              0          0             0x0
+PmtuAger            0          0             0x0
+DeadWait            0          0             0x0
+Linger              0          0             0x0
+ProcessQ            0          0             0x0
+
+iss: 3278600015  snduna: 3278601033  sndnxt: 3278601033     sndwnd:  15909
+irs:  863074257  rcvnxt:  863074862  rcvwnd:      16327  delrcvwnd:     57
+
+SRTT: 296 ms, RTTO: 331 ms, RTV: 35 ms, KRTT: 0 ms
+minRTT: 4 ms, maxRTT: 300 ms, ACK hold: 200 ms
+Status Flags: active open
+Option Flags: nagle
+IP Precedence value : 6
+
+Datagrams (max data segment is 536 bytes):
+Rcvd: 59 (out of order: 0), with data: 30, total data bytes: 604
+Sent: 59 (retransmit: 0, fastretransmit: 0, partialack: 0, Second Congestion: 0), with data: 32, total data bytes: 1017
+ Packets received in fast path: 0, fast processed: 0, slow path: 0
+ fast lock acquisition failures: 0, slow path: 0
+
+BGP neighbor is 28.1.1.1,  remote AS 300, internal link
+  BGP version 4, remote router ID 28.1.1.1
+  BGP state = Established, up for 00:27:16
+  Last read 00:00:16, last write 00:00:16, hold time is 180, keepalive interval is 60 seconds
+  Neighbor capabilities:
+    Route refresh: advertised and received(old & new)
+    Address family IPv4 Unicast: advertised and received
+  Message statistics:
+    InQ depth is 0
+    OutQ depth is 0
+                         Sent       Rcvd
+    Opens:                  3          3
+    Notifications:          0          0
+    Updates:               34          3
+    Keepalives:           142        143
+    Route Refresh:          0          0
+    Total:                179        149
+  Default minimum time between advertisement runs is 0 seconds
+
+ For address family: IPv4 Unicast
+  BGP table version 61, neighbor version 61/0
+ Output queue size : 0
+  Index 2, Offset 0, Mask 0x4
+  Route-Reflector Client
+  2 update-group member
+                                 Sent       Rcvd
+  Prefix activity:               ----       ----
+    Prefixes Current:              11          1 (Consumes 52 bytes)
+    Prefixes Total:                12          1
+    Implicit Withdraw:              1          0
+    Explicit Withdraw:              0          0
+    Used as bestpath:             n/a          1
+    Used as multipath:            n/a          0
+
+                                   Outbound    Inbound
+  Local Policy Denied Prefixes:    --------    -------
+    Total:                                0          0
+  Number of NLRIs in the update sent: max 6, min 0
+
+  Connections established 3; dropped 2
+  Last reset 00:27:48, due to User reset
+Connection state is ESTAB, I/O status: 1, unread input bytes: 0            
+Connection is ECN Disabled, Mininum incoming TTL 0, Outgoing TTL 255
+Local host: 9.1.1.1, Local port: 37861
+Foreign host: 28.1.1.1, Foreign port: 179
+Connection tableid (VRF): 0
+
+Enqueued packets for retransmit: 0, input: 0  mis-ordered: 0 (0 bytes)
+
+Event Timers (current time is 0x519D5B8):
+Timer          Starts    Wakeups            Next
+Retrans            35          0             0x0
+TimeWait            0          0             0x0
+AckHold            32         14             0x0
+SendWnd             0          0             0x0
+KeepAlive           0          0             0x0
+GiveUp              0          0             0x0
+PmtuAger            0          0             0x0
+DeadWait            0          0             0x0
+Linger              0          0             0x0
+ProcessQ            0          0             0x0
+
+iss: 3578658981  snduna: 3578660003  sndnxt: 3578660003     sndwnd:  15909
+irs: 1847738867  rcvnxt: 1847739538  rcvwnd:      16251  delrcvwnd:    133
+
+SRTT: 297 ms, RTTO: 321 ms, RTV: 24 ms, KRTT: 0 ms
+minRTT: 4 ms, maxRTT: 300 ms, ACK hold: 200 ms
+Status Flags: active open
+Option Flags: nagle
+IP Precedence value : 6
+
+Datagrams (max data segment is 536 bytes):
+Rcvd: 48 (out of order: 0), with data: 32, total data bytes: 670
+Sent: 51 (retransmit: 0, fastretransmit: 0, partialack: 0, Second Congestion: 0), with data: 34, total data bytes: 1021
+ Packets received in fast path: 0, fast processed: 0, slow path: 0
+ fast lock acquisition failures: 0, slow path: 0
+
+BGP neighbor is 100.1.1.1,  remote AS 20, external link
+  BGP version 4, remote router ID 100.1.1.1
+  BGP state = Established, up for 00:27:33
+  Last read 00:00:13, last write 00:00:32, hold time is 180, keepalive interval is 60 seconds
+  Neighbor capabilities:
+    Route refresh: advertised and received(old & new)
+    Address family IPv4 Unicast: advertised and received
+  Message statistics:
+    InQ depth is 0
+    OutQ depth is 0
+                         Sent       Rcvd
+    Opens:                  2          2
+    Notifications:          0          0
+    Updates:               15         34
+    Keepalives:           141        140
+    Route Refresh:          0          0
+    Total:                158        176
+  Default minimum time between advertisement runs is 30 seconds
+
+ For address family: IPv4 Unicast
+  BGP table version 61, neighbor version 61/0
+ Output queue size : 0
+  Index 1, Offset 0, Mask 0x2
+  1 update-group member
+  NEXT_HOP is always this router
+                                 Sent       Rcvd
+  Prefix activity:               ----       ----
+    Prefixes Current:               4          9 (Consumes 468 bytes)
+    Prefixes Total:                 4          9
+    Implicit Withdraw:              0          0
+    Explicit Withdraw:              0          0
+    Used as bestpath:             n/a          7
+    Used as multipath:            n/a          0
+
+                                   Outbound    Inbound
+  Local Policy Denied Prefixes:    --------    -------
+    AS_PATH loop:                       n/a          2
+    Bestpath from this peer:              7        n/a
+    Total:                                7          2
+  Number of NLRIs in the update sent: max 2, min 0
+
+  Connections established 2; dropped 1
+  Last reset 00:27:40, due to User reset
+  External BGP neighbor may be up to 255 hops away.
+Connection state is ESTAB, I/O status: 1, unread input bytes: 0            
+Connection is ECN Disabled, Mininum incoming TTL 0, Outgoing TTL 255
+Local host: 9.1.1.1, Local port: 179
+Foreign host: 100.1.1.1, Foreign port: 18752
+Connection tableid (VRF): 0
+
+Enqueued packets for retransmit: 0, input: 0  mis-ordered: 0 (0 bytes)
+
+Event Timers (current time is 0x519E840):
+Timer          Starts    Wakeups            Next
+Retrans            32          0             0x0
+TimeWait            0          0             0x0
+AckHold            33         31             0x0
+SendWnd             0          0             0x0
+KeepAlive           0          0             0x0
+GiveUp              0          0             0x0
+PmtuAger            0          0             0x0
+DeadWait            0          0             0x0
+Linger              0          0             0x0
+ProcessQ            0          0             0x0
+
+iss: 2267172861  snduna: 2267173664  sndnxt: 2267173664     sndwnd:  16118
+irs: 2793044318  rcvnxt: 2793045252  rcvwnd:      16004  delrcvwnd:    380
+
+SRTT: 296 ms, RTTO: 331 ms, RTV: 35 ms, KRTT: 0 ms
+minRTT: 0 ms, maxRTT: 300 ms, ACK hold: 200 ms
+Status Flags: passive open, gen tcbs
+Option Flags: nagle
+IP Precedence value : 6
+
+Datagrams (max data segment is 536 bytes):
+Rcvd: 66 (out of order: 0), with data: 35, total data bytes: 933
+Sent: 65 (retransmit: 0, fastretransmit: 0, partialack: 0, Second Congestion: 0), with data: 32, total data bytes: 802
+ Packets received in fast path: 0, fast processed: 0, slow path: 0
+ fast lock acquisition failures: 0, slow path: 0
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show version
+Cisco IOS Software, 2801 Software (C2801-ADVENTERPRISEK9-M), Version 12.4(9)T3, RELEASE SOFTWARE (fc3)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2007 by Cisco Systems, Inc.
+Compiled Fri 23-Mar-07 19:08 by prod_rel_team
+
+ROM: System Bootstrap, Version 12.3(8r)T9, RELEASE SOFTWARE (fc1)
+
+R2-9_ISPC-B2 uptime is 23 hours, 46 minutes
+System returned to ROM by reload at 15:59:13 UTC Thu Jan 12 2017
+System image file is "flash:c2801-adventerprisek9-mz.124-9.T3.bin"
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+Cisco 2801 (revision 6.0) with 119808K/11264K bytes of memory.
+Processor board ID FCZ110812Q0
+2 FastEthernet interfaces
+2 Serial(sync/async) interfaces
+1 Virtual Private Network (VPN) Module
+DRAM configuration is 64 bits wide with parity disabled.
+191K bytes of NVRAM.
+62720K bytes of ATA CompactFlash (Read/Write)
+
+Configuration register is 0x2102
+
+
+
