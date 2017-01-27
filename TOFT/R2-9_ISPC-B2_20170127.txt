@@ -1,0 +1,299 @@
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show running-config
+Building configuration...
+
+Current configuration : 3894 bytes
+!
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname R2-9_ISPC-B2
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 5 $1$Z6sf$tT3bvnM9zK3WgAIiafdYh.
+!
+no aaa new-model
+!
+resource policy
+!
+ip cef
+!
+!
+!
+!
+no ip domain lookup
+ipv6 unicast-routing
+!
+!
+!
+voice-card 0
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+username cisco privilege 15 secret 5 $1$OQ5P$qtWnlD0ObfrTkBDR3Uwzc0
+!
+! 
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 9.1.1.1 255.255.255.0
+ ipv6 address 2001:9::1/64
+ ipv6 enable
+ ipv6 ospf 10 area 1
+!
+interface FastEthernet0/0
+ ip address 180.30.0.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface Serial0/1/0
+ description to_R2_3
+ no ip address
+ encapsulation frame-relay
+ no keepalive
+ no fair-queue
+ clock rate 2000000
+!
+interface Serial0/1/0.100 point-to-point
+ description to_R2_8_ISPC-B1
+ ip address 10.30.0.1 255.255.255.252
+ ipv6 address 2001:1::1/64
+ ipv6 enable
+ ipv6 ospf 10 area 1
+ frame-relay interface-dlci 100   
+!
+interface Serial0/1/0.200 point-to-point
+ description to_R2_22_ISPC-B5
+ ip address 10.30.0.5 255.255.255.252
+ ipv6 address 2001:2::1/64
+ ipv6 enable
+ ipv6 ospf 10 area 1
+ frame-relay interface-dlci 200   
+!
+interface Serial0/1/0.300 point-to-point
+ description to_R2_28_ISPC-B2
+ ip address 10.30.0.9 255.255.255.252
+ ipv6 address 2001:3::1/64
+ ipv6 enable
+ ipv6 ospf 10 area 1
+ frame-relay interface-dlci 300   
+!
+interface Serial0/1/0.400 point-to-point
+ description to_R2_23_ISPC-B2
+ ip address 10.30.0.13 255.255.255.252
+ ipv6 address 2001:4::1/64
+ ipv6 enable
+ ipv6 ospf 10 area 1
+ frame-relay interface-dlci 400   
+!
+interface Serial0/1/1
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+router ospf 1
+ router-id 30.1.1.1
+ log-adjacency-changes
+ network 9.1.1.1 0.0.0.0 area 1
+ network 10.30.0.0 0.0.0.3 area 1
+ network 10.30.0.4 0.0.0.3 area 1
+ network 10.30.0.8 0.0.0.3 area 1
+ network 10.30.0.12 0.0.0.3 area 1
+!
+router bgp 300
+ bgp router-id 9.1.1.1
+ no bgp default ipv4-unicast
+ bgp log-neighbor-changes
+ neighbor 8.1.1.1 remote-as 300
+ neighbor 8.1.1.1 update-source Loopback0
+ neighbor 22.1.1.1 remote-as 300
+ neighbor 22.1.1.1 update-source Loopback0
+ neighbor 23.1.1.1 remote-as 300
+ neighbor 23.1.1.1 update-source Loopback0
+ neighbor 28.1.1.1 remote-as 300
+ neighbor 28.1.1.1 update-source Loopback0
+ neighbor 2001:8::1 remote-as 300
+ neighbor 2001:8::1 update-source Loopback0
+ neighbor 2001:22::1 remote-as 300
+ neighbor 2001:22::1 update-source Loopback0
+ neighbor 2001:23::1 remote-as 300
+ neighbor 2001:23::1 update-source Loopback0
+ neighbor 2001:28::1 remote-as 300
+ neighbor 2001:28::1 update-source Loopback0
+ neighbor 100.1.1.1 remote-as 20
+ neighbor 100.1.1.1 ebgp-multihop 255
+ neighbor 100.1.1.1 update-source Loopback0
+ !
+ address-family ipv4
+ neighbor 8.1.1.1 activate
+ neighbor 8.1.1.1 route-reflector-client
+ neighbor 22.1.1.1 activate
+ neighbor 22.1.1.1 route-reflector-client
+ neighbor 23.1.1.1 activate
+ neighbor 23.1.1.1 route-reflector-client
+ neighbor 28.1.1.1 activate
+ neighbor 28.1.1.1 route-reflector-cl
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 route
+ neighbor 100.1.1.1 activate
+ neighbor 100.1.1.1 next-hop-self
+ no auto-summary
+ no synchronization
+ network 180.30.0.0 mask 255.255.255.0
+ exit-address-family
+!
+ip route 100.1.1.0 255.255.255.0 180.30.0.254
+!
+!
+ip http server
+no ip http secure-server
+!
+ipv6 router ospf 10
+ router-id 1.1.1.1
+ log-adjacency-changes
+!
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+!
+banner motd ^CNot Authorized!^C
+!
+line con 0
+ exec-timeout 0 0
+ password 7 0822455D0A16
+ logging synchronous
+ login local
+line aux 0
+line vty 0 4
+ exec-timeout 0 0
+ password 7 045802150C2E
+ logging synchronous
+ login local
+ transport input telnet
+line vty 5 15
+ exec-timeout 0 0
+ password 7 045802150C2E
+ logging synchronous
+ login local
+ transport input telnet
+!
+scheduler allocate 20000 1000
+end
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 int brief
+IPv6 Routing Table - 4 entries
+Codes: C - Connected, L - Local, S - Static, R - RIP, B - BGP
+       U - Per-user Static route
+       I1 - ISIS L1, I2 - ISIS L2, IA - ISIS interarea, IS - ISIS summary
+       O - OSPF intra, OI - OSPF inter, OE1 - OSPF ext 1, OE2 - OSPF ext 2
+       ON1 - OSPF NSSA ext 1, ON2 - OSPF NSSA ext 2
+       D - EIGRP, EX - EIGRP external
+C   2001:9::/64 [0/0]
+     via ::, Loopback0
+L   2001:9::1/128 [0/0]
+     via ::, Loopback0
+L   FE80::/10 [0/0]
+     via ::, Null0
+L   FF00::/8 [0/0]
+     via ::, Null0
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show cdp neighbors
+FastEthernet0/0            [up/down]
+    unassigned
+FastEthernet0/1            [administratively down/down]
+    unassigned
+Serial0/1/0                [down/down]
+    unassigned
+Serial0/1/0.100            [down/down]
+    FE80::21A:E2FF:FEAB:49DE
+    2001:1::1
+Serial0/1/0.200            [down/down]
+    FE80::21A:E2FF:FEAB:49DE
+    2001:2::1
+Serial0/1/0.300            [down/down]
+    FE80::21A:E2FF:FEAB:49DE
+    2001:3::1
+Serial0/1/0.400            [down/down]
+    FE80::21A:E2FF:FEAB:49DE
+    2001:4::1
+Serial0/1/1                [administratively down/down]
+    unassigned
+Loopback0                  [up/up]
+    FE80::21A:E2FF:FEAB:49DE
+    2001:9::1
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 ospf 10
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 ospf neighbor
+ Routing Process "ospfv3 10" with ID 1.1.1.1
+ SPF schedule delay 5 secs, Hold time between two SPFs 10 secs
+ Minimum LSA interval 5 secs. Minimum LSA arrival 1 secs
+ LSA group pacing timer 240 secs
+ Interface flood pacing timer 33 msecs
+ Retransmission pacing timer 66 msecs
+ Number of external LSA 0. Checksum Sum 0x000000
+ Number of areas in this router is 1. 1 normal 0 stub 0 nssa
+ Reference bandwidth unit is 100 mbps
+    Area 1
+	Number of interfaces in this area is 5
+	SPF algorithm executed 5 times
+	Number of LSA 2. Checksum Sum 0x016099
+	Number of DCbitless LSA 0
+	Number of indication LSA 0
+	Number of DoNotAge LSA 0
+	Flood list length 0
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show version
+
+
+
