@@ -166,7 +166,7 @@ Compiled Wed 01-Jun-11 16:54 by prod_rel_team
 
 ROM: System Bootstrap, Version 15.0(1r)M9, RELEASE SOFTWARE (fc1)
 
-R3-22_ISPB-B4 uptime is 1 week, 1 day, 2 hours, 11 minutes
+R3-22_ISPB-B4 uptime is 1 week, 1 day, 2 hours, 12 minutes
 System returned to ROM by reload at 15:25:33 UTC Fri Jan 20 2017
 System restarted at 15:26:52 UTC Fri Jan 20 2017
 System image file is "flash0:c2900-universalk9-mz.SPA.150-1.M6.bin"
