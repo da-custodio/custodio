@@ -89,8 +89,7 @@ interface FastEthernet0/1
  no ip address
  shutdown
  duplex auto
- s
-*May 11 01:26:35.249: %SYS-5-CONFIG_I: Configured from console by consolepeed auto
+ speed auto
 !
 interface Serial0/1/0
  description ToR2-20_ISPC
@@ -281,7 +280,7 @@ Compiled Mon 19-Oct-09 17:38 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.4(13r)T, RELEASE SOFTWARE (fc1)
 
-R2-23_ISPC-B6 uptime is 1 day, 2 hours, 38 minutes
+R2-23_ISPC-B6 uptime is 1 day, 2 hours, 39 minutes
 System returned to ROM by reload at 22:45:53 UTC Fri May 9 2014
 System image file is "flash:c2800nm-adventerprisek9-mz.124-24.T2.bin"
 
@@ -301,7 +300,7 @@ http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
 If you require further assistance please contact us by sending email to
 export@cisco.com.
 
-Cisco 2811 (revision 53.50) with 249856K/12288K bytes of memory.
+Cisco 2811 (revision 53.51) with 249856K/12288K bytes of memory.
 Processor board ID FCZ124671CY
 2 FastEthernet interfaces
 4 Serial(sync/async) interfaces

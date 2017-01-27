@@ -159,11 +159,11 @@ router bgp 300
  neighbor 23.1.1.1 activate
  neighbor 23.1.1.1 route-reflector-client
  neighbor 28.1.1.1 activate
- neighbor 28.1.1.1 route-reflector-cl
+ neighbor 28.1.1.1 route-reflector-client
+ neighbor 100
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 route
- neighbor 100.1.1.1 activate
- neighbor 100.1.1.1 next-hop-self
+ neighbor 100.1.1.1 next-hop-self
  no auto-summary
  no synchronization
  network 180.30.0.0 mask 255.255.255.0

@@ -124,8 +124,7 @@ router bgp 300
  no synchronization
  exit-address-family
 !
-ip route 200.1.0.0 25
-*May  1 21:36:35.485: %SYS-5-CONFIG_I: Configured from console by console5.255.255.0 190.30.0.254
+ip route 200.1.0.0 255.255.255.0 190.30.0.254
 ip route 200.2.0.0 255.255.255.0 190.30.0.254
 ip route 200.3.0.0 255.255.255.0 190.30.0.254
 !
@@ -220,7 +219,7 @@ show cdp neighbors
 
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
 R3-23_ISP_A-B3.cisco.com
-                 Fas 0/0            132         R S I     CISCO2911 Gig 0/0
+                 Fas 0/0            134         R S I     CISCO2911 Gig 0/0
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 ospf 10
@@ -256,7 +255,7 @@ Compiled Fri 23-Mar-07 19:08 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.3(8r)T9, RELEASE SOFTWARE (fc1)
 
-R2-8_ISPC-B1 uptime is 1 day, 2 hours, 34 minutes
+R2-8_ISPC-B1 uptime is 1 day, 2 hours, 35 minutes
 System returned to ROM by reload at 19:01:26 UTC Thu Apr 30 2015
 System image file is "flash:c2801-adventerprisek9-mz.124-9.T3.bin"
 

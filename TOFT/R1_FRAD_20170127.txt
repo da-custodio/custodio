@@ -127,10 +127,10 @@ show cdp neighbors
                   S - Switch, H - Host, I - IGMP, r - Repeater
 
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
-FRAD_4           Ser 0/0.4          140        R S I      Cisco 2811Ser 0/0/0.1
-FRAD_5           Ser 0/0.5          169        R S I      Cisco 2811Ser 0/2/1.1
-FRAD_2           Ser 0/0.2          170         R S       2621XM    Ser 0/2.1
-FRAD_3           Ser 0/0.3          172        R S I      Cisco 2621Ser 0/1.1
+FRAD_4           Ser 0/0.4          144        R S I      Cisco 2811Ser 0/0/0.1
+FRAD_5           Ser 0/0.5          173        R S I      Cisco 2811Ser 0/2/1.1
+FRAD_2           Ser 0/0.2          174         R S       2621XM    Ser 0/2.1
+FRAD_3           Ser 0/0.3          176        R S I      Cisco 2621Ser 0/1.1
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 ospf 10

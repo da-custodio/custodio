@@ -169,10 +169,10 @@ show cdp neighbors
                   S - Switch, H - Host, I - IGMP, r - Repeater
 
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
-R1_FRAD          Ser 0/2/1.1        153          R S      2621XM    Ser 0/0.5
-FRAD_4           Ser 0/2/1.4        122         R S I     2811      Ser 0/0/0.5
-FRAD_2           Ser 0/2/1.2        151          R S      2621XM    Ser 0/2.5
-FRAD_3           Ser 0/2/1.3        154         R S I     2621XM    Ser 0/1.5
+R1_FRAD          Ser 0/2/1.1        161          R S      2621XM    Ser 0/0.5
+FRAD_4           Ser 0/2/1.4        129         R S I     2811      Ser 0/0/0.5
+FRAD_2           Ser 0/2/1.2        158          R S      2621XM    Ser 0/2.5
+FRAD_3           Ser 0/2/1.3        161         R S I     2621XM    Ser 0/1.5
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 ospf 10
@@ -191,7 +191,7 @@ Compiled Mon 19-Oct-09 17:38 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.4(13r)T11, RELEASE SOFTWARE (fc1)
 
-FRAD_5 uptime is 2 hours, 19 minutes
+FRAD_5 uptime is 2 hours, 20 minutes
 System returned to ROM by reload at 13:44:25 UTC Fri Jan 27 2017
 System image file is "flash:c2800nm-adventerprisek9-mz.124-24.T2.bin"
 
@@ -211,7 +211,7 @@ http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
 If you require further assistance please contact us by sending email to
 export@cisco.com.
 
-Cisco 2811 (revision 53.50) with 512000K/12288K bytes of memory.
+Cisco 2811 (revision 53.51) with 512000K/12288K bytes of memory.
 Processor board ID FCZ142270AY
 2 FastEthernet interfaces
 2 Serial(sync/async) interfaces
