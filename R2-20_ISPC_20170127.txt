@@ -225,7 +225,7 @@ Compiled Sun 27-Mar-11 06:31 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.4(13r)T, RELEASE SOFTWARE (fc1)
 
-R2-20_ISPC uptime is 1 day, 6 minutes
+R2-20_ISPC uptime is 1 day, 11 minutes
 System returned to ROM by reload at 16:01:39 UTC Thu Jan 26 2017
 System image file is "flash:c2800nm-ipvoicek9-mz.151-3.T1.bin"
 Last reload type: Normal Reload
