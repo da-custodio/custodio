@@ -219,7 +219,7 @@ show cdp neighbors
 
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
 R3-23_ISP_A-B3.cisco.com
-                 Fas 0/0            134         R S I     CISCO2911 Gig 0/0
+                 Fas 0/0            142         R S I     CISCO2911 Gig 0/0
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 ospf 10
