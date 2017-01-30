@@ -53,7 +53,7 @@ Compiled Fri 23-Mar-07 19:08 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.3(8r)T9, RELEASE SOFTWARE (fc1)
 
-R_PS uptime is 5 hours, 56 minutes
+R_PS uptime is 6 hours, 5 minutes
 System returned to ROM by reload at 14:11:17 UTC Mon May 4 2015
 System image file is "flash:c2801-adventerprisek9-mz.124-9.T3.bin"
 
