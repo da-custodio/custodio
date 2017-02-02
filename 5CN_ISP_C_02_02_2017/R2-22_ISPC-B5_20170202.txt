@@ -200,24 +200,24 @@ show ip route
 
 Gateway of last resort is not set
 
-O E2 200.1.0.0/24 [110/20] via 10.30.0.5, 01:48:19, Serial0/2/0.202
-O E2 200.2.0.0/24 [110/20] via 10.30.0.5, 01:48:19, Serial0/2/0.202
-O E2 200.3.0.0/24 [110/20] via 10.30.0.5, 01:48:19, Serial0/2/0.202
+O E2 200.1.0.0/24 [110/20] via 10.30.0.5, 01:50:44, Serial0/2/0.202
+O E2 200.2.0.0/24 [110/20] via 10.30.0.5, 01:50:44, Serial0/2/0.202
+O E2 200.3.0.0/24 [110/20] via 10.30.0.5, 01:50:44, Serial0/2/0.202
      23.0.0.0/32 is subnetted, 1 subnets
-O       23.1.1.1 [110/129] via 10.30.0.5, 01:04:40, Serial0/2/0.202
+O       23.1.1.1 [110/129] via 10.30.0.5, 01:07:05, Serial0/2/0.202
      22.0.0.0/24 is subnetted, 1 subnets
 C       22.1.1.0 is directly connected, Loopback0
      8.0.0.0/32 is subnetted, 1 subnets
-O       8.1.1.1 [110/129] via 10.30.0.5, 01:48:19, Serial0/2/0.202
+O       8.1.1.1 [110/129] via 10.30.0.5, 01:50:44, Serial0/2/0.202
      9.0.0.0/32 is subnetted, 1 subnets
-O       9.1.1.1 [110/65] via 10.30.0.5, 01:48:20, Serial0/2/0.202
+O       9.1.1.1 [110/65] via 10.30.0.5, 01:50:45, Serial0/2/0.202
      10.0.0.0/30 is subnetted, 4 subnets
 C       10.30.0.4 is directly connected, Serial0/2/0.202
-O       10.30.0.0 [110/128] via 10.30.0.5, 01:48:20, Serial0/2/0.202
-O       10.30.0.12 [110/128] via 10.30.0.5, 01:48:20, Serial0/2/0.202
-O       10.30.0.8 [110/128] via 10.30.0.5, 01:48:20, Serial0/2/0.202
+O       10.30.0.0 [110/128] via 10.30.0.5, 01:50:45, Serial0/2/0.202
+O       10.30.0.12 [110/128] via 10.30.0.5, 01:50:45, Serial0/2/0.202
+O       10.30.0.8 [110/128] via 10.30.0.5, 01:50:45, Serial0/2/0.202
      28.0.0.0/32 is subnetted, 1 subnets
-O       28.1.1.1 [110/129] via 10.30.0.5, 01:48:20, Serial0/2/0.202
+O       28.1.1.1 [110/129] via 10.30.0.5, 01:50:45, Serial0/2/0.202
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 route
@@ -286,7 +286,7 @@ show cdp neighbors
                   S - Switch, H - Host, I - IGMP, r - Repeater
 
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
-R2-9_ISPC-B2     Ser 0/2/0.202      154         R S I     2801      Ser 0/1/0.200
+R2-9_ISPC-B2     Ser 0/2/0.202      128         R S I     2801      Ser 0/1/0.200
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 ospf 10
@@ -313,19 +313,23 @@ show ipv6 ospf 10
 show ipv6 ospf 10 neighbor
 
 Neighbor ID     Pri   State           Dead Time   Interface ID    Interface
-1.1.1.1           1   FULL/  -        00:00:39    16              Serial0/2/0.202
+1.1.1.1           1   FULL/  -        00:00:34    16              Serial0/2/0.202
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ipv6 bgp unicast summary
-                        ^
-% Invalid input detected at '^' marker.
+show ip bgp ipv6 unicast summary
+BGP router identifier 22.1.1.1, local AS number 300
+BGP table version is 7, main routing table version 7
 
+Neighbor        V          AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+2001:9::1       4        300     126     124        7    0    0 00:09:01        0
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ip bgp unicast summary
-                           ^
-% Invalid input detected at '^' marker.
+show ip bgp summary
+BGP router identifier 22.1.1.1, local AS number 300
+BGP table version is 5, main routing table version 5
 
+Neighbor        V          AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+9.1.1.1         4        300       0       0        0    0    0 never    Active
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show version
@@ -336,7 +340,7 @@ Compiled Mon 19-Oct-09 17:38 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.4(13r)T11, RELEASE SOFTWARE (fc1)
 
-R2-22_ISPC-B5 uptime is 9 hours, 22 minutes
+R2-22_ISPC-B5 uptime is 9 hours, 24 minutes
 System returned to ROM by reload at 07:05:15 UTC Thu Feb 2 2017
 System image file is "flash:c2800nm-adventerprisek9-mz.124-24.T2.bin"
 
@@ -356,7 +360,7 @@ http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
 If you require further assistance please contact us by sending email to
 export@cisco.com.
 
-Cisco 2811 (revision 53.50) with 512000K/12288K bytes of memory.
+Cisco 2811 (revision 53.51) with 512000K/12288K bytes of memory.
 Processor board ID FCZ142270AY
 2 FastEthernet interfaces
 2 Serial(sync/async) interfaces

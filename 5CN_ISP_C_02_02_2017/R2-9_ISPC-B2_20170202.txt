@@ -161,14 +161,14 @@ router bgp 300
  neighbor 2001:28::1 route-reflector-client
  exit-address-family
 !
-ip route 100.1.1.0 255.255.255.0 180.30.0.2
+ip route 100.1.1.0 255.255.255.0 180.30.0.254
+!
+!
+ip http server
+n
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ip route
 !
-!
-ip http server
-no ip http secure-server
-!
 ipv6 router ospf 10
  router-id 1.1.1.1
  log-adjacency-changes
@@ -228,15 +228,15 @@ Gateway of last resort is not set
 
      100.0.0.0/24 is subnetted, 1 subnets
 S       100.1.1.0 [1/0] via 180.30.0.254
-O E2 200.1.0.0/24 [110/20] via 10.30.0.2, 01:04:14, Serial0/1/0.100
-O E2 200.2.0.0/24 [110/20] via 10.30.0.2, 01:04:14, Serial0/1/0.100
-O E2 200.3.0.0/24 [110/20] via 10.30.0.2, 01:04:14, Serial0/1/0.100
+O E2 200.1.0.0/24 [110/20] via 10.30.0.2, 01:06:39, Serial0/1/0.100
+O E2 200.2.0.0/24 [110/20] via 10.30.0.2, 01:06:39, Serial0/1/0.100
+O E2 200.3.0.0/24 [110/20] via 10.30.0.2, 01:06:39, Serial0/1/0.100
      23.0.0.0/32 is subnetted, 1 subnets
-O       23.1.1.1 [110/65] via 10.30.0.14, 01:04:14, Serial0/1/0.400
+O       23.1.1.1 [110/65] via 10.30.0.14, 01:06:39, Serial0/1/0.400
      22.0.0.0/32 is subnetted, 1 subnets
-O       22.1.1.1 [110/65] via 10.30.0.6, 01:04:14, Serial0/1/0.200
+O       22.1.1.1 [110/65] via 10.30.0.6, 01:06:39, Serial0/1/0.200
      8.0.0.0/32 is subnetted, 1 subnets
-O       8.1.1.1 [110/65] via 10.30.0.2, 01:04:15, Serial0/1/0.100
+O       8.1.1.1 [110/65] via 10.30.0.2, 01:06:39, Serial0/1/0.100
      9.0.0.0/24 is subnetted, 1 subnets
 C       9.1.1.0 is directly connected, Loopback0
      10.0.0.0/30 is subnetted, 4 subnets
@@ -245,7 +245,7 @@ C       10.30.0.0 is directly connected, Serial0/1/0.100
 C       10.30.0.12 is directly connected, Serial0/1/0.400
 C       10.30.0.8 is directly connected, Serial0/1/0.300
      28.0.0.0/32 is subnetted, 1 subnets
-O       28.1.1.1 [110/65] via 10.30.0.10, 01:04:15, Serial0/1/0.300
+O       28.1.1.1 [110/65] via 10.30.0.10, 01:06:39, Serial0/1/0.300
      180.30.0.0/24 is subnetted, 1 subnets
 C       180.30.0.0 is directly connected, FastEthernet0/0
 
@@ -336,11 +336,11 @@ show ipv6 ospf 10
                   S - Switch, H - Host, I - IGMP, r - Repeater
 
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
-R2-22_ISPC-B5    Ser 0/1/0.200      179         R S I     2811      Ser 0/2/0.202
-R2-23_ISPC-B6    Ser 0/1/0.400      169         R S I     2811      Ser 0/1/0.402
-R2-4_ISPC-B3     Ser 0/1/0.300      134         R S I     2621XM    Ser 0/1.301
-R3-8_CIX         Fas 0/0            151         R S I     CISCO2901 Gig 0/0/3
-R2-8_ISPC-B1     Ser 0/1/0.100      148         R S I     2801      Ser 0/1/0.102
+R2-22_ISPC-B5    Ser 0/1/0.200      155         R S I     2811      Ser 0/2/0.202
+R2-23_ISPC-B6    Ser 0/1/0.400      145         R S I     2811      Ser 0/1/0.402
+R2-4_ISPC-B3     Ser 0/1/0.300      170         R S I     2621XM    Ser 0/1.301
+R3-8_CIX         Fas 0/0            166         R S I     CISCO2901 Gig 0/0/3
+R2-8_ISPC-B1     Ser 0/1/0.100      124         R S I     2801      Ser 0/1/0.102
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 ospf 10 neighbor
@@ -364,24 +364,31 @@ show ipv6 ospf 10 neighbor
 
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ipv6 bgp unicast summary
+show ip bgp ipv6 unicast summary
 
 Neighbor ID     Pri   State           Dead Time   Interface ID    Interface
-23.1.1.1          1   FULL/  -        00:00:34    17              Serial0/1/0.400
-28.1.1.1          1   FULL/  -        00:00:36    15              Serial0/1/0.300
-22.1.1.1          1   FULL/  -        00:00:37    13              Serial0/1/0.200
-8.1.1.1           1   FULL/  -        00:00:38    15              Serial0/1/0.100
+23.1.1.1          1   FULL/  -        00:00:31    17              Serial0/1/0.400
+28.1.1.1          1   FULL/  -        00:00:32    15              Serial0/1/0.300
+22.1.1.1          1   FULL/  -        00:00:33    13              Serial0/1/0.200
+8.1.1.1           1   FULL/  -        00:00:34    15              Serial0/1/0.100
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ip bgp unicast summary
-                       ^
-% Invalid input detected at '^' marker.
+show ip bgp summary
+BGP router identifier 9.1.1.1, local AS number 300
+BGP table version is 1, main routing table version 1
 
+Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+2001:8::1       4   300     115     115        1    0    0 00:08:35        0
+2001:22::1      4   300     124     125        1    0    0 00:08:36        0
+2001:23::1      4   300     121     125        1    0    0 00:08:36        0
+2001:28::1      4   300      97      97        1    0    0 00:05:48        0
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show version
-                          ^
-% Invalid input detected at '^' marker.
+BGP router identifier 9.1.1.1, local AS number 300
+BGP table version is 1, main routing table version 1
 
+Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+28.1.1.1        4   301      13      10        1    0    0 00:05:11        0
 
 
