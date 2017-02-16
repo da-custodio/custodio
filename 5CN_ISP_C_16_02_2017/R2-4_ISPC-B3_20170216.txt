@@ -1,0 +1,325 @@
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show running-config
+Building configuration...
+
+*May 12 01:59:01.043: %SYS-5-CONFIG_I: Configured from console by console
+Current configuration : 2738 bytes
+!
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname R2-4_ISPC-B3
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 5 $1$n8M1$UQ7NyyCy4vtqfzzseFwtK1
+!
+no aaa new-model
+no network-clock-participate slot 1 
+no network-clock-participate wic 0 
+ip cef
+!
+!
+!
+!
+no ip domain lookup
+ip auth-proxy max-nodata-conns 3
+ip admission max-nodata-conns 3
+!
+ipv6 unicast-routing
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+username cisco privilege 15 secret 5 $1$NyFD$ypHLwGgQAuHcVDqvLitbR/
+!
+!
+! 
+!
+!
+!
+!
+interface Loopback0
+ ip address 28.1.1.1 255.255.255.0
+ ipv6 address 2001:28::1/64
+ ipv6 enable
+ ipv6 ospf 10 area 1
+!
+interface FastEthernet0/0
+ ip address 190.20.0.254 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface Serial0/0
+ no ip address
+ shutdown
+ no fair-queue
+!
+interface BRI0/0
+ no ip address
+ encapsulation hdlc
+ shutdown
+!
+interface FastEthernet0/1
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface Serial0/1
+ description to_R2-3_ISPC
+ no ip address
+ encapsulation frame-relay
+ no keepalive
+!
+interface Serial0/1.301 point-to-point
+ description to_R2_9_ISPC-B2
+ ip address 10.30.0.10 255.255.255.252
+ ipv6 address 2001:3::2/64
+ ipv6 enable
+ ipv6 ospf 10 area 1
+ frame-relay interface-dlci 301   
+!
+router ospf 1
+ log-adjacency-changes
+ network 10.30.0.8 0.0.0.3 area 1
+ network 28.1.1.0 0.0.0.255 area 1
+!
+router bgp 300
+ bgp router-id 28.1.1.1
+ no bgp default ipv4-unicast
+ bgp log-neighbor-changes
+ neighbor 2.2.2.2 remote-as 2
+ neighbor 2.2.2.2 local-as 301 no-prepend replace-as dual-as
+ neighbor 2.2.2.2 ebgp-multihop 255
+ neighbor 2.2.2.2 update-source Loopback0
+ neighbor 9.1.1.1 remote-as 301
+ neighbor 9.1.1.1 local-as 301 no-prepend replace-as dual-as
+ neighbor 9.1.1.1 ebgp-multihop 255
+ neighbor 9.1.1.1 update-source Loopback0
+ neighbor 2001:9::1 remote-as 300
+ neighbor 2001:9::1 update-source Loopback0
+ !
+ address-family ipv4
+  neighbor 2.2.2.2 activate
+  neighbor 2.2.2.2 next-hop-self
+  neighbor 9.1.1.1 activate
+  neighbor 9.1.1.1 next-hop-self
+  no auto-summary
+  no synchronization
+  network 190.20.0.0 mask 255.255.255.0
+ exit-address-family
+ !
+ address-family ipv6
+  neighbor 2001:9::1 activate
+  neighbor 2001:9::1 next-hop-self
+  no synchronization
+ exit-address-family
+!
+ip forward-protocol nd
+ip route 2.2.2.0 255.255.255.0 190.20.0.1
+!
+!
+ip http server
+no ip http secure-server
+!
+ipv6 router ospf 10
+ router-id 28.1.1.1
+ log-adjacency-changes
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+!
+banner motd ^CCNot Authorized!^C
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+ login local
+line aux 0
+line vty 0 4
+ exec-timeout 0 0
+ logging synchronous
+ login local
+line vty 5 15
+ exec-timeout 0 0
+ logging synchronous
+ login local
+!
+!
+end
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+     10.0.0.0/30 is subnetted, 1 subnets
+C       10.30.0.8 is directly connected, Serial0/1.301
+     28.0.0.0/24 is subnetted, 1 subnets
+C       28.1.1.0 is directly connected, Loopback0
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 route
+IPv6 Routing Table - 6 entries
+Codes: C - Connected, L - Local, S - Static, R - RIP, B - BGP
+       U - Per-user Static route
+       I1 - ISIS L1, I2 - ISIS L2, IA - ISIS interarea, IS - ISIS summary
+       O - OSPF intra, OI - OSPF inter, OE1 - OSPF ext 1, OE2 - OSPF ext 2
+       ON1 - OSPF NSSA ext 1, ON2 - OSPF NSSA ext 2
+C   2001:3::/64 [0/0]
+     via ::, Serial0/1.301
+L   2001:3::2/128 [0/0]
+     via ::, Serial0/1.301
+C   2001:28::/64 [0/0]
+     via ::, Loopback0
+L   2001:28::1/128 [0/0]
+     via ::, Loopback0
+L   FE80::/10 [0/0]
+     via ::, Null0
+L   FF00::/8 [0/0]
+     via ::, Null0
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip int brief
+Interface                  IP-Address      OK? Method Status                Protocol
+FastEthernet0/0            190.20.0.254    YES manual up                    down    
+Serial0/0                  unassigned      YES manual administratively down down    
+BRI0/0                     unassigned      YES manual administratively down down    
+BRI0/0:1                   unassigned      YES unset  administratively down down    
+BRI0/0:2                   unassigned      YES unset  administratively down down    
+FastEthernet0/1            unassigned      YES manual administratively down down    
+Serial0/1                  unassigned      YES manual up                    up      
+Serial0/1.301              10.30.0.10      YES manual up                    up      
+Loopback0                  28.1.1.1        YES manual up                    up      
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 int brief
+FastEthernet0/0            [up/down]
+Serial0/0                  [administratively down/down]
+BRI0/0                     [administratively down/down]
+BRI0/0:1                   [administratively down/down]
+BRI0/0:2                   [administratively down/down]
+FastEthernet0/1            [administratively down/down]
+Serial0/1                  [up/up]
+Serial0/1.301              [up/up]
+    FE80::20A:F4FF:FE34:DCC0
+    2001:3::2
+Loopback0                  [up/up]
+    FE80::20A:F4FF:FE34:DCC0
+    2001:28::1
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show cdp neighbors
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 ospf 10
+ Routing Process "ospfv3 10" with ID 28.1.1.1
+ SPF schedule delay 5 secs, Hold time between two SPFs 10 secs
+ Minimum LSA interval 5 secs. Minimum LSA arrival 1 secs
+ LSA group pacing timer 240 secs
+ Interface flood pacing timer 33 msecs
+ Retransmission pacing timer 66 msecs
+ Number of external LSA 0. Checksum Sum 0x000000
+ Number of areas in this router is 1. 1 normal 0 stub 0 nssa
+ Reference bandwidth unit is 100 mbps
+    Area 1
+	Number of interfaces in this area is 2
+	SPF algorithm executed 13 times
+	Number of LSA 10. Checksum Sum 0x04F11C
+	Number of DCbitless LSA 0
+	Number of indication LSA 0
+	Number of DoNotAge LSA 0
+	Flood list length 0
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 ospf 10 neighbor
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip bgp summary
+BGP router identifier 28.1.1.1, local AS number 300
+BGP table version is 1, main routing table version 1
+
+Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+2.2.2.2         4     2       0       0        0    0    0 never    Active
+9.1.1.1         4   301      68      75        0    0    0 00:05:32 Active
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show version
+Cisco IOS Software, C2600 Software (C2600-ADVIPSERVICESK9-M), Version 12.4(23), RELEASE SOFTWARE (fc1)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2008 by Cisco Systems, Inc.
+Compiled Sat 08-Nov-08 20:53 by prod_rel_team
+
+ROM: System Bootstrap, Version 12.2(7r) [cmong 7r], RELEASE SOFTWARE (fc1)
+
+R2-4_ISPC-B3 uptime is 1 hour, 28 minutes
+System returned to ROM by reload
+System image file is "flash:c2600-advipservicesk9-mz124-23.bin"
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+Cisco 2621XM (MPC860P) processor (revision 1.0) with 127308K/3764K bytes of memory.
+Processor board ID JAD06350OFG
+M860 processor: part number 5, mask 2
+2 FastEthernet interfaces
+2 Serial(sync/async) interfaces
+1 ISDN Basic Rate interface
+32K bytes of NVRAM.
+32768K bytes of processor board System flash (Read/Write)
+
+Configuration register is 0x2102
+
+
+
