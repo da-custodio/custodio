@@ -2,7 +2,6 @@
 show running-config
 Building configuration...
 
-*May 12 01:59:01.043: %SYS-5-CONFIG_I: Configured from console by console
 Current configuration : 2738 bytes
 !
 version 12.4
@@ -279,7 +278,7 @@ BGP table version is 1, main routing table version 1
 
 Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
 2.2.2.2         4     2       0       0        0    0    0 never    Active
-9.1.1.1         4   301      68      75        0    0    0 00:05:32 Active
+9.1.1.1         4   301      68      75        0    0    0 00:11:13 Active
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show version
@@ -290,7 +289,7 @@ Compiled Sat 08-Nov-08 20:53 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.2(7r) [cmong 7r], RELEASE SOFTWARE (fc1)
 
-R2-4_ISPC-B3 uptime is 1 hour, 28 minutes
+R2-4_ISPC-B3 uptime is 1 hour, 33 minutes
 System returned to ROM by reload
 System image file is "flash:c2600-advipservicesk9-mz124-23.bin"
 
