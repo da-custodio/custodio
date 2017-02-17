@@ -289,7 +289,7 @@ show ipv6 ospf 10
     Area 1
 	Number of interfaces in this area is 5
 	SPF algorithm executed 16 times
-	Number of LSA 2. Checksum Sum 0x003FAE
+	Number of LSA 2. Checksum Sum 0x010AC8
 	Number of DCbitless LSA 0
 	Number of indication LSA 0
 	Number of DoNotAge LSA 0
@@ -306,7 +306,7 @@ show ip bgp summary
 BGP table version is 1, main routing table version 1
 
 Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
-28.1.1.1        4   301      73      76        0    0    0 17:22:37 Active
+28.1.1.1        4   301      73      76        0    0    0 1d00h    Active
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show version
@@ -317,7 +317,7 @@ Compiled Fri 23-Mar-07 19:08 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.3(8r)T9, RELEASE SOFTWARE (fc1)
 
-R2-9_ISPC-B2 uptime is 18 hours, 49 minutes
+R2-9_ISPC-B2 uptime is 1 day, 2 hours, 9 minutes
 System returned to ROM by reload at 15:30:40 UTC Thu Feb 16 2017
 System image file is "flash:c2801-adventerprisek9-mz.124-9.T3.bin"
 
