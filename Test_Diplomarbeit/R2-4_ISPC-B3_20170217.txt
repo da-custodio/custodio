@@ -254,7 +254,7 @@ show ipv6 ospf 10
     Area 1
 	Number of interfaces in this area is 2
 	SPF algorithm executed 14 times
-	Number of LSA 2. Checksum Sum 0x017427
+	Number of LSA 2. Checksum Sum 0x015039
 	Number of DCbitless LSA 0
 	Number of indication LSA 0
 	Number of DoNotAge LSA 0
@@ -272,7 +272,7 @@ BGP table version is 1, main routing table version 1
 
 Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
 2.2.2.2         4     2       0       0        0    0    0 never    Active
-9.1.1.1         4   301      68      75        0    0    0 17:22:59 Active
+9.1.1.1         4   301      68      75        0    0    0 22:41:42 Active
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show version
@@ -283,7 +283,7 @@ Compiled Sat 08-Nov-08 20:53 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.2(7r) [cmong 7r], RELEASE SOFTWARE (fc1)
 
-R2-4_ISPC-B3 uptime is 18 hours, 45 minutes
+R2-4_ISPC-B3 uptime is 1 day, 4 minutes
 System returned to ROM by reload
 System image file is "flash:c2600-advipservicesk9-mz124-23.bin"
 
