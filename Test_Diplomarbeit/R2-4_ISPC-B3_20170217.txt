@@ -2,7 +2,7 @@
 show running-config
 Building configuration...
 
-Current configuration : 2750 bytes
+Current configuration : 2781 bytes
 !
 version 12.4
 service timestamps debug datetime msec
@@ -59,6 +59,7 @@ interface Loopback0
 !
 interface FastEthernet0/0
  ip address 190.20.0.254 255.255.255.0
+ shutdown
  duplex auto
  speed auto
 !
@@ -74,6 +75,7 @@ interface BRI0/0
 !
 interface FastEthernet0/1
  ip address 10.78.0.10 255.255.255.0
+ shutdown
  duplex auto
  speed auto
 !
@@ -81,6 +83,7 @@ interface Serial0/1
  description to_R2-3_ISPC
  no ip address
  encapsulation frame-relay
+ shutdown
  no keepalive
 !
 interface Serial0/1.301 point-to-point
@@ -151,7 +154,7 @@ control-plane
 !
 !
 !
-banner motd ^CCNot Authorized!^C
+banner motd ^CCCNot Authorized!^C
 !
 line con 0
  exec-timeout 0 0
@@ -206,26 +209,26 @@ L   FF00::/8 [0/0]
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ip int brief
 Interface                  IP-Address      OK? Method Status                Protocol
-FastEthernet0/0            190.20.0.254    YES manual up                    down    
+FastEthernet0/0            190.20.0.254    YES manual administratively down down    
 Serial0/0                  unassigned      YES manual administratively down down    
 BRI0/0                     unassigned      YES manual administratively down down    
 BRI0/0:1                   unassigned      YES unset  administratively down down    
 BRI0/0:2                   unassigned      YES unset  administratively down down    
-FastEthernet0/1            10.78.0.10      YES manual up                    down    
-Serial0/1                  unassigned      YES manual down                  down    
-Serial0/1.301              10.30.0.10      YES manual down                  down    
+FastEthernet0/1            10.78.0.10      YES manual administratively down down    
+Serial0/1                  unassigned      YES manual administratively down down    
+Serial0/1.301              10.30.0.10      YES manual administratively down down    
 Loopback0                  28.1.1.1        YES manual up                    up      
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 int brief
-FastEthernet0/0            [up/down]
+FastEthernet0/0            [administratively down/down]
 Serial0/0                  [administratively down/down]
 BRI0/0                     [administratively down/down]
 BRI0/0:1                   [administratively down/down]
 BRI0/0:2                   [administratively down/down]
-FastEthernet0/1            [up/down]
-Serial0/1                  [down/down]
-Serial0/1.301              [down/down]
+FastEthernet0/1            [administratively down/down]
+Serial0/1                  [administratively down/down]
+Serial0/1.301              [administratively down/down]
     FE80::20A:F4FF:FE34:DCC0
     2001:3::2
 Loopback0                  [up/up]
@@ -252,8 +255,8 @@ show ipv6 ospf 10
  Reference bandwidth unit is 100 mbps
     Area 1
 	Number of interfaces in this area is 2
-	SPF algorithm executed 14 times
-	Number of LSA 2. Checksum Sum 0x014C3B
+	SPF algorithm executed 1 times
+	Number of LSA 2. Checksum Sum 0x00F2E8
 	Number of DCbitless LSA 0
 	Number of indication LSA 0
 	Number of DoNotAge LSA 0
@@ -271,7 +274,7 @@ BGP table version is 1, main routing table version 1
 
 Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
 2.2.2.2         4     2       0       0        0    0    0 never    Active
-9.1.1.1         4   301      68      75        0    0    0 22:50:06 Active
+9.1.1.1         4   301       0       0        0    0    0 never    Active
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show version
@@ -282,7 +285,7 @@ Compiled Sat 08-Nov-08 20:53 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.2(7r) [cmong 7r], RELEASE SOFTWARE (fc1)
 
-R2-4_ISPC-B3 uptime is 1 day, 12 minutes
+R2-4_ISPC-B3 uptime is 1 hour, 32 minutes
 System returned to ROM by reload
 System image file is "flash:c2600-advipservicesk9-mz124-23.bin"
 
