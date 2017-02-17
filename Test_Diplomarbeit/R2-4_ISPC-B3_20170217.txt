@@ -2,7 +2,8 @@
 show running-config
 Building configuration...
 
-Current configuration : 2738 bytes
+*May 13 00:36:59.030: %SYS-5-CONFIG_I: Configured from console by console
+Current configuration : 2750 bytes
 !
 version 12.4
 service timestamps debug datetime msec
@@ -73,8 +74,7 @@ interface BRI0/0
  shutdown
 !
 interface FastEthernet0/1
- no ip address
- shutdown
+ ip address 10.78.0.10 255.255.255.0
  duplex auto
  speed auto
 !
@@ -212,7 +212,7 @@ Serial0/0                  unassigned      YES manual administratively down down
 BRI0/0                     unassigned      YES manual administratively down down    
 BRI0/0:1                   unassigned      YES unset  administratively down down    
 BRI0/0:2                   unassigned      YES unset  administratively down down    
-FastEthernet0/1            unassigned      YES manual administratively down down    
+FastEthernet0/1            10.78.0.10      YES manual up                    down    
 Serial0/1                  unassigned      YES manual down                  down    
 Serial0/1.301              10.30.0.10      YES manual down                  down    
 Loopback0                  28.1.1.1        YES manual up                    up      
@@ -224,7 +224,7 @@ Serial0/0                  [administratively down/down]
 BRI0/0                     [administratively down/down]
 BRI0/0:1                   [administratively down/down]
 BRI0/0:2                   [administratively down/down]
-FastEthernet0/1            [administratively down/down]
+FastEthernet0/1            [up/down]
 Serial0/1                  [down/down]
 Serial0/1.301              [down/down]
     FE80::20A:F4FF:FE34:DCC0
@@ -272,7 +272,7 @@ BGP table version is 1, main routing table version 1
 
 Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
 2.2.2.2         4     2       0       0        0    0    0 never    Active
-9.1.1.1         4   301      68      75        0    0    0 22:41:42 Active
+9.1.1.1         4   301      68      75        0    0    0 22:43:29 Active
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show version
@@ -283,7 +283,7 @@ Compiled Sat 08-Nov-08 20:53 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.2(7r) [cmong 7r], RELEASE SOFTWARE (fc1)
 
-R2-4_ISPC-B3 uptime is 1 day, 4 minutes
+R2-4_ISPC-B3 uptime is 1 day, 6 minutes
 System returned to ROM by reload
 System image file is "flash:c2600-advipservicesk9-mz124-23.bin"
 
