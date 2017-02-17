@@ -275,7 +275,7 @@ show ipv6 ospf 10
     Area 1
 	Number of interfaces in this area is 2
 	SPF algorithm executed 8 times
-	Number of LSA 2. Checksum Sum 0x010DA0
+	Number of LSA 2. Checksum Sum 0x00E9B2
 	Number of DCbitless LSA 0
 	Number of indication LSA 0
 	Number of DoNotAge LSA 0
@@ -303,7 +303,7 @@ Compiled Mon 19-Oct-09 17:38 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.4(13r)T11, RELEASE SOFTWARE (fc1)
 
-R2-22_ISPC-B5 uptime is 18 hours, 50 minutes
+R2-22_ISPC-B5 uptime is 1 day, 8 minutes
 System returned to ROM by reload at 14:50:07 UTC Thu Feb 16 2017
 System image file is "flash:c2800nm-adventerprisek9-mz.124-24.T2.bin"
 
