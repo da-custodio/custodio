@@ -197,7 +197,7 @@ show cdp neighbors
                   D - Remote, C - CVTA, M - Two-port Mac Relay 
 
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
-SerVir_Router    Gig 1/0/24        135             R S I  2811      Fas 0/0
+SerVir_Router    Gig 1/0/24        161             R S I  2811      Fas 0/0
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ip bgp summary
@@ -216,7 +216,7 @@ Image text-base: 0x00003000, data-base: 0x01B00000
 ROM: Bootstrap program is Alpha board boot loader
 BOOTLDR: C2960S Boot Loader (C2960S-HBOOT-M) Version 12.2(55r)SE1, RELEASE SOFTWARE (fc1)
 
-Switch uptime is 1 week, 1 day, 6 hours, 52 minutes
+Switch uptime is 1 week, 1 day, 6 hours, 59 minutes
 System returned to ROM by power-on
 System image file is "flash:/c2960s-universalk9-mz.122-55.SE8/c2960s-universalk9-mz.122-55.SE8.bin"
 
