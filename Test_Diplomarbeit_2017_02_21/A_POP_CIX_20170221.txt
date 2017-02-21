@@ -2,7 +2,7 @@
 show running-config
 Building configuration...
 
-Current configuration : 1391 bytes
+Current configuration : 1523 bytes
 !
 version 12.4
 service timestamps debug datetime msec
@@ -85,6 +85,13 @@ router eigrp 1
  network 9.0.3.0 0.0.0.3
  no auto-summary
 !
+router bgp 300
+ no synchronization
+ bgp log-neighbor-changes
+ redistribute static
+ default-information originate
+ no auto-summary
+!
 ip route 0.0.0.0 0.0.0.0 8.8.8.4
 ip route 0.0.0.0 0.0.0.0 FastEthernet0/0 8.8.8.4
 ip route 9.0.4.0 255.255.255.252 8.8.8.3
@@ -129,6 +136,10 @@ end
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ip route
+*Feb 21 14:25:21.600: %SYS-5-CONFIG_I: Configured from console by console
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 route
 Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
        D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
        N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
@@ -141,7 +152,7 @@ Gateway of last resort is not set
 
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ipv6 route
+show ip int brief
 IPv6 Routing Table - 2 entries
 Codes: C - Connected, L - Local, S - Static, R - RIP, B - BGP
        U - Per-user Static route
@@ -155,7 +166,7 @@ L   FF00::/8 [0/0]
      via ::, Null0
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ip int brief
+show ipv6 int brief
 Interface                  IP-Address      OK? Method Status                Protocol
 FastEthernet0/0            8.8.8.2         YES manual up                    down    
 FastEthernet0/1            unassigned      YES unset  administratively down down    
@@ -164,7 +175,7 @@ Serial0/1/1                unassigned      YES unset  administratively down down
 Tunnel1                    9.0.3.2         YES manual up                    down    
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ipv6 int brief
+show cdp neighbors
 FastEthernet0/0            [up/down]
     unassigned
 FastEthernet0/1            [administratively down/down]
@@ -177,15 +188,11 @@ Tunnel1                    [up/down]
     unassigned
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show cdp neighbors
+show ipv6 ospf 10
 Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
                   S - Switch, H - Host, I - IGMP, r - Repeater
 
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
-
-! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ipv6 ospf 10
-%OSPFv3: No router process 10
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 ospf 10 neighbor
@@ -193,48 +200,10 @@ show ipv6 ospf 10 neighbor
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ip bgp summary
-% BGP not active
-
+%OSPFv3: No router process 10
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show version
-Cisco IOS Software, 2801 Software (C2801-ADVENTERPRISEK9-M), Version 12.4(9)T3, RELEASE SOFTWARE (fc3)
-Technical Support: http://www.cisco.com/techsupport
-Copyright (c) 1986-2007 by Cisco Systems, Inc.
-Compiled Fri 23-Mar-07 19:08 by prod_rel_team
-
-ROM: System Bootstrap, Version 12.3(8r)T9, RELEASE SOFTWARE (fc1)
-
-A_POP_CIX uptime is 1 day, 4 hours, 13 minutes
-System returned to ROM by reload at 10:00:01 UTC Mon Feb 20 2017
-System image file is "flash:c2801-adventerprisek9-mz.124-9.T3.bin"
-
-
-This product contains cryptographic features and is subject to United
-States and local country laws governing import, export, transfer and
-use. Delivery of Cisco cryptographic products does not imply
-third-party authority to import, export, distribute or use encryption.
-Importers, exporters, distributors and users are responsible for
-compliance with U.S. and local country laws. By using this product you
-agree to comply with applicable laws and regulations. If you are unable
-to comply with U.S. and local laws, return this product immediately.
-
-A summary of U.S. laws governing Cisco cryptographic products may be found at:
-http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
-
-If you require further assistance please contact us by sending email to
-export@cisco.com.
-
-Cisco 2801 (revision 6.0) with 119808K/11264K bytes of memory.
-Processor board ID FCZ110812Q0
-2 FastEthernet interfaces
-2 Serial(sync/async) interfaces
-1 Virtual Private Network (VPN) Module
-DRAM configuration is 64 bits wide with parity disabled.
-191K bytes of NVRAM.
-62720K bytes of ATA CompactFlash (Read/Write)
-
-Configuration register is 0x2102
-
+
 
 
