@@ -2,7 +2,7 @@
 show running-config
 Building configuration...
 
-Current configuration : 1523 bytes
+Current configuration : 1562 bytes
 !
 version 12.4
 service timestamps debug datetime msec
@@ -94,6 +94,7 @@ router bgp 300
 !
 ip route 0.0.0.0 0.0.0.0 8.8.8.4
 ip route 0.0.0.0 0.0.0.0 FastEthernet0/0 8.8.8.4
+ip route 9.0.4.0 255.255.255.0 8.8.8.1
 ip route 9.0.4.0 255.255.255.252 8.8.8.3
 ip route 9.0.5.0 255.255.255.252 8.8.8.3
 ip route 9.0.6.0 255.255.255.252 8.8.8.3
@@ -136,10 +137,10 @@ end
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ip route
-*Feb 21 14:25:21.600: %SYS-5-CONFIG_I: Configured from console by console
+*Feb 21 14:50:19.076: %SYS-5-CONFIG_I: Configured from console by console
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ipv6 route
+show ip int brief
 Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
        D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
        N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
@@ -152,21 +153,7 @@ Gateway of last resort is not set
 
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ip int brief
-IPv6 Routing Table - 2 entries
-Codes: C - Connected, L - Local, S - Static, R - RIP, B - BGP
-       U - Per-user Static route
-       I1 - ISIS L1, I2 - ISIS L2, IA - ISIS interarea, IS - ISIS summary
-       O - OSPF intra, OI - OSPF inter, OE1 - OSPF ext 1, OE2 - OSPF ext 2
-       ON1 - OSPF NSSA ext 1, ON2 - OSPF NSSA ext 2
-       D - EIGRP, EX - EIGRP external
-L   FE80::/10 [0/0]
-     via ::, Null0
-L   FF00::/8 [0/0]
-     via ::, Null0
-
-! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ipv6 int brief
+show cdp neighbors
 Interface                  IP-Address      OK? Method Status                Protocol
 FastEthernet0/0            8.8.8.2         YES manual up                    down    
 FastEthernet0/1            unassigned      YES unset  administratively down down    
@@ -175,32 +162,11 @@ Serial0/1/1                unassigned      YES unset  administratively down down
 Tunnel1                    9.0.3.2         YES manual up                    down    
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show cdp neighbors
-FastEthernet0/0            [up/down]
-    unassigned
-FastEthernet0/1            [administratively down/down]
-    unassigned
-Serial0/1/0                [administratively down/down]
-    unassigned
-Serial0/1/1                [administratively down/down]
-    unassigned
-Tunnel1                    [up/down]
-    unassigned
-
-! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ipv6 ospf 10
+show ip bgp summary
 Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
                   S - Switch, H - Host, I - IGMP, r - Repeater
 
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
-
-! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ipv6 ospf 10 neighbor
-%OSPFv3: No router process 10
-
-! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ip bgp summary
-%OSPFv3: No router process 10
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show version
