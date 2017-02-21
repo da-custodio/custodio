@@ -221,22 +221,6 @@ Gateway of last resort is not set
 C       23.1.1.0 is directly connected, Loopback0
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ipv6 route
-IPv6 Routing Table - Default - 3 entries
-Codes: C - Connected, L - Local, S - Static, U - Per-user Static route
-       B - BGP, M - MIPv6, R - RIP, I1 - ISIS L1
-       I2 - ISIS L2, IA - ISIS interarea, IS - ISIS summary, D - EIGRP
-       EX - EIGRP external
-       O - OSPF Intra, OI - OSPF Inter, OE1 - OSPF ext 1, OE2 - OSPF ext 2
-       ON1 - OSPF NSSA ext 1, ON2 - OSPF NSSA ext 2
-C   2001:23::/64 [0/0]
-     via Loopback0, directly connected
-L   2001:23::1/128 [0/0]
-     via Loopback0, receive
-L   FF00::/8 [0/0]
-     via Null0, receive
-
-! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ip int brief
 Interface                  IP-Address      OK? Method Status                Protocol
 FastEthernet0/0            200.6.0.1       YES manual up                    down    
@@ -249,57 +233,11 @@ Serial0/2/1                200.4.31.1      YES manual down                  down
 Loopback0                  23.1.1.1        YES manual up                    up      
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ipv6 int brief
-FastEthernet0/0            [up/down]
-    unassigned
-FastEthernet0/1            [administratively down/down]
-    unassigned
-Serial0/1/0                [down/down]
-    unassigned
-Serial0/1/0.402            [down/down]
-    FE80::223:5EFF:FE06:63A0
-    2001:4::2
-Serial0/1/1                [administratively down/down]
-    unassigned
-Serial0/2/0                [down/down]
-    unassigned
-Serial0/2/1                [down/down]
-    unassigned
-Loopback0                  [up/up]
-    FE80::223:5EFF:FE06:63A0
-    2001:23::1
-
-! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show cdp neighbors
 Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
                   S - Switch, H - Host, I - IGMP, r - Repeater
 
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
-
-! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ipv6 ospf 10
- Routing Process "ospfv3 10" with ID 23.1.1.1
- SPF schedule delay 5 secs, Hold time between two SPFs 10 secs
- Minimum LSA interval 5 secs. Minimum LSA arrival 1 secs
- LSA group pacing timer 240 secs
- Interface flood pacing timer 33 msecs
- Retransmission pacing timer 66 msecs
- Number of external LSA 0. Checksum Sum 0x000000
- Number of areas in this router is 1. 1 normal 0 stub 0 nssa
- Reference bandwidth unit is 100 mbps
-    Area 1
-	Number of interfaces in this area is 2
-	SPF algorithm executed 13 times
-	Number of LSA 2. Checksum Sum 0x014DF4
-	Number of DCbitless LSA 0
-	Number of indication LSA 0
-	Number of DoNotAge LSA 0
-	Flood list length 0
-
-
-! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ipv6 ospf 10 neighbor
-
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ip bgp summary
@@ -318,7 +256,7 @@ Compiled Mon 19-Oct-09 17:38 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.4(13r)T, RELEASE SOFTWARE (fc1)
 
-R2-23_ISPC-B6 uptime is 5 days, 12 minutes
+R2-23_ISPC-B6 uptime is 5 days, 16 minutes
 System returned to ROM by reload at 00:11:39 UTC Sat May 31 2014
 System image file is "flash:c2800nm-adventerprisek9-mz.124-24.T2.bin"
 
