@@ -2,7 +2,7 @@
 show running-config
 Building configuration...
 
-Current configuration : 1562 bytes
+Current configuration : 1596 bytes
 !
 version 12.4
 service timestamps debug datetime msec
@@ -94,6 +94,7 @@ router bgp 300
 !
 ip route 0.0.0.0 0.0.0.0 8.8.8.4
 ip route 0.0.0.0 0.0.0.0 FastEthernet0/0 8.8.8.4
+ip route 0.0.0.0 0.0.0.0 8.8.88.8
 ip route 9.0.4.0 255.255.255.0 8.8.8.1
 ip route 9.0.4.0 255.255.255.252 8.8.8.3
 ip route 9.0.5.0 255.255.255.252 8.8.8.3
@@ -212,7 +213,7 @@ Compiled Fri 23-Mar-07 19:08 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.3(8r)T9, RELEASE SOFTWARE (fc1)
 
-A_POP_CIX uptime is 1 day, 5 hours, 22 minutes
+A_POP_CIX uptime is 1 day, 5 hours, 44 minutes
 System returned to ROM by reload at 10:00:01 UTC Mon Feb 20 2017
 System image file is "flash:c2801-adventerprisek9-mz.124-9.T3.bin"
 
