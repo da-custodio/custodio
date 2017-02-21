@@ -141,15 +141,6 @@ Gateway of last resort is not set
 
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ipv6 route
-IPv6 Routing Table - 0 entries
-Codes: C - Connected, L - Local, S - Static, R - RIP, B - BGP
-       U - Per-user Static route
-       I1 - ISIS L1, I2 - ISIS L2, IA - ISIS interarea, IS - ISIS summary
-       O - OSPF intra, OI - OSPF inter, OE1 - OSPF ext 1, OE2 - OSPF ext 2
-       ON1 - OSPF NSSA ext 1, ON2 - OSPF NSSA ext 2
-
-! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ip int brief
 Interface                  IP-Address      OK? Method Status                Protocol
 FastEthernet0/0            unassigned      YES unset  administratively down down    
@@ -164,32 +155,11 @@ Tunnel5                    9.0.5.1         YES manual up                    down
 Tunnel6                    9.0.6.1         YES manual up                    down    
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ipv6 int brief
-FastEthernet0/0            [administratively down/down]
-Serial0/0                  [administratively down/down]
-BRI0/0                     [administratively down/down]
-BRI0/0:1                   [administratively down/down]
-BRI0/0:2                   [administratively down/down]
-FastEthernet0/1            [up/down]
-Serial0/1                  [administratively down/down]
-Tunnel4                    [up/down]
-Tunnel5                    [up/down]
-Tunnel6                    [up/down]
-
-! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show cdp neighbors
 Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
                   S - Switch, H - Host, I - IGMP, r - Repeater
 
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
-
-! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ipv6 ospf 10
-%OSPFv3: No router process 10
-
-! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ipv6 ospf 10 neighbor
-%OSPFv3: No router process 10
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ip bgp summary
@@ -205,7 +175,7 @@ Compiled Sat 08-Nov-08 20:53 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.2(7r) [cmong 7r], RELEASE SOFTWARE (fc1)
 
-ISP_B uptime is 1 day, 5 hours, 37 minutes
+ISP_B uptime is 1 day, 5 hours, 41 minutes
 System returned to ROM by reload
 System image file is "flash:c2600-advipservicesk9-mz124-23.bin"
 
