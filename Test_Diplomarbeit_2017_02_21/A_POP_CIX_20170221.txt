@@ -1,0 +1,240 @@
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show running-config
+Building configuration...
+
+Current configuration : 1391 bytes
+!
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname A_POP_CIX
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+resource policy
+!
+ip cef
+!
+!
+!
+!
+!
+!
+!
+voice-card 0
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+! 
+!
+!
+!
+!
+!
+interface Tunnel1
+ ip address 9.0.3.2 255.255.255.252
+ tunnel source FastEthernet0/0
+ tunnel destination 10.0.0.46
+!
+interface FastEthernet0/0
+ description to_Border5
+ ip address 8.8.8.2 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface Serial0/1/0
+ no ip address
+ shutdown
+ no fair-queue
+ clock rate 2000000
+!
+interface Serial0/1/1
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+router eigrp 1
+ redistribute static route-map default-only
+ network 9.0.3.0 0.0.0.3
+ no auto-summary
+!
+ip route 0.0.0.0 0.0.0.0 8.8.8.4
+ip route 0.0.0.0 0.0.0.0 FastEthernet0/0 8.8.8.4
+ip route 9.0.4.0 255.255.255.252 8.8.8.3
+ip route 9.0.5.0 255.255.255.252 8.8.8.3
+ip route 9.0.6.0 255.255.255.252 8.8.8.3
+ip route 10.0.0.44 255.255.255.252 8.8.8.1
+!
+!
+ip http server
+no ip http secure-server
+!
+access-list 1 permit 0.0.0.0
+!
+!
+!
+route-map default-only permit 10
+ match ip address 1
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ login
+!
+scheduler allocate 20000 1000
+end
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 route
+IPv6 Routing Table - 2 entries
+Codes: C - Connected, L - Local, S - Static, R - RIP, B - BGP
+       U - Per-user Static route
+       I1 - ISIS L1, I2 - ISIS L2, IA - ISIS interarea, IS - ISIS summary
+       O - OSPF intra, OI - OSPF inter, OE1 - OSPF ext 1, OE2 - OSPF ext 2
+       ON1 - OSPF NSSA ext 1, ON2 - OSPF NSSA ext 2
+       D - EIGRP, EX - EIGRP external
+L   FE80::/10 [0/0]
+     via ::, Null0
+L   FF00::/8 [0/0]
+     via ::, Null0
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip int brief
+Interface                  IP-Address      OK? Method Status                Protocol
+FastEthernet0/0            8.8.8.2         YES manual up                    down    
+FastEthernet0/1            unassigned      YES unset  administratively down down    
+Serial0/1/0                unassigned      YES unset  administratively down down    
+Serial0/1/1                unassigned      YES unset  administratively down down    
+Tunnel1                    9.0.3.2         YES manual up                    down    
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 int brief
+FastEthernet0/0            [up/down]
+    unassigned
+FastEthernet0/1            [administratively down/down]
+    unassigned
+Serial0/1/0                [administratively down/down]
+    unassigned
+Serial0/1/1                [administratively down/down]
+    unassigned
+Tunnel1                    [up/down]
+    unassigned
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show cdp neighbors
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 ospf 10
+%OSPFv3: No router process 10
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 ospf 10 neighbor
+%OSPFv3: No router process 10
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip bgp summary
+% BGP not active
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show version
+Cisco IOS Software, 2801 Software (C2801-ADVENTERPRISEK9-M), Version 12.4(9)T3, RELEASE SOFTWARE (fc3)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2007 by Cisco Systems, Inc.
+Compiled Fri 23-Mar-07 19:08 by prod_rel_team
+
+ROM: System Bootstrap, Version 12.3(8r)T9, RELEASE SOFTWARE (fc1)
+
+A_POP_CIX uptime is 1 day, 4 hours, 13 minutes
+System returned to ROM by reload at 10:00:01 UTC Mon Feb 20 2017
+System image file is "flash:c2801-adventerprisek9-mz.124-9.T3.bin"
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+Cisco 2801 (revision 6.0) with 119808K/11264K bytes of memory.
+Processor board ID FCZ110812Q0
+2 FastEthernet interfaces
+2 Serial(sync/async) interfaces
+1 Virtual Private Network (VPN) Module
+DRAM configuration is 64 bits wide with parity disabled.
+191K bytes of NVRAM.
+62720K bytes of ATA CompactFlash (Read/Write)
+
+Configuration register is 0x2102
+
+
+
