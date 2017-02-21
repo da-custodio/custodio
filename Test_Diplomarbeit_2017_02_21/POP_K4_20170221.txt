@@ -131,20 +131,6 @@ Gateway of last resort is not set
 
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ipv6 route
-IPv6 Routing Table - 2 entries
-Codes: C - Connected, L - Local, S - Static, R - RIP, B - BGP
-       U - Per-user Static route
-       I1 - ISIS L1, I2 - ISIS L2, IA - ISIS interarea, IS - ISIS summary
-       O - OSPF intra, OI - OSPF inter, OE1 - OSPF ext 1, OE2 - OSPF ext 2
-       ON1 - OSPF NSSA ext 1, ON2 - OSPF NSSA ext 2
-       D - EIGRP, EX - EIGRP external
-L   FE80::/10 [0/0]
-     via ::, Null0
-L   FF00::/8 [0/0]
-     via ::, Null0
-
-! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ip int brief
 Interface                  IP-Address      OK? Method Status                Protocol
 FastEthernet0/0            unassigned      YES unset  administratively down down    
@@ -154,32 +140,11 @@ Serial0/1/1                unassigned      YES unset  administratively down down
 Tunnel5                    9.0.5.2         YES manual up                    down    
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ipv6 int brief
-FastEthernet0/0            [administratively down/down]
-    unassigned
-FastEthernet0/1            [up/down]
-    unassigned
-Serial0/1/0                [administratively down/down]
-    unassigned
-Serial0/1/1                [administratively down/down]
-    unassigned
-Tunnel5                    [up/down]
-    unassigned
-
-! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show cdp neighbors
 Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
                   S - Switch, H - Host, I - IGMP, r - Repeater
 
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
-
-! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ipv6 ospf 10
-%OSPFv3: No router process 10
-
-! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ipv6 ospf 10 neighbor
-%OSPFv3: No router process 10
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ip bgp summary
@@ -195,7 +160,7 @@ Compiled Fri 23-Mar-07 19:08 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.3(8r)T9, RELEASE SOFTWARE (fc1)
 
-POP_K4 uptime is 1 day, 5 hours, 44 minutes
+POP_K4 uptime is 1 day, 5 hours, 48 minutes
 System returned to ROM by reload at 14:52:24 UTC Mon May 25 2015
 System image file is "flash:c2801-adventerprisek9-mz.124-9.T3.bin"
 
