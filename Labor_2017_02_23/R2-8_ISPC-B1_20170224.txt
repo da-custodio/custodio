@@ -2,7 +2,7 @@
 show running-config
 Building configuration...
 
-Current configuration : 2240 bytes
+Current configuration : 2298 bytes
 !
 version 12.4
 service timestamps debug datetime msec
@@ -14,6 +14,9 @@ hostname R2-8_ISPC-B1
 boot-start-marker
 boot-end-marker
 !
+no logging buffered
+no logging console
+no logging monitor
 enable secret 5 $1$r52E$7ecQhrrJAaXMwvYqmKDiH.
 !
 no aaa new-model
@@ -179,27 +182,27 @@ S    200.1.0.0/24 [1/0] via 190.30.0.254
 S    200.2.0.0/24 [1/0] via 190.30.0.254
 S    200.3.0.0/24 [1/0] via 190.30.0.254
      190.20.0.0/24 is subnetted, 1 subnets
-B       190.20.0.0 [200/0] via 28.1.1.1, 20:29:15
+B       190.20.0.0 [200/0] via 28.1.1.1, 20:36:12
      190.30.0.0/24 is subnetted, 1 subnets
 C       190.30.0.0 is directly connected, FastEthernet0/0
      23.0.0.0/32 is subnetted, 1 subnets
-O       23.1.1.1 [110/129] via 10.30.0.1, 20:29:36, Serial0/1/0.102
+O       23.1.1.1 [110/129] via 10.30.0.1, 20:36:34, Serial0/1/0.102
      22.0.0.0/32 is subnetted, 1 subnets
-O       22.1.1.1 [110/129] via 10.30.0.1, 20:29:36, Serial0/1/0.102
+O       22.1.1.1 [110/129] via 10.30.0.1, 20:36:34, Serial0/1/0.102
      8.0.0.0/24 is subnetted, 1 subnets
 C       8.1.1.0 is directly connected, Loopback0
      9.0.0.0/32 is subnetted, 1 subnets
-O       9.1.1.1 [110/65] via 10.30.0.1, 20:29:36, Serial0/1/0.102
+O       9.1.1.1 [110/65] via 10.30.0.1, 20:36:34, Serial0/1/0.102
      10.0.0.0/30 is subnetted, 4 subnets
-O       10.30.0.4 [110/128] via 10.30.0.1, 20:29:36, Serial0/1/0.102
+O       10.30.0.4 [110/128] via 10.30.0.1, 20:36:34, Serial0/1/0.102
 C       10.30.0.0 is directly connected, Serial0/1/0.102
-O       10.30.0.12 [110/128] via 10.30.0.1, 20:29:36, Serial0/1/0.102
-O       10.30.0.8 [110/128] via 10.30.0.1, 20:29:36, Serial0/1/0.102
+O       10.30.0.12 [110/128] via 10.30.0.1, 20:36:34, Serial0/1/0.102
+O       10.30.0.8 [110/128] via 10.30.0.1, 20:36:34, Serial0/1/0.102
      28.0.0.0/32 is subnetted, 1 subnets
-O       28.1.1.1 [110/129] via 10.30.0.1, 20:29:36, Serial0/1/0.102
+O       28.1.1.1 [110/129] via 10.30.0.1, 20:36:34, Serial0/1/0.102
      180.30.0.0/24 is subnetted, 1 subnets
-B       180.30.0.0 [200/0] via 9.1.1.1, 20:29:15
-B*   0.0.0.0/0 [200/0] via 180.30.0.254, 20:28:50
+B       180.30.0.0 [200/0] via 9.1.1.1, 20:36:12
+B*   0.0.0.0/0 [200/0] via 180.30.0.254, 20:35:47
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 route
@@ -271,8 +274,8 @@ show cdp neighbors
 
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
 R3-23_ISP_A-B3.cisco.com
-                 Fas 0/0            135         R S I     CISCO2911 Gig 0/0
-R2-9_ISPC-B2     Ser 0/1/0.102      177         R S I     2801      Ser 0/1/0.100
+                 Fas 0/0            139         R S I     CISCO2911 Gig 0/0
+R2-9_ISPC-B2     Ser 0/1/0.102      179         R S I     2801      Ser 0/1/0.100
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 ospf 10
@@ -288,7 +291,7 @@ show ipv6 ospf 10
     Area 1
 	Number of interfaces in this area is 2
 	SPF algorithm executed 8 times
-	Number of LSA 12. Checksum Sum 0x062725
+	Number of LSA 12. Checksum Sum 0x061D2A
 	Number of DCbitless LSA 0
 	Number of indication LSA 0
 	Number of DoNotAge LSA 0
@@ -299,7 +302,7 @@ show ipv6 ospf 10
 show ipv6 ospf 10 neighbor
 
 Neighbor ID     Pri   State           Dead Time   Interface ID    Interface
-1.1.1.1           1   FULL/  -        00:00:30    15              Serial0/1/0.102
+1.1.1.1           1   FULL/  -        00:00:33    15              Serial0/1/0.102
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ip bgp summary
@@ -316,7 +319,7 @@ BGP using 1268 total bytes of memory
 BGP activity 7/3 prefixes, 7/3 paths, scan interval 60 secs
 
 Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
-9.1.1.1         4   300    1287    1282       15    0    0 21:16:52        3
+9.1.1.1         4   300    1294    1289       15    0    0 21:23:49        3
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show version
@@ -327,7 +330,7 @@ Compiled Fri 23-Mar-07 19:08 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.3(8r)T9, RELEASE SOFTWARE (fc1)
 
-R2-8_ISPC-B1 uptime is 21 hours, 25 minutes
+R2-8_ISPC-B1 uptime is 21 hours, 32 minutes
 System returned to ROM by reload at 19:07:27 UTC Thu May 28 2015
 System image file is "flash:c2801-adventerprisek9-mz.124-9.T3.bin"
 
