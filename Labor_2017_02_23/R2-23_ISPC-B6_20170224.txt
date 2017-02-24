@@ -201,32 +201,32 @@ Gateway of last resort is 180.30.0.254 to network 0.0.0.0
 
      2.0.0.0/24 is subnetted, 1 subnets
 S       2.2.2.0 [1/0] via 190.20.0.1
-O E2 200.1.0.0/24 [110/20] via 10.30.0.13, 21:00:42, Serial0/1/0.402
-O E2 200.2.0.0/24 [110/20] via 10.30.0.13, 21:00:42, Serial0/1/0.402
-O E2 200.3.0.0/24 [110/20] via 10.30.0.13, 21:00:42, Serial0/1/0.402
+O E2 200.1.0.0/24 [110/20] via 10.30.0.13, 21:05:10, Serial0/1/0.402
+O E2 200.2.0.0/24 [110/20] via 10.30.0.13, 21:05:10, Serial0/1/0.402
+O E2 200.3.0.0/24 [110/20] via 10.30.0.13, 21:05:10, Serial0/1/0.402
      190.20.0.0/24 is subnetted, 1 subnets
-B       190.20.0.0 [200/0] via 28.1.1.1, 21:31:24
+B       190.20.0.0 [200/0] via 28.1.1.1, 21:35:53
      190.30.0.0/24 is subnetted, 1 subnets
-B       190.30.0.0 [200/0] via 8.1.1.1, 21:31:24
+B       190.30.0.0 [200/0] via 8.1.1.1, 21:35:53
      23.0.0.0/24 is subnetted, 1 subnets
 C       23.1.1.0 is directly connected, Loopback0
      22.0.0.0/32 is subnetted, 1 subnets
-O       22.1.1.1 [110/129] via 10.30.0.13, 21:31:38, Serial0/1/0.402
+O       22.1.1.1 [110/129] via 10.30.0.13, 21:36:06, Serial0/1/0.402
      8.0.0.0/32 is subnetted, 1 subnets
-O       8.1.1.1 [110/129] via 10.30.0.13, 21:00:43, Serial0/1/0.402
+O       8.1.1.1 [110/129] via 10.30.0.13, 21:05:11, Serial0/1/0.402
      9.0.0.0/32 is subnetted, 1 subnets
-O       9.1.1.1 [110/65] via 10.30.0.13, 21:31:38, Serial0/1/0.402
+O       9.1.1.1 [110/65] via 10.30.0.13, 21:36:06, Serial0/1/0.402
      10.0.0.0/30 is subnetted, 4 subnets
-O       10.30.0.4 [110/128] via 10.30.0.13, 21:31:38, Serial0/1/0.402
-O       10.30.0.0 [110/128] via 10.30.0.13, 21:31:38, Serial0/1/0.402
+O       10.30.0.4 [110/128] via 10.30.0.13, 21:36:06, Serial0/1/0.402
+O       10.30.0.0 [110/128] via 10.30.0.13, 21:36:06, Serial0/1/0.402
 C       10.30.0.12 is directly connected, Serial0/1/0.402
-O       10.30.0.8 [110/128] via 10.30.0.13, 21:31:38, Serial0/1/0.402
+O       10.30.0.8 [110/128] via 10.30.0.13, 21:36:06, Serial0/1/0.402
 C    200.4.30.0/24 is directly connected, Serial0/2/0
      28.0.0.0/32 is subnetted, 1 subnets
-O       28.1.1.1 [110/129] via 10.30.0.13, 21:31:38, Serial0/1/0.402
+O       28.1.1.1 [110/129] via 10.30.0.13, 21:36:06, Serial0/1/0.402
      180.30.0.0/24 is subnetted, 1 subnets
-B       180.30.0.0 [200/0] via 9.1.1.1, 21:31:26
-B*   0.0.0.0/0 [200/0] via 180.30.0.254, 21:09:23
+B       180.30.0.0 [200/0] via 9.1.1.1, 21:35:54
+B*   0.0.0.0/0 [200/0] via 180.30.0.254, 21:13:51
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 route
@@ -301,8 +301,8 @@ show cdp neighbors
                   S - Switch, H - Host, I - IGMP, r - Repeater
 
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
-R2-26            Ser 0/2/0          160         R S I     2811      Ser 0/2/0
-R2-9_ISPC-B2     Ser 0/1/0.402      163         R S I     2801      Ser 0/1/0.400
+R2-26            Ser 0/2/0          132         R S I     2811      Ser 0/2/0
+R2-9_ISPC-B2     Ser 0/1/0.402      134         R S I     2801      Ser 0/1/0.400
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 ospf 10
@@ -318,7 +318,7 @@ show ipv6 ospf 10
     Area 1
 	Number of interfaces in this area is 2
 	SPF algorithm executed 3 times
-	Number of LSA 12. Checksum Sum 0x066C54
+	Number of LSA 12. Checksum Sum 0x066856
 	Number of DCbitless LSA 0
 	Number of indication LSA 0
 	Number of DoNotAge LSA 0
@@ -329,7 +329,7 @@ show ipv6 ospf 10
 show ipv6 ospf 10 neighbor
 
 Neighbor ID     Pri   State           Dead Time   Interface ID    Interface
-1.1.1.1           1   FULL/  -        00:00:37    18              Serial0/1/0.402
+1.1.1.1           1   FULL/  -        00:00:38    18              Serial0/1/0.402
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ip bgp summary
@@ -346,7 +346,7 @@ BGP using 1312 total bytes of memory
 BGP activity 4/0 prefixes, 4/0 paths, scan interval 60 secs
 
 Neighbor        V          AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
-9.1.1.1         4        300    1299    1285        5    0    0 21:31:32        4
+9.1.1.1         4        300    1304    1290        5    0    0 21:36:01        4
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show version
@@ -357,7 +357,7 @@ Compiled Mon 19-Oct-09 17:38 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.4(13r)T, RELEASE SOFTWARE (fc1)
 
-R2-23_ISPC-B6 uptime is 21 hours, 49 minutes
+R2-23_ISPC-B6 uptime is 21 hours, 53 minutes
 System returned to ROM by reload at 23:03:02 UTC Fri Jun 6 2014
 System image file is "flash:c2800nm-adventerprisek9-mz.124-24.T2.bin"
 
