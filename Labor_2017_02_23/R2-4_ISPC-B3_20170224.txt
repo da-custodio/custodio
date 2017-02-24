@@ -2,7 +2,7 @@
 show running-config
 Building configuration...
 
-Current configuration : 2211 bytes
+Current configuration : 2269 bytes
 !
 version 12.4
 service timestamps debug datetime msec
@@ -14,6 +14,9 @@ hostname R2-4_ISPC-B3
 boot-start-marker
 boot-end-marker
 !
+no logging buffered
+no logging console
+no logging monitor
 enable secret 5 $1$UieH$5DGdHWOaHqKSpuAqAhqI20
 !
 no aaa new-model
@@ -168,31 +171,31 @@ Gateway of last resort is 180.30.0.254 to network 0.0.0.0
 
      2.0.0.0/24 is subnetted, 1 subnets
 S       2.2.2.0 [1/0] via 190.20.0.1
-O E2 200.1.0.0/24 [110/20] via 10.30.0.9, 20:29:08, Serial0/1.301
-O E2 200.2.0.0/24 [110/20] via 10.30.0.9, 20:29:08, Serial0/1.301
-O E2 200.3.0.0/24 [110/20] via 10.30.0.9, 20:29:08, Serial0/1.301
+O E2 200.1.0.0/24 [110/20] via 10.30.0.9, 20:36:05, Serial0/1.301
+O E2 200.2.0.0/24 [110/20] via 10.30.0.9, 20:36:05, Serial0/1.301
+O E2 200.3.0.0/24 [110/20] via 10.30.0.9, 20:36:05, Serial0/1.301
      190.20.0.0/24 is subnetted, 1 subnets
 C       190.20.0.0 is directly connected, FastEthernet0/0
      190.30.0.0/24 is subnetted, 1 subnets
-B       190.30.0.0 [200/0] via 8.1.1.1, 21:11:27
+B       190.30.0.0 [200/0] via 8.1.1.1, 21:18:24
      23.0.0.0/32 is subnetted, 1 subnets
-O       23.1.1.1 [110/129] via 10.30.0.9, 20:29:09, Serial0/1.301
+O       23.1.1.1 [110/129] via 10.30.0.9, 20:36:06, Serial0/1.301
      22.0.0.0/32 is subnetted, 1 subnets
-O       22.1.1.1 [110/129] via 10.30.0.9, 20:29:09, Serial0/1.301
+O       22.1.1.1 [110/129] via 10.30.0.9, 20:36:06, Serial0/1.301
      8.0.0.0/32 is subnetted, 1 subnets
-O       8.1.1.1 [110/129] via 10.30.0.9, 20:29:09, Serial0/1.301
+O       8.1.1.1 [110/129] via 10.30.0.9, 20:36:06, Serial0/1.301
      9.0.0.0/32 is subnetted, 1 subnets
-O       9.1.1.1 [110/65] via 10.30.0.9, 20:29:09, Serial0/1.301
+O       9.1.1.1 [110/65] via 10.30.0.9, 20:36:06, Serial0/1.301
      10.0.0.0/30 is subnetted, 4 subnets
-O       10.30.0.4 [110/128] via 10.30.0.9, 20:29:09, Serial0/1.301
-O       10.30.0.0 [110/128] via 10.30.0.9, 20:29:09, Serial0/1.301
-O       10.30.0.12 [110/128] via 10.30.0.9, 20:29:09, Serial0/1.301
+O       10.30.0.4 [110/128] via 10.30.0.9, 20:36:06, Serial0/1.301
+O       10.30.0.0 [110/128] via 10.30.0.9, 20:36:06, Serial0/1.301
+O       10.30.0.12 [110/128] via 10.30.0.9, 20:36:06, Serial0/1.301
 C       10.30.0.8 is directly connected, Serial0/1.301
      28.0.0.0/24 is subnetted, 1 subnets
 C       28.1.1.0 is directly connected, Loopback0
      180.30.0.0/24 is subnetted, 1 subnets
-B       180.30.0.0 [200/0] via 9.1.1.1, 21:14:51
-B*   0.0.0.0/0 [200/0] via 180.30.0.254, 20:37:48
+B       180.30.0.0 [200/0] via 9.1.1.1, 21:21:48
+B*   0.0.0.0/0 [200/0] via 180.30.0.254, 20:44:45
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 route
@@ -264,8 +267,8 @@ show cdp neighbors
                   S - Switch, H - Host, I - IGMP, r - Repeater
 
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
-R2-15_ISPB-B5    Fas 0/0            160        R S I      2811      Fas 0/1
-R2-9_ISPC-B2     Ser 0/1.301        136        R S I      2801      Ser 0/1/0.300
+R2-15_ISPB-B5    Fas 0/0            164        R S I      2811      Fas 0/1
+R2-9_ISPC-B2     Ser 0/1.301        140        R S I      2801      Ser 0/1/0.300
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 ospf 10
@@ -281,7 +284,7 @@ show ipv6 ospf 10
     Area 1
 	Number of interfaces in this area is 2
 	SPF algorithm executed 5 times
-	Number of LSA 12. Checksum Sum 0x06F492
+	Number of LSA 12. Checksum Sum 0x06EA97
 	Number of DCbitless LSA 0
 	Number of indication LSA 0
 	Number of DoNotAge LSA 0
@@ -292,7 +295,7 @@ show ipv6 ospf 10
 show ipv6 ospf 10 neighbor
 
 Neighbor ID     Pri   State           Dead Time   Interface ID    Interface
-1.1.1.1           1   FULL/  -        00:00:31    17              Serial0/1.301
+1.1.1.1           1   FULL/  -        00:00:34    17              Serial0/1.301
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ip bgp summary
@@ -310,7 +313,7 @@ BGP activity 6/2 prefixes, 6/2 paths, scan interval 60 secs
 
 Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
 2.2.2.2         4     2       0       0        0    0    0 never    Active
-9.1.1.1         4   300    1287    1282        9    0    0 21:15:33        3
+9.1.1.1         4   300    1294    1289        9    0    0 21:22:30        3
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show version
@@ -321,7 +324,7 @@ Compiled Sat 08-Nov-08 20:53 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.2(7r) [cmong 7r], RELEASE SOFTWARE (fc1)
 
-R2-4_ISPC-B3 uptime is 21 hours, 20 minutes
+R2-4_ISPC-B3 uptime is 21 hours, 27 minutes
 System returned to ROM by reload
 System image file is "flash:c2600-advipservicesk9-mz124-23.bin"
 
