@@ -4,7 +4,7 @@ show running-config
 
 Current configuration : 1454 bytes
 !
-! Last configuration change at 15:43:27 UTC Thu Mar 2 2017
+! Last configuration change at 15:50:04 UTC Thu Mar 2 2017
 version 15.2
 service timestamps debug datetime msec
 service timestamps log datetime msec
@@ -171,7 +171,7 @@ show cdp neighbors
                   D - Remote, C - CVTA, M - Two-port Mac Relay 
 
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
-R2               Gig 0/0            135            R S I  CISCO2901 Gig 0/0
+R2               Gig 0/0            141            R S I  CISCO2901 Gig 0/0
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 ospf 10
@@ -187,7 +187,7 @@ show ip bgp summary
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show access-lists
 IPv6 access list OSPF_IN
-    permit 89 host FE80:1::2 host FF02::5 (34059 matches) sequence 40
+    permit 89 host FE80:1::2 host FF02::5 (34101 matches) sequence 40
     permit 89 host FE80:1::2 host FF02::6 sequence 50
 IPv6 access list OUT_g00
     deny ipv6 any any sequence 10
@@ -201,7 +201,7 @@ Compiled Tue 15-Apr-14 09:45 by prod_rel_team
 
 ROM: System Bootstrap, Version 15.0(1r)M16, RELEASE SOFTWARE (fc1)
 
-R1 uptime is 1 week, 1 hour, 1 minute
+R1 uptime is 1 week, 1 hour, 7 minutes
 System returned to ROM by reload at 14:40:38 UTC Thu Feb 23 2017
 System image file is "flash0:c2900-universalk9-mz.SPA.152-4.M6a.bin"
 Last reload type: Normal Reload
