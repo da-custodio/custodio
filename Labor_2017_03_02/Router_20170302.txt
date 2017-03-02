@@ -2,9 +2,9 @@
 show running-config
 Building configuration...
 
-Current configuration : 1397 bytes
+Current configuration : 1458 bytes
 !
-! Last configuration change at 15:26:50 UTC Thu Mar 2 2017
+! Last configuration change at 15:18:29 UTC Thu Mar 2 2017
 version 15.2
 service timestamps debug datetime msec
 service timestamps log datetime msec
@@ -40,7 +40,7 @@ multilink bundle-name authenticated
 !
 !
 !
-license udi pid CISCO2901/K9 sn FCZ184492UE
+license udi pid CISCO2901/K9 sn FCZ184492U0
 !
 !
 !
@@ -57,11 +57,13 @@ interface Embedded-Service-Engine0/0
 !
 interface GigabitEthernet0/0
  no ip address
+ ip access-group TEST out
  duplex auto
  speed auto
- ipv6 address FE80:1::2 link-local
- ipv6 address 2001::1/64
+ ipv6 address FE80:1::1 link-local
+ ipv6 address 2001::2/64
  ipv6 enable
+ ipv6 traffic-filter OSPF_IN in
  ipv6 ospf 1 area 1
 !
 interface GigabitEthernet0/1
@@ -70,21 +72,9 @@ interface GigabitEthernet0/1
  duplex auto
  speed auto
 !
-interface FastEthernet0/0/0
- no ip address
- shutdown
- duplex auto
- speed auto
-!
-interface FastEthernet0/0/1
- no ip address
- shutdown
- duplex auto
- speed auto
-!
 !
 router ospfv3 1
- router-id 2.2.2.2
+ router-id 1.1.1.1
  !
  address-family ipv6 unicast
  exit-address-family
@@ -97,6 +87,13 @@ no ip http secure-server
 !
 !
 !
+!
+ipv6 access-list OSPF_IN
+ sequence 40 permit 89 host FE80:1::2 host FF02::5
+ permit 89 host FE80:1::2 host FF02::6
+!
+ipv6 access-list OUT_g00
+ deny ipv6 any any
 !
 control-plane
 !
@@ -145,7 +142,7 @@ Codes: C - Connected, L - Local, S - Static, U - Per-user Static route
        ON1 - OSPF NSSA ext 1, ON2 - OSPF NSSA ext 2, l - LISP
 C   2001::/64 [0/0]
      via GigabitEthernet0/0, directly connected
-L   2001::1/128 [0/0]
+L   2001::2/128 [0/0]
      via GigabitEthernet0/0, receive
 L   FF00::/8 [0/0]
      via Null0, receive
@@ -156,21 +153,15 @@ show ip int brief
 Embedded-Service-Engine0/0 unassigned      YES unset  administratively down down    
 GigabitEthernet0/0         unassigned      YES unset  up                    up      
 GigabitEthernet0/1         unassigned      YES unset  administratively down down    
-FastEthernet0/0/0          unassigned      YES unset  administratively down down    
-FastEthernet0/0/1          unassigned      YES unset  administratively down down    
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 int brief
 Em0/0                  [administratively down/down]
     unassigned
 GigabitEthernet0/0     [up/up]
-    FE80:1::2
-    2001::1
+    FE80:1::1
+    2001::2
 GigabitEthernet0/1     [administratively down/down]
-    unassigned
-FastEthernet0/0/0      [administratively down/down]
-    unassigned
-FastEthernet0/0/1      [administratively down/down]
     unassigned
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
@@ -180,7 +171,7 @@ show cdp neighbors
                   D - Remote, C - CVTA, M - Two-port Mac Relay 
 
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
-Router           Gig 0/0            155            R S I  CISCO2901 Gig 0/0
+Router           Gig 0/0            126            R S I  CISCO2901 Gig 0/0
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 ospf 10
@@ -195,6 +186,11 @@ show ip bgp summary
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show access-lists
+IPv6 access list OSPF_IN
+    permit 89 host FE80:1::2 host FF02::5 (33901 matches) sequence 40
+    permit 89 host FE80:1::2 host FF02::6 sequence 50
+IPv6 access list OUT_g00
+    deny ipv6 any any sequence 10
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show version
@@ -205,8 +201,8 @@ Compiled Tue 15-Apr-14 09:45 by prod_rel_team
 
 ROM: System Bootstrap, Version 15.0(1r)M16, RELEASE SOFTWARE (fc1)
 
-Router uptime is 1 week, 35 minutes
-System returned to ROM by reload at 14:49:14 UTC Thu Feb 23 2017
+Router uptime is 1 week, 36 minutes
+System returned to ROM by reload at 14:40:38 UTC Thu Feb 23 2017
 System image file is "flash0:c2900-universalk9-mz.SPA.152-4.M6a.bin"
 Last reload type: Normal Reload
 Last reload reason: Reload Command
@@ -229,8 +225,7 @@ If you require further assistance please contact us by sending email to
 export@cisco.com.
 
 Cisco CISCO2901/K9 (revision 1.0) with 2506752K/114688K bytes of memory.
-Processor board ID FCZ184492UE
-2 FastEthernet interfaces
+Processor board ID FCZ184492U0
 2 Gigabit Ethernet interfaces
 1 terminal line
 DRAM configuration is 64 bits wide with parity enabled.
@@ -245,7 +240,7 @@ License UDI:
 -------------------------------------------------
 Device#	  PID			SN
 -------------------------------------------------
-*0  	  CISCO2901/K9          FCZ184492UE     
+*0  	  CISCO2901/K9          FCZ184492U0     
 
 
 
