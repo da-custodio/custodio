@@ -1,0 +1,410 @@
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show running-config
+Building configuration...
+
+Current configuration : 3865 bytes
+!
+! Last configuration change at 18:29:08 UTC Tue Mar 7 2017
+!
+version 12.2
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname MTTRouterhubDONOTTOUCH
+!
+boot-start-marker
+boot-end-marker
+!
+no logging buffered
+no logging console
+no logging monitor
+!
+!
+!
+no aaa new-model
+system mtu routing 1500
+ip routing
+ip dhcp excluded-address 10.2.1.0
+!
+ip dhcp pool DHCP_POOL_20
+   network 10.2.1.0 255.255.255.0
+   default-router 10.2.1.1 
+!
+!
+ipv6 unicast-routing
+!
+!
+crypto pki trustpoint TP-self-signed-3452839552
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-3452839552
+ revocation-check none
+ rsakeypair TP-self-signed-3452839552
+!
+!
+crypto pki certificate chain TP-self-signed-3452839552
+ certificate self-signed 01
+  3082024F 308201B8 A0030201 02020101 300D0609 2A864886 F70D0101 04050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 33343532 38333935 3532301E 170D3933 30333031 30303031 
+  31335A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D33 34353238 
+  33393535 3230819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  8100E12F 20094DC3 D00565EC 9E74620A 5F02A701 52945247 DE3A40ED 046666FF 
+  B909B5AB 87A71035 9E73131B EA0ABDD3 AAE1073C 11149032 C0AB0DBD C50F0975 
+  4A09CE2A 00ADA18F 1E0F676C C2453DDD 6AE22219 CEA7CB43 54548BE3 611BF38D 
+  8645207E CFC3884F 92290FBE 00729749 BAAB97A5 CFF867C3 882E9772 6D52B68C 
+  99630203 010001A3 77307530 0F060355 1D130101 FF040530 030101FF 30220603 
+  551D1104 1B301982 174D5454 526F7574 65726875 62444F4E 4F54544F 5543482E 
+  301F0603 551D2304 18301680 1461192E CC3063FC 2F2E3373 048908E4 5CEE89C4 
+  06301D06 03551D0E 04160414 61192ECC 3063FC2F 2E337304 8908E45C EE89C406 
+  300D0609 2A864886 F70D0101 04050003 81810005 2B272681 704A30CE F0B2B6E2 
+  857DAC7B 56BD2223 53791E47 4D7AB496 5154847F 63E4E6F8 B3E73915 40161570 
+  77D0B3ED 87BFD423 11A1A25E 04DAE1F1 41A8E5DA EB34F8E4 35E5DC7D 15A00DD7 
+  83984DF5 36977626 AF5D1355 86246635 D6AFD1F4 2CF2332F B9313B4C 4FEB89F7 
+  AE152122 C0DCB857 EEB0B6DA 49E928EA 54CCAE
+  quit
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+interface FastEthernet0/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface FastEthernet0/2
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface FastEthernet0/3
+!
+interface FastEthernet0/4
+!
+interface FastEthernet0/5
+!
+interface FastEthernet0/6
+!
+interface FastEthernet0/7
+!
+interface FastEthernet0/8
+!
+interface FastEthernet0/9
+!
+interface FastEthernet0/10
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+!
+interface FastEthernet0/23
+!
+interface FastEthernet0/24
+!
+interface GigabitEthernet0/1
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ ip address 10.0.0.1 255.255.255.0
+ ipv6 address 2A00:EB0:100:1::2/64
+ ipv6 enable
+ ipv6 ospf 10 area 0
+!
+interface Vlan10
+ ip address 10.1.1.1 255.255.255.0
+ ipv6 address 2A00:EB0:100::1/64
+ ipv6 enable
+ ipv6 ospf 10 area 0
+!
+interface Vlan20
+ ip address 10.2.1.1 255.255.255.0
+ ipv6 address 2A00:EB0:20::1/64
+ ipv6 enable
+ ipv6 ospf 10 area 0
+!
+router rip
+ version 2
+ network 10.0.0.0
+ no auto-summary
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 Vlan1
+ip http server
+ip http secure-server
+!
+!
+ipv6 router ospf 10
+ log-adjacency-changes
+!
+!
+!
+!
+!
+line con 0
+line vty 0 4
+ login
+line vty 5 15
+ login
+!
+ntp clock-period 36028825
+ntp server 10.0.0.2
+end
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 route
+IPv6 Routing Table - Default - 1 entries
+Codes: C - Connected, L - Local, S - Static, U - Per-user Static route
+       B - BGP, R - RIP, D - EIGRP, EX - EIGRP external
+       ND - Neighbor Discovery
+       O - OSPF Intra, OI - OSPF Inter, OE1 - OSPF ext 1, OE2 - OSPF ext 2
+       ON1 - OSPF NSSA ext 1, ON2 - OSPF NSSA ext 2
+L   FF00::/8 [0/0]
+     via Null0, receive
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip int brief
+Interface              IP-Address      OK? Method Status                Protocol
+Vlan1                  10.0.0.1        YES manual up                    down    
+Vlan10                 10.1.1.1        YES manual up                    down    
+Vlan20                 10.2.1.1        YES manual up                    down    
+FastEthernet0/1        unassigned      YES unset  down                  down    
+FastEthernet0/2        unassigned      YES unset  down                  down    
+FastEthernet0/3        unassigned      YES unset  down                  down    
+FastEthernet0/4        unassigned      YES unset  down                  down    
+FastEthernet0/5        unassigned      YES unset  down                  down    
+FastEthernet0/6        unassigned      YES unset  down                  down    
+FastEthernet0/7        unassigned      YES unset  down                  down    
+FastEthernet0/8        unassigned      YES unset  down                  down    
+FastEthernet0/9        unassigned      YES unset  down                  down    
+FastEthernet0/10       unassigned      YES unset  down                  down    
+FastEthernet0/11       unassigned      YES unset  down                  down    
+FastEthernet0/12       unassigned      YES unset  down                  down    
+FastEthernet0/13       unassigned      YES unset  down                  down    
+FastEthernet0/14       unassigned      YES unset  down                  down    
+FastEthernet0/15       unassigned      YES unset  down                  down    
+FastEthernet0/16       unassigned      YES unset  down                  down    
+FastEthernet0/17       unassigned      YES unset  down                  down    
+FastEthernet0/18       unassigned      YES unset  down                  down    
+FastEthernet0/19       unassigned      YES unset  down                  down    
+FastEthernet0/20       unassigned      YES unset  down                  down    
+FastEthernet0/21       unassigned      YES unset  down                  down    
+FastEthernet0/22       unassigned      YES unset  down                  down    
+FastEthernet0/23       unassigned      YES unset  down                  down    
+FastEthernet0/24       unassigned      YES unset  down                  down    
+GigabitEthernet0/1     unassigned      YES unset  down                  down    
+GigabitEthernet0/2     unassigned      YES unset  down                  down    
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 int brief
+Vlan1                      [up/down]
+    FE80::6A99:CDFF:FECE:26C0
+    2A00:EB0:100:1::2
+Vlan10                     [up/down]
+    FE80::6A99:CDFF:FECE:26C1
+    2A00:EB0:100::1
+Vlan20                     [up/down]
+    FE80::6A99:CDFF:FECE:26C2
+    2A00:EB0:20::1
+FastEthernet0/1            [down/down]
+    unassigned
+FastEthernet0/2            [down/down]
+    unassigned
+FastEthernet0/3            [down/down]
+    unassigned
+FastEthernet0/4            [down/down]
+    unassigned
+FastEthernet0/5            [down/down]
+    unassigned
+FastEthernet0/6            [down/down]
+    unassigned
+FastEthernet0/7            [down/down]
+    unassigned
+FastEthernet0/8            [down/down]
+    unassigned
+FastEthernet0/9            [down/down]
+    unassigned
+FastEthernet0/10           [down/down]
+    unassigned
+FastEthernet0/11           [down/down]
+    unassigned
+FastEthernet0/12           [down/down]
+    unassigned
+FastEthernet0/13           [down/down]
+    unassigned
+FastEthernet0/14           [down/down]
+    unassigned
+FastEthernet0/15           [down/down]
+    unassigned
+FastEthernet0/16           [down/down]
+    unassigned
+FastEthernet0/17           [down/down]
+    unassigned
+FastEthernet0/18           [down/down]
+    unassigned
+FastEthernet0/19           [down/down]
+    unassigned
+FastEthernet0/20           [down/down]
+    unassigned
+FastEthernet0/21           [down/down]
+    unassigned
+FastEthernet0/22           [down/down]
+    unassigned
+FastEthernet0/23           [down/down]
+    unassigned
+FastEthernet0/24           [down/down]
+    unassigned
+GigabitEthernet0/1         [down/down]
+    unassigned
+GigabitEthernet0/2         [down/down]
+    unassigned
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show cdp neighbors
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone, 
+                  D - Remote, C - CVTA, M - Two-port Mac Relay 
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 ospf 10
+ Routing Process "ospfv3 10" with ID 10.0.0.1
+ SPF schedule delay 5 secs, Hold time between two SPFs 10 secs
+ Minimum LSA interval 5 secs. Minimum LSA arrival 1 secs
+ LSA group pacing timer 240 secs
+ Interface flood pacing timer 33 msecs
+ Retransmission pacing timer 66 msecs
+ Number of external LSA 0. Checksum Sum 0x000000
+ Number of areas in this router is 1. 1 normal 0 stub 0 nssa
+ Reference bandwidth unit is 100 mbps
+    Area BACKBONE(0) (Inactive)
+	Number of interfaces in this area is 3
+	SPF algorithm executed 11 times
+	Number of LSA 1. Checksum Sum 0x005B92
+	Number of DCbitless LSA 0
+	Number of indication LSA 0
+	Number of DoNotAge LSA 0
+	Flood list length 0
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 ospf 10 neighbor
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip bgp summary
+% BGP not active
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show access-lists
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show version
+Cisco IOS Software, C3560 Software (C3560-IPSERVICESK9-M), Version 12.2(55)SE8, RELEASE SOFTWARE (fc2)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2013 by Cisco Systems, Inc.
+Compiled Wed 26-Jun-13 11:18 by prod_rel_team
+Image text-base: 0x01000000, data-base: 0x02F00000
+
+ROM: Bootstrap program is C3560 boot loader
+BOOTLDR: C3560 Boot Loader (C3560-HBOOT-M) Version 12.2(53r)SEY4, RELEASE SOFTWARE (fc1)
+
+MTTRouterhubDONOTTOUCH uptime is 6 days, 5 hours, 27 minutes
+System returned to ROM by power-on
+System restarted at 13:01:43 UTC Wed Mar 1 2017
+System image file is "flash:/c3560-ipservicesk9-mz.122-55.SE8/c3560-ipservicesk9-mz.122-55.SE8.bin"
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+cisco WS-C3560V2-24PS (PowerPC405) processor (revision Q0) with 131072K bytes of memory.
+Processor board ID FDO1840Y09C
+Last reset from power-on
+3 Virtual Ethernet interfaces
+24 FastEthernet interfaces
+2 Gigabit Ethernet interfaces
+The password-recovery mechanism is enabled.
+
+512K bytes of flash-simulated non-volatile configuration memory.
+Base ethernet MAC Address       : 68:99:CD:CE:26:80
+Motherboard assembly number     : 73-12634-01
+Power supply part number        : 341-0266-03
+Motherboard serial number       : FDO18410D7Q
+Power supply serial number      : LIT1830037F
+Model revision number           : Q0
+Motherboard revision number     : F0
+Model number                    : WS-C3560V2-24PS-E
+System serial number            : FDO1840Y09C
+Top Assembly Part Number        : 800-33976-03
+Top Assembly Revision Number    : C0
+Version ID                      : V08
+CLEI Code Number                : COMKL10DRB
+Hardware Board Revision Number  : 0x02
+
+
+Switch Ports Model              SW Version            SW Image                 
+------ ----- -----              ----------            ----------               
+*    1 26    WS-C3560V2-24PS    12.2(55)SE8           C3560-IPSERVICESK9-M     
+
+
+Configuration register is 0xF
+
+
+
