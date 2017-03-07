@@ -3,7 +3,7 @@ show running-config
 Building configuration...
 
 
-Current configuration : 2577 bytes
+Current configuration : 2548 bytes
 !
 version 12.4
 service timestamps debug datetime msec
@@ -65,7 +65,7 @@ voice-card 0
 !
 !
 !
-username cisco privilege 15 secret 5 $1$bewT$X/WtxLXwzazQsNkuQ69n10
+username cisco password 7 00071A150754
 archive
  log config
   hidekeys
@@ -306,8 +306,8 @@ Compiled Mon 19-Oct-09 17:38 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.4(13r)T, RELEASE SOFTWARE (fc1)
 
-R2-22_ISPC-B5 uptime is 7 minutes
-System returned to ROM by reload at 17:33:21 UTC Tue Mar 7 2017
+R2-22_ISPC-B5 uptime is 6 minutes
+System returned to ROM by reload at 18:22:07 UTC Tue Mar 7 2017
 System image file is "flash:c2800nm-adventerprisek9-mz.124-24.T2.bin"
 
 
