@@ -247,6 +247,6 @@ This platform has a Base license.
 Serial Number: JMX1016K0R8
 Running Permanent Activation Key: 0xca132d74 0x8480aa25 0x741049a8 0x95384890 0x0910f2ae 
 Configuration register is 0x1
-Configuration last modified by enable_15 at 17:51:18.876 UTC Tue Mar 7 2017
+Configuration last modified by enable_15 at 17:51:33.056 UTC Tue Mar 7 2017
 
 
