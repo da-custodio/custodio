@@ -5,7 +5,7 @@ show running-config
 
 Current configuration : 1925 bytes
 !
-! Last configuration change at 10:56:41 UTC Wed Jan 7 1970 by cisco
+! Last configuration change at 11:36:54 UTC Wed Jan 7 1970 by cisco
 !
 version 15.1
 service timestamps debug datetime msec
@@ -251,7 +251,7 @@ Compiled Mon 15-Nov-10 22:28 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.3(8r)T8, RELEASE SOFTWARE (fc1)
 
-BORDER_5 uptime is 1 day, 6 hours, 59 minutes
+BORDER_5 uptime is 1 day, 7 hours, 39 minutes
 System returned to ROM by reload at 03:55:42 UTC Tue Jan 6 1970
 System image file is "flash:c2801-adventerprisek9-mz.151-3.T.bin"
 Last reload type: Normal Reload
