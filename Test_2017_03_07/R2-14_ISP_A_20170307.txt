@@ -278,7 +278,7 @@ http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
 If you require further assistance please contact us by sending email to
 export@cisco.com.
 
-Cisco 2811 (revision 53.50) with 247808K/14336K bytes of memory.
+Cisco 2811 (revision 53.51) with 247808K/14336K bytes of memory.
 Processor board ID FCZ10017202
 6 FastEthernet interfaces
 1 ISDN Basic Rate interface
