@@ -1,0 +1,310 @@
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show running-config
+Building configuration...
+
+Current configuration : 1498 bytes
+!
+version 12.2
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname Backbone
+!
+boot-start-marker
+boot-end-marker
+!
+no logging buffered
+no logging console
+no logging monitor
+!
+no aaa new-model
+system mtu routing 1500
+ip subnet-zero
+ip routing
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+!
+interface FastEthernet0/1
+!
+interface FastEthernet0/2
+!
+interface FastEthernet0/3
+!
+interface FastEthernet0/4
+!
+interface FastEthernet0/5
+!
+interface FastEthernet0/6
+!
+interface FastEthernet0/7
+!
+interface FastEthernet0/8
+!
+interface FastEthernet0/9
+!
+interface FastEthernet0/10
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+!
+interface FastEthernet0/23
+!
+interface FastEthernet0/24
+!
+interface GigabitEthernet0/1
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ ip address 10.0.0.2 255.255.255.224
+!
+interface Vlan10
+ no ip address
+!
+interface Vlan20
+ ip address 10.2.1.1 255.255.255.0
+!
+router rip
+ version 2
+ network 10.0.0.0
+ network 193.36.189.0
+ no auto-summary
+!
+ip classless
+ip http server
+!
+!
+control-plane
+!
+!
+line con 0
+line vty 5 15
+!
+end
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 route
+% Specified IPv6 routing table does not exist
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip int brief
+Interface              IP-Address      OK? Method Status                Protocol
+Vlan1                  10.0.0.2        YES manual up                    down    
+Vlan10                 unassigned      YES unset  up                    down    
+Vlan20                 10.2.1.1        YES manual up                    down    
+FastEthernet0/1        unassigned      YES unset  down                  down    
+FastEthernet0/2        unassigned      YES unset  down                  down    
+FastEthernet0/3        unassigned      YES unset  down                  down    
+FastEthernet0/4        unassigned      YES unset  down                  down    
+FastEthernet0/5        unassigned      YES unset  down                  down    
+FastEthernet0/6        unassigned      YES unset  down                  down    
+FastEthernet0/7        unassigned      YES unset  down                  down    
+FastEthernet0/8        unassigned      YES unset  down                  down    
+FastEthernet0/9        unassigned      YES unset  down                  down    
+FastEthernet0/10       unassigned      YES unset  down                  down    
+FastEthernet0/11       unassigned      YES unset  down                  down    
+FastEthernet0/12       unassigned      YES unset  down                  down    
+FastEthernet0/13       unassigned      YES unset  down                  down    
+FastEthernet0/14       unassigned      YES unset  down                  down    
+FastEthernet0/15       unassigned      YES unset  down                  down    
+FastEthernet0/16       unassigned      YES unset  down                  down    
+FastEthernet0/17       unassigned      YES unset  down                  down    
+FastEthernet0/18       unassigned      YES unset  down                  down    
+FastEthernet0/19       unassigned      YES unset  down                  down    
+FastEthernet0/20       unassigned      YES unset  down                  down    
+FastEthernet0/21       unassigned      YES unset  down                  down    
+FastEthernet0/22       unassigned      YES unset  down                  down    
+FastEthernet0/23       unassigned      YES unset  down                  down    
+FastEthernet0/24       unassigned      YES unset  down                  down    
+GigabitEthernet0/1     unassigned      YES unset  down                  down    
+GigabitEthernet0/2     unassigned      YES unset  down                  down    
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 int brief
+Vlan1                      [up/down]
+    unassigned
+Vlan10                     [up/down]
+    unassigned
+Vlan20                     [up/down]
+    unassigned
+FastEthernet0/1            [down/down]
+    unassigned
+FastEthernet0/2            [down/down]
+    unassigned
+FastEthernet0/3            [down/down]
+    unassigned
+FastEthernet0/4            [down/down]
+    unassigned
+FastEthernet0/5            [down/down]
+    unassigned
+FastEthernet0/6            [down/down]
+    unassigned
+FastEthernet0/7            [down/down]
+    unassigned
+FastEthernet0/8            [down/down]
+    unassigned
+FastEthernet0/9            [down/down]
+    unassigned
+FastEthernet0/10           [down/down]
+    unassigned
+FastEthernet0/11           [down/down]
+    unassigned
+FastEthernet0/12           [down/down]
+    unassigned
+FastEthernet0/13           [down/down]
+    unassigned
+FastEthernet0/14           [down/down]
+    unassigned
+FastEthernet0/15           [down/down]
+    unassigned
+FastEthernet0/16           [down/down]
+    unassigned
+FastEthernet0/17           [down/down]
+    unassigned
+FastEthernet0/18           [down/down]
+    unassigned
+FastEthernet0/19           [down/down]
+    unassigned
+FastEthernet0/20           [down/down]
+    unassigned
+FastEthernet0/21           [down/down]
+    unassigned
+FastEthernet0/22           [down/down]
+    unassigned
+FastEthernet0/23           [down/down]
+    unassigned
+FastEthernet0/24           [down/down]
+    unassigned
+GigabitEthernet0/1         [down/down]
+    unassigned
+GigabitEthernet0/2         [down/down]
+    unassigned
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show cdp neighbors
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone, 
+                  D - Remote, C - CVTA, M - Two-port Mac Relay 
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 ospf 10
+                   ^
+% Invalid input detected at '^' marker.
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 ospf 10 neighbor
+                   ^
+% Invalid input detected at '^' marker.
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip bgp summary
+                 ^
+% Invalid input detected at '^' marker.
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show access-lists
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show version
+Cisco IOS Software, C3560 Software (C3560-IPBASE-M), Version 12.2(50)SE5, RELEASE SOFTWARE (fc1)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2010 by Cisco Systems, Inc.
+Compiled Tue 28-Sep-10 13:21 by prod_rel_team
+Image text-base: 0x01000000, data-base: 0x02700000
+
+ROM: Bootstrap program is C3560 boot loader
+BOOTLDR: C3560 Boot Loader (C3560-HBOOT-M) Version 12.2(53r)SEY4, RELEASE SOFTWARE (fc1)
+
+Backbone uptime is 6 days, 4 hours, 59 minutes
+System returned to ROM by power-on
+System image file is "flash:/c3560-ipbase-mz.122-50.SE5.bin"
+
+cisco WS-C3560V2-24PS (PowerPC405) processor (revision M0) with 131072K bytes of memory.
+Processor board ID FDO1523Y2AQ
+Last reset from power-on
+3 Virtual Ethernet interfaces
+24 FastEthernet interfaces
+2 Gigabit Ethernet interfaces
+The password-recovery mechanism is enabled.
+
+512K bytes of flash-simulated non-volatile configuration memory.
+Base ethernet MAC Address       : D0:C2:82:39:60:80
+Motherboard assembly number     : 73-12634-01
+Power supply part number        : 341-0266-03
+Motherboard serial number       : FDO15240GPM
+Power supply serial number      : LIT15200KSF
+Model revision number           : M0
+Motherboard revision number     : B0
+Model number                    : WS-C3560V2-24PS-E
+System serial number            : FDO1523Y2AQ
+Top Assembly Part Number        : 800-33976-02
+Top Assembly Revision Number    : A0
+Version ID                      : V06
+CLEI Code Number                : COMKL10DRA
+Hardware Board Revision Number  : 0x02
+
+
+Switch Ports Model              SW Version            SW Image                 
+------ ----- -----              ----------            ----------               
+*    1 26    WS-C3560V2-24PS    12.2(50)SE5           C3560-IPBASE-M           
+
+
+Configuration register is 0xF
+
+
+
