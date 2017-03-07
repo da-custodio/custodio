@@ -259,6 +259,6 @@ This platform has a Base license.
 Serial Number: JMX1050K10A
 Running Permanent Activation Key: 0x8b36e144 0x9857a5cc 0x84e3fd0c 0xa0e84c44 0xca14b3a7 
 Configuration register is 0x1
-Configuration last modified by enable_15 at 09:12:49.356 UTC Thu Jan 23 2003
+Configuration last modified by enable_15 at 09:59:29.286 UTC Thu Jan 23 2003
 
 
