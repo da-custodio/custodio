@@ -161,7 +161,7 @@ Image text-base: 0x80008098, data-base: 0x80ECF498
 
 ROM: System Bootstrap, Version 12.2(7r) [cmong 7r], RELEASE SOFTWARE (fc1)
 
-Border_2 uptime is 1 day, 6 hours, 57 minutes
+Border_2 uptime is 1 day, 7 hours, 38 minutes
 System returned to ROM by reload
 System image file is "flash:c2600-ipbase-mz.123-6a.bin"
 
