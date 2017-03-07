@@ -4,7 +4,7 @@ show running-config
 
 Current configuration : 1053 bytes
 !
-! Last configuration change at 18:40:15 UTC Tue Mar 7 2017
+! Last configuration change at 18:37:09 UTC Tue Mar 7 2017
 version 15.2
 service timestamps debug datetime msec
 service timestamps log datetime msec
@@ -36,7 +36,7 @@ multilink bundle-name authenticated
 !
 !
 !
-license udi pid CISCO2901/K9 sn FCZ184492UD
+license udi pid CISCO2901/K9 sn FCZ184492UM
 !
 !
 !
@@ -165,7 +165,7 @@ Compiled Tue 15-Apr-14 09:45 by prod_rel_team
 
 ROM: System Bootstrap, Version 15.0(1r)M16, RELEASE SOFTWARE (fc1)
 
-Router uptime is 4 days, 5 hours, 13 minutes
+Router uptime is 4 days, 5 hours, 14 minutes
 System returned to ROM by power-on
 System image file is "flash0:c2900-universalk9-mz.SPA.152-4.M6a.bin"
 Last reload type: Normal Reload
@@ -188,8 +188,8 @@ http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
 If you require further assistance please contact us by sending email to
 export@cisco.com.
 
-Cisco CISCO2901/K9 (revision 1.0) with 487424K/36864K bytes of memory.
-Processor board ID FCZ184492UD
+Cisco CISCO2901/K9 (revision 1.0) with 2506752K/114688K bytes of memory.
+Processor board ID FCZ184492UM
 2 Gigabit Ethernet interfaces
 1 terminal line
 1 Virtual Private Network (VPN) Module
@@ -205,7 +205,7 @@ License UDI:
 -------------------------------------------------
 Device#	  PID			SN
 -------------------------------------------------
-*0  	  CISCO2901/K9          FCZ184492UD     
+*0  	  CISCO2901/K9          FCZ184492UM     
 
 
 
