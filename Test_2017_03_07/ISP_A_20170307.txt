@@ -186,7 +186,7 @@ Image text-base: 0x80008098, data-base: 0x80ECF498
 
 ROM: System Bootstrap, Version 12.2(8r) [cmong 8r], RELEASE SOFTWARE (fc1)
 
-ISP_A uptime is 1 day, 6 hours, 58 minutes
+ISP_A uptime is 1 day, 7 hours, 39 minutes
 System returned to ROM by reload
 System image file is "flash:c2600-ipbase-mz.123-6a.bin"
 
