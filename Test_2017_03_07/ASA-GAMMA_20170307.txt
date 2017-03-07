@@ -1,0 +1,264 @@
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show running-config
+: Saved
+:
+ASA Version 8.4(3) 
+!
+hostname ASA-GAMMA
+enable password 2KFQnbNIdI.2KYOU encrypted
+passwd 2KFQnbNIdI.2KYOU encrypted
+names
+!
+interface Ethernet0/0
+ shutdown
+ no nameif
+ no security-level
+ no ip address
+!
+interface Ethernet0/1
+ nameif OUTSIDE
+ security-level 0
+ ip address 192.168.3.253 255.255.255.0 
+!
+interface Ethernet0/2
+ nameif INSIDE
+ security-level 100
+ ip address 192.168.100.254 255.255.255.0 
+!
+interface Ethernet0/3
+ nameif DMZ
+ security-level 50
+ ip address 192.168.101.254 255.255.255.0 
+!
+interface Management0/0
+ shutdown
+ no nameif
+ no security-level
+ no ip address
+!
+ftp mode passive
+access-list DMZ_mpc extended permit ip any 192.168.101.0 255.255.255.0 
+pager lines 24
+mtu OUTSIDE 1500
+mtu INSIDE 1500
+mtu DMZ 1500
+icmp unreachable rate-limit 1 burst-size 1
+asdm image disk0:/asdm-647.bin
+no asdm history enable
+arp timeout 14400
+nat (INSIDE,OUTSIDE) source dynamic any interface
+route OUTSIDE 0.0.0.0 0.0.0.0 192.168.3.254 1
+timeout xlate 3:00:00
+timeout pat-xlate 0:00:30
+timeout conn 1:00:00 half-closed 0:10:00 udp 0:02:00 icmp 0:00:02
+timeout sunrpc 0:10:00 h323 0:05:00 h225 1:00:00 mgcp 0:05:00 mgcp-pat 0:05:00
+timeout sip 0:30:00 sip_media 0:02:00 sip-invite 0:03:00 sip-disconnect 0:02:00
+timeout sip-provisional-media 0:02:00 uauth 0:05:00 absolute
+timeout tcp-proxy-reassembly 0:01:00
+timeout floating-conn 0:00:00
+dynamic-access-policy-record DfltAccessPolicy
+user-identity default-domain LOCAL
+http server enable
+http 192.168.100.0 255.255.255.0 INSIDE
+no snmp-server location
+no snmp-server contact
+snmp-server enable traps snmp authentication linkup linkdown coldstart warmstart
+telnet timeout 5
+ssh timeout 5
+console timeout 0
+threat-detection basic-threat
+threat-detection statistics access-list
+no threat-detection statistics tcp-intercept
+webvpn
+username admin password f3UhLvUj1QsXsuK7 encrypted privilege 15
+!
+class-map DMZ-class
+ match access-list DMZ_mpc
+ match default-inspection-traffic
+class-map inspection_default
+ match default-inspection-traffic
+!
+!
+policy-map type inspect dns preset_dns_map
+ parameters
+  message-length maximum client auto
+  message-length maximum 512
+policy-map global_policy
+ class inspection_default
+  inspect dns preset_dns_map 
+  inspect ftp 
+  inspect h323 h225 
+  inspect h323 ras 
+  inspect ip-options 
+  inspect netbios 
+  inspect rsh 
+  inspect rtsp 
+  inspect skinny  
+  inspect esmtp 
+  inspect sqlnet 
+  inspect sunrpc 
+  inspect tftp 
+  inspect sip  
+  inspect xdmcp 
+  inspect icmp 
+policy-map DMZ-policy
+ class DMZ-class
+  inspect ctiqbe 
+  inspect dcerpc 
+  inspect dns 
+  inspect esmtp 
+  inspect ftp 
+  inspect h323 h225 
+  inspect h323 ras 
+  inspect http 
+  inspect icmp 
+  inspect icmp error 
+  inspect ils 
+  inspect ip-options 
+  inspect ipsec-pass-thru 
+  inspect mgcp 
+  inspect netbios 
+  inspect pptp 
+  inspect rsh 
+  inspect rtsp 
+  inspect sip  
+  inspect skinny  
+  inspect snmp 
+  inspect sqlnet 
+  inspect sunrpc 
+  inspect tftp 
+  inspect waas 
+  inspect xdmcp 
+!
+service-policy global_policy global
+service-policy DMZ-policy interface DMZ
+prompt hostname context 
+call-home reporting anonymous prompt 2
+call-home
+ profile CiscoTAC-1
+  no active
+  destination address http https://tools.cisco.com/its/service/oddce/services/DDCEService
+  destination address email callhome@cisco.com
+  destination transport-method http
+  subscribe-to-alert-group diagnostic
+  subscribe-to-alert-group environment
+  subscribe-to-alert-group inventory periodic monthly
+  subscribe-to-alert-group configuration periodic monthly
+  subscribe-to-alert-group telemetry periodic daily
+Cryptochecksum:777680d2a86e55eeb226107a532f645c
+: end
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip route
+                   ^
+ERROR: % Invalid input detected at '^' marker.
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 route
+
+IPv6 Routing Table - 0 entries
+Codes: C - Connected, L - Local, S - Static
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip int brief
+                   ^
+ERROR: % Invalid input detected at '^' marker.
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 int brief
+Ethernet0/0 [administratively down/down]
+    unassigned
+OUTSIDE [down/down]
+    unassigned
+INSIDE [down/down]
+    unassigned
+DMZ [down/down]
+    unassigned
+Management0/0 [administratively down/down]
+    unassigned
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show cdp neighbors
+                 ^
+ERROR: % Invalid input detected at '^' marker.
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 ospf 10
+                     ^
+ERROR: % Invalid input detected at '^' marker.
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 ospf 10 neighbor
+                     ^
+ERROR: % Invalid input detected at '^' marker.
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip bgp summary
+                   ^
+ERROR: % Invalid input detected at '^' marker.
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show access-lists
+                           ^
+ERROR: % Invalid input detected at '^' marker.
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show version
+
+Cisco Adaptive Security Appliance Software Version 8.4(3) 
+Device Manager Version 6.4(7)
+
+Compiled on Fri 06-Jan-12 10:24 by builders
+System image file is "disk0:/asa843-k8.bin"
+Config file at boot was "startup-config"
+
+ASA-GAMMA up 22 days 9 hours
+
+Hardware:   ASA5510-K8, 1024 MB RAM, CPU Pentium 4 Celeron 1599 MHz
+Internal ATA Compact Flash, 256MB
+BIOS Flash AT49LW080 @ 0xfff00000, 1024KB
+
+Encryption hardware device : Cisco ASA-55x0 on-board accelerator (revision 0x0)
+                             Boot microcode        : CN1000-MC-BOOT-2.00 
+                             SSL/IKE microcode     : CNLite-MC-SSLm-PLUS-2.03
+                             IPSec microcode       : CNlite-MC-IPSECm-MAIN-2.06
+                             Number of accelerators: 1
+
+ 0: Ext: Ethernet0/0         : address is 0019.0665.56ea, irq 9
+ 1: Ext: Ethernet0/1         : address is 0019.0665.56eb, irq 9
+ 2: Ext: Ethernet0/2         : address is 0019.0665.56ec, irq 9
+ 3: Ext: Ethernet0/3         : address is 0019.0665.56ed, irq 9
+ 4: Ext: Management0/0       : address is 0019.0665.56e9, irq 11
+ 5: Int: Not used            : irq 11
+ 6: Int: Not used            : irq 5
+
+Licensed features for this platform:
+Maximum Physical Interfaces       : Unlimited      perpetual
+Maximum VLANs                     : 50             perpetual
+Inside Hosts                      : Unlimited      perpetual
+Failover                          : Disabled       perpetual
+VPN-DES                           : Enabled        perpetual
+VPN-3DES-AES                      : Enabled        perpetual
+Security Contexts                 : 0              perpetual
+GTP/GPRS                          : Disabled       perpetual
+AnyConnect Premium Peers          : 2              perpetual
+AnyConnect Essentials             : Disabled       perpetual
+Other VPN Peers                   : 250            perpetual
+Total VPN Peers                   : 250            perpetual
+Shared License                    : Disabled       perpetual
+AnyConnect for Mobile             : Disabled       perpetual
+AnyConnect for Cisco VPN Phone    : Disabled       perpetual
+Advanced Endpoint Assessment      : Disabled       perpetual
+UC Phone Proxy Sessions           : 2              perpetual
+Total UC Proxy Sessions           : 2              perpetual
+Botnet Traffic Filter             : Disabled       perpetual
+Intercompany Media Engine         : Disabled       perpetual
+
+This platform has a Base license.
+
+Serial Number: JMX1050K10A
+Running Permanent Activation Key: 0x8b36e144 0x9857a5cc 0x84e3fd0c 0xa0e84c44 0xca14b3a7 
+Configuration register is 0x1
+Configuration last modified by enable_15 at 09:12:49.356 UTC Thu Jan 23 2003
+
+
