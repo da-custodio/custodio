@@ -1,0 +1,248 @@
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show running-config
+Building configuration...
+
+Current configuration : 1349 bytes
+!
+! Last configuration change at 18:35:26 UTC Tue Mar 7 2017
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname THIS-IS-MY-ROUTER
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no logging buffered
+no logging console
+no logging monitor
+!
+no aaa new-model
+!
+ip cef
+!
+!
+!
+!
+!
+!
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+license udi pid CISCO2901/K9 sn FCZ184492TY
+!
+!
+!
+redundancy
+!
+!
+!
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+interface Embedded-Service-Engine0/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/0
+ description to_inet
+ ip address dhcp
+ ip nat outside
+ ip virtual-reassembly in
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ description to_intern
+ ip address 192.168.0.254 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+ duplex auto
+ speed auto
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+ip nat inside source list ACL_SEPTANA interface GigabitEthernet0/0 overload
+!
+ip access-list extended ACL_SEPTANA
+ permit ip 192.168.0.0 0.0.0.255 any
+!
+!
+!
+!
+control-plane
+!
+!
+!
+line con 0
+line aux 0
+line 2
+ no activation-character
+ no exec
+ transport preferred none
+ transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
+ stopbits 1
+line vty 0 4
+ login
+ transport input all
+!
+scheduler allocate 20000 1000
+!
+end
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip route
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       + - replicated route, % - next hop override
+
+Gateway of last resort is 10.78.254.254 to network 0.0.0.0
+
+S*    0.0.0.0/0 [254/0] via 10.78.254.254
+      10.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C        10.78.0.0/16 is directly connected, GigabitEthernet0/0
+L        10.78.20.237/32 is directly connected, GigabitEthernet0/0
+      192.168.0.0/24 is variably subnetted, 2 subnets, 2 masks
+C        192.168.0.0/24 is directly connected, GigabitEthernet0/1
+L        192.168.0.254/32 is directly connected, GigabitEthernet0/1
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 route
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip int brief
+Interface                  IP-Address      OK? Method Status                Protocol
+Embedded-Service-Engine0/0 unassigned      YES unset  administratively down down    
+GigabitEthernet0/0         10.78.20.237    YES DHCP   up                    up      
+GigabitEthernet0/1         192.168.0.254   YES manual up                    up      
+NVI0                       192.168.0.254   YES unset  up                    up      
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 int brief
+Em0/0                  [administratively down/down]
+    unassigned
+GigabitEthernet0/0     [up/up]
+    unassigned
+GigabitEthernet0/1     [up/up]
+    unassigned
+NVI0                   [up/up]
+    unassigned
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show cdp neighbors
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone, 
+                  D - Remote, C - CVTA, M - Two-port Mac Relay 
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+Switch           Gig 0/1            177             S I   WS-C2960- Fas 0/4
+SRV-Consolen     Gig 0/0            153            R S I  WS-C4503  Gig 2/24
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 ospf 10
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 ospf 10 neighbor
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip bgp summary
+% BGP not active
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show access-lists
+Extended IP access list ACL_SEPTANA
+    10 permit ip 192.168.0.0 0.0.0.255 any (1388 matches)
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show version
+Cisco IOS Software, C2900 Software (C2900-UNIVERSALK9-M), Version 15.2(4)M6a, RELEASE SOFTWARE (fc1)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2014 by Cisco Systems, Inc.
+Compiled Tue 15-Apr-14 09:45 by prod_rel_team
+
+ROM: System Bootstrap, Version 15.0(1r)M16, RELEASE SOFTWARE (fc1)
+
+THIS-IS-MY-ROUTER uptime is 4 days, 5 hours, 15 minutes
+System returned to ROM by power-on
+System image file is "flash0:c2900-universalk9-mz.SPA.152-4.M6a.bin"
+Last reload type: Normal Reload
+Last reload reason: power-on
+
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+Cisco CISCO2901/K9 (revision 1.0) with 2506752K/114688K bytes of memory.
+Processor board ID FCZ184492TY
+2 Gigabit Ethernet interfaces
+1 terminal line
+1 Virtual Private Network (VPN) Module
+DRAM configuration is 64 bits wide with parity enabled.
+255K bytes of non-volatile configuration memory.
+255488K bytes of ATA System CompactFlash 0 (Read/Write)
+
+
+License Info:
+
+License UDI:
+
+-------------------------------------------------
+Device#	  PID			SN
+-------------------------------------------------
+*0  	  CISCO2901/K9          FCZ184492TY     
+
+
+
+Technology Package License Information for Module:'c2900' 
+
+-----------------------------------------------------------------
+Technology    Technology-package           Technology-package
+              Current       Type           Next reboot  
+------------------------------------------------------------------
+ipbase        ipbasek9      Permanent      ipbasek9
+security      securityk9    Permanent      securityk9
+uc            None          None           None
+data          None          None           None
+
+Configuration register is 0x2102
+
+
+
