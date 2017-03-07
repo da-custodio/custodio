@@ -120,7 +120,7 @@ call-home
   subscribe-to-alert-group inventory periodic monthly
   subscribe-to-alert-group configuration periodic monthly
   subscribe-to-alert-group telemetry periodic daily
-Cryptochecksum:1b28dafc54891b9984772789712a97e3
+Cryptochecksum:88b966dfa365bd66c295c1943b1be0da
 : end
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
@@ -188,7 +188,7 @@ Compiled on Wed 15-Jun-11 18:17 by builders
 System image file is "disk0:/asa842-k8.bin"
 Config file at boot was "startup-config"
 
-ARENAASA up 22 days 8 hours
+ARENAASA up 22 days 9 hours
 
 Hardware:   ASA5510-K8, 1024 MB RAM, CPU Pentium 4 Celeron 1600 MHz
 Internal ATA Compact Flash, 256MB
@@ -235,6 +235,6 @@ This platform has an ASA 5510 Security Plus license.
 Serial Number: JMX1108L07Z
 Running Permanent Activation Key: 0x7d0e3d41 0xe0922e45 0x30b0a184 0xa1b4285c 0x4935dd9a 
 Configuration register is 0x1
-Configuration has not been modified since last system restart.
+Configuration last modified by enable_15 at 09:53:24.476 UTC Thu Jan 23 2003
 
 
