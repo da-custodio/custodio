@@ -266,7 +266,7 @@ Image text-base: 0x00003000, data-base: 0x01A00000
 ROM: Bootstrap program is C3560 boot loader
 BOOTLDR: C3560 Boot Loader (C3560-HBOOT-M) Version 12.2(25r)SEC, RELEASE SOFTWARE (fc4)
 
-Backbone-Switch uptime is 6 days, 5 hours, 30 minutes
+Backbone-Switch uptime is 6 days, 5 hours, 31 minutes
 System returned to ROM by power-on
 System image file is "flash:/c3560-advipservicesk9-mz.122-46.SE.bin"
 
