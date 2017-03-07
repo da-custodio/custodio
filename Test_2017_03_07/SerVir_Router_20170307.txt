@@ -129,7 +129,7 @@ show cdp neighbors
                   S - Switch, H - Host, I - IGMP, r - Repeater
 
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
-Switch           Fas 0/0            171         S I       WS-C2960S Gig 1/0/24
+Switch           Fas 0/0            160         S I       WS-C2960S Gig 1/0/24
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 ospf 10
@@ -182,7 +182,7 @@ http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
 If you require further assistance please contact us by sending email to
 export@cisco.com.
 
-Cisco 2811 (revision 53.50) with 249856K/12288K bytes of memory.
+Cisco 2811 (revision 53.51) with 249856K/12288K bytes of memory.
 Processor board ID FCZ101573G8
 2 FastEthernet interfaces
 1 Virtual Private Network (VPN) Module
