@@ -222,7 +222,7 @@ Compiled Sat 08-Nov-08 20:53 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.2(7r) [cmong 7r], RELEASE SOFTWARE (fc1)
 
-ISP_B uptime is 1 day, 6 hours, 56 minutes
+ISP_B uptime is 1 day, 7 hours, 37 minutes
 System returned to ROM by reload
 System image file is "flash:c2600-advipservicesk9-mz124-23.bin"
 
