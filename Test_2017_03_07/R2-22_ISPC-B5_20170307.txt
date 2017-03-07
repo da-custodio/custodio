@@ -306,7 +306,7 @@ Compiled Mon 19-Oct-09 17:38 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.4(13r)T, RELEASE SOFTWARE (fc1)
 
-R2-22_ISPC-B5 uptime is 6 minutes
+R2-22_ISPC-B5 uptime is 18 minutes
 System returned to ROM by reload at 18:22:07 UTC Tue Mar 7 2017
 System image file is "flash:c2800nm-adventerprisek9-mz.124-24.T2.bin"
 
@@ -326,7 +326,7 @@ http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
 If you require further assistance please contact us by sending email to
 export@cisco.com.
 
-Cisco 2811 (revision 53.50) with 512000K/12288K bytes of memory.
+Cisco 2811 (revision 53.51) with 512000K/12288K bytes of memory.
 Processor board ID FCZ120973UR
 2 FastEthernet interfaces
 2 Serial(sync/async) interfaces
