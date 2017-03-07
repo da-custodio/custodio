@@ -3,7 +3,7 @@ show running-config
 Building configuration...
 
 
-Current configuration : 1160 bytes
+Current configuration : 987 bytes
 !
 version 12.4
 service timestamps debug datetime msec
@@ -85,27 +85,15 @@ interface FastEthernet0/1
  duplex auto
  speed auto
 !
-interface FastEthernet0/2/0
-!
-interface FastEthernet0/2/1
-!
-interface FastEthernet0/2/2
-!
-interface FastEthernet0/2/3
-!
-interface Serial0/0/0
+interface Serial0/2/0
  no ip address
  shutdown
  no fair-queue
  clock rate 2000000
 !
-interface Serial0/0/1
+interface Serial0/2/1
  no ip address
  shutdown
- clock rate 2000000
-!
-interface Vlan1
- no ip address
 !
 ip forward-protocol nd
 no ip http server
@@ -161,13 +149,8 @@ show ip int brief
 Interface                  IP-Address      OK? Method Status                Protocol
 FastEthernet0/0            unassigned      YES unset  administratively down down    
 FastEthernet0/1            unassigned      YES unset  administratively down down    
-FastEthernet0/2/0          unassigned      YES unset  up                    down    
-FastEthernet0/2/1          unassigned      YES unset  up                    down    
-FastEthernet0/2/2          unassigned      YES unset  up                    down    
-FastEthernet0/2/3          unassigned      YES unset  up                    down    
-Serial0/0/0                unassigned      YES unset  administratively down down    
-Serial0/0/1                unassigned      YES unset  administratively down down    
-Vlan1                      unassigned      YES unset  up                    down    
+Serial0/2/0                unassigned      YES unset  administratively down down    
+Serial0/2/1                unassigned      YES unset  administratively down down    
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 int brief
@@ -175,19 +158,9 @@ show ipv6 int brief
     unassigned
 FastEthernet0/1            [administratively down/down]
     unassigned
-FastEthernet0/2/0          [up/down]
+Serial0/2/0                [administratively down/down]
     unassigned
-FastEthernet0/2/1          [up/down]
-    unassigned
-FastEthernet0/2/2          [up/down]
-    unassigned
-FastEthernet0/2/3          [up/down]
-    unassigned
-Serial0/0/0                [administratively down/down]
-    unassigned
-Serial0/0/1                [administratively down/down]
-    unassigned
-Vlan1                      [up/down]
+Serial0/2/1                [administratively down/down]
     unassigned
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
@@ -221,10 +194,10 @@ Technical Support: http://www.cisco.com/techsupport
 Copyright (c) 1986-2009 by Cisco Systems, Inc.
 Compiled Mon 19-Oct-09 17:38 by prod_rel_team
 
-ROM: System Bootstrap, Version 12.4(13r)T, RELEASE SOFTWARE (fc1)
+ROM: System Bootstrap, Version 12.4(13r)T11, RELEASE SOFTWARE (fc1)
 
-Router uptime is 1 day, 9 hours, 38 minutes
-System returned to ROM by reload at 12:46:17 UTC Mon Mar 6 2017
+Router uptime is 4 days, 1 hour, 23 minutes
+System returned to ROM by reload at 17:24:27 UTC Fri Mar 3 2017
 System image file is "flash:c2800nm-adventerprisek9-mz.124-24.T2.bin"
 
 
@@ -243,12 +216,12 @@ http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
 If you require further assistance please contact us by sending email to
 export@cisco.com.
 
-Cisco 2811 (revision 53.50) with 509952K/14336K bytes of memory.
-Processor board ID FCZ120973UT
-6 FastEthernet interfaces
+Cisco 2811 (revision 53.50) with 512000K/12288K bytes of memory.
+Processor board ID FCZ142270AY
+2 FastEthernet interfaces
 2 Serial(sync/async) interfaces
 1 Virtual Private Network (VPN) Module
-DRAM configuration is 64 bits wide with parity disabled.
+DRAM configuration is 64 bits wide with parity enabled.
 239K bytes of non-volatile configuration memory.
 62720K bytes of ATA CompactFlash (Read/Write)
 
