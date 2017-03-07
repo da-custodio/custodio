@@ -3,11 +3,9 @@ show running-config
 Building configuration...
 
 
-Current configuration : 3038 bytes
+Current configuration : 2577 bytes
 !
-! Last configuration change at 18:04:34 UTC Tue Mar 7 2017
-!
-version 15.1
+version 12.4
 service timestamps debug datetime msec
 service timestamps log datetime msec
 service password-encryption
@@ -18,7 +16,7 @@ hostname R2-22_ISPC-B5
 boot-start-marker
 boot-end-marker
 !
-!
+logging message-counter syslog
 no logging buffered
 no logging console
 no logging monitor
@@ -33,11 +31,23 @@ ip source-route
 ip cef
 !
 !
-!
 no ip domain lookup
 ipv6 unicast-routing
 ipv6 cef
+!
 multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
 !
 !
 !
@@ -51,16 +61,16 @@ multilink bundle-name authenticated
 !
 voice-card 0
 !
-crypto pki token default removal timeout 0
 !
 !
 !
 !
-license udi pid CISCO2811 sn FHK1048U065
+username cisco privilege 15 secret 5 $1$bewT$X/WtxLXwzazQsNkuQ69n10
 archive
  log config
   hidekeys
-username cisco privilege 15 secret 5 $1$bewT$X/WtxLXwzazQsNkuQ69n10
+! 
+!
 !
 !
 !
@@ -72,6 +82,7 @@ interface Loopback0
  ip address 22.1.1.1 255.255.255.0
  ipv6 address 2001:22::1/64
  ipv6 enable
+ ipv6 ospf 10 area 1
 !
 interface FastEthernet0/0
  ip address 200.5.0.1 255.255.255.0
@@ -85,23 +96,12 @@ interface FastEthernet0/1
  duplex auto
  speed auto
 !
-interface Serial0/0/0
- no ip address
- shutdown
- no fair-queue
- clock rate 2000000
-!
-interface Serial0/0/1
- no ip address
- shutdown
- clock rate 2000000
-!
 interface Serial0/2/0
  no ip address
  encapsulation frame-relay
  shutdown
- no fair-queue
  no keepalive
+ no fair-queue
  clock rate 2000000
 !
 interface Serial0/2/0.202 point-to-point
@@ -109,6 +109,7 @@ interface Serial0/2/0.202 point-to-point
  ip address 10.30.0.6 255.255.255.252
  ipv6 address 2001:2::2/64
  ipv6 enable
+ ipv6 ospf 10 area 1
  frame-relay interface-dlci 202   
 !
 interface Serial0/2/1
@@ -116,23 +117,8 @@ interface Serial0/2/1
  shutdown
  clock rate 2000000
 !
-interface FastEthernet0/3/0
-!
-interface FastEthernet0/3/1
-!
-interface FastEthernet0/3/2
-!
-interface FastEthernet0/3/3
-!
-interface Analysis-Module1/0
- no ip address
- shutdown
- hold-queue 60 out
-!
-interface Vlan1
- no ip address
-!
 router ospf 1
+ log-adjacency-changes
  network 10.30.0.4 0.0.0.3 area 1
  network 22.1.1.0 0.0.0.255 area 1
 !
@@ -146,20 +132,29 @@ router bgp 300
  neighbor 2001:9::1 update-source Loopback0
  !
  address-family ipv4
-  network 200.5.0.0
   neighbor 9.1.1.1 activate
   neighbor 9.1.1.1 next-hop-self
   no auto-summary
+  no synchronization
+  network 200.5.0.0
  exit-address-family
  !
  address-family ipv6
   neighbor 2001:9::1 activate
+  no synchronization
  exit-address-family
 !
 ip forward-protocol nd
-!
 no ip http server
 no ip http secure-server
+!
+!
+!
+ipv6 router ospf 10
+ router-id 22.1.1.1
+ log-adjacency-changes
+!
+!
 !
 !
 !
@@ -170,7 +165,7 @@ control-plane
 !
 !
 !
-mgcp profile default
+!
 !
 !
 !
@@ -183,12 +178,6 @@ line con 0
  logging synchronous
  login local
 line aux 0
-line 66
- no activation-character
- no exec
- transport preferred none
- transport input all
- transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
 line vty 0 4
  exec-timeout 0 0
  password 7 05080F1C2243
@@ -208,28 +197,28 @@ end
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ip route
-Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
        D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
        N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
        E1 - OSPF external type 1, E2 - OSPF external type 2
        i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
        ia - IS-IS inter area, * - candidate default, U - per-user static route
-       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
-       + - replicated route, % - next hop override
+       o - ODR, P - periodic downloaded static route
 
 Gateway of last resort is not set
 
-      22.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
-C        22.1.1.0/24 is directly connected, Loopback0
-L        22.1.1.1/32 is directly connected, Loopback0
+     22.0.0.0/24 is subnetted, 1 subnets
+C       22.1.1.0 is directly connected, Loopback0
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 route
-IPv6 Routing Table - default - 3 entries
+IPv6 Routing Table - Default - 3 entries
 Codes: C - Connected, L - Local, S - Static, U - Per-user Static route
-       B - BGP, HA - Home Agent, MR - Mobile Router, R - RIP
-       I1 - ISIS L1, I2 - ISIS L2, IA - ISIS interarea, IS - ISIS summary
-       D - EIGRP, EX - EIGRP external, ND - Neighbor Discovery
+       B - BGP, M - MIPv6, R - RIP, I1 - ISIS L1
+       I2 - ISIS L2, IA - ISIS interarea, IS - ISIS summary, D - EIGRP
+       EX - EIGRP external
+       O - OSPF Intra, OI - OSPF Inter, OE1 - OSPF ext 1, OE2 - OSPF ext 2
+       ON1 - OSPF NSSA ext 1, ON2 - OSPF NSSA ext 2
 C   2001:22::/64 [0/0]
      via Loopback0, directly connected
 L   2001:22::1/128 [0/0]
@@ -242,18 +231,10 @@ show ip int brief
 Interface                  IP-Address      OK? Method Status                Protocol
 FastEthernet0/0            200.5.0.1       YES manual administratively down down    
 FastEthernet0/1            unassigned      YES manual administratively down down    
-Serial0/0/0                unassigned      YES unset  administratively down down    
-Serial0/0/1                unassigned      YES unset  administratively down down    
 Serial0/2/0                unassigned      YES manual administratively down down    
 Serial0/2/0.202            10.30.0.6       YES manual administratively down down    
 Serial0/2/1                unassigned      YES manual administratively down down    
-FastEthernet0/3/0          unassigned      YES unset  up                    down    
-FastEthernet0/3/1          unassigned      YES unset  up                    down    
-FastEthernet0/3/2          unassigned      YES unset  up                    down    
-FastEthernet0/3/3          unassigned      YES unset  up                    down    
-Analysis-Module1/0         unassigned      YES unset  administratively down down    
 Loopback0                  22.1.1.1        YES manual up                    up      
-Vlan1                      unassigned      YES unset  up                    down    
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 int brief
@@ -261,60 +242,56 @@ show ipv6 int brief
     unassigned
 FastEthernet0/1            [administratively down/down]
     unassigned
-Serial0/0/0                [administratively down/down]
-    unassigned
-Serial0/0/1                [administratively down/down]
-    unassigned
 Serial0/2/0                [administratively down/down]
     unassigned
 Serial0/2/0.202            [administratively down/down]
-    FE80::21A:6CFF:FE1E:4428
+    FE80::21F:6CFF:FE6F:E2B0
     2001:2::2
 Serial0/2/1                [administratively down/down]
     unassigned
-FastEthernet0/3/0          [up/down]
-    unassigned
-FastEthernet0/3/1          [up/down]
-    unassigned
-FastEthernet0/3/2          [up/down]
-    unassigned
-FastEthernet0/3/3          [up/down]
-    unassigned
-Analysis-Module1/0         [administratively down/down]
-    unassigned
 Loopback0                  [up/up]
-    FE80::21A:6CFF:FE1E:4428
+    FE80::21F:6CFF:FE6F:E2B0
     2001:22::1
-Vlan1                      [up/down]
-    unassigned
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show cdp neighbors
 Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
-                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone, 
-                  D - Remote, C - CVTA, M - Two-port Mac Relay 
+                  S - Switch, H - Host, I - IGMP, r - Repeater
 
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 ospf 10
-                        ^
-% Invalid input detected at '^' marker.
+ Routing Process "ospfv3 10" with ID 22.1.1.1
+ SPF schedule delay 5 secs, Hold time between two SPFs 10 secs
+ Minimum LSA interval 5 secs. Minimum LSA arrival 1 secs
+ LSA group pacing timer 240 secs
+ Interface flood pacing timer 33 msecs
+ Retransmission pacing timer 66 msecs
+ Number of external LSA 0. Checksum Sum 0x000000
+ Number of areas in this router is 1. 1 normal 0 stub 0 nssa
+ Reference bandwidth unit is 100 mbps
+    Area 1
+	Number of interfaces in this area is 2
+	SPF algorithm executed 1 times
+	Number of LSA 2. Checksum Sum 0x00AD50
+	Number of DCbitless LSA 0
+	Number of indication LSA 0
+	Number of DoNotAge LSA 0
+	Flood list length 0
 
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 ospf 10 neighbor
-                        ^
-% Invalid input detected at '^' marker.
-
+
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ip bgp summary
 BGP router identifier 22.1.1.1, local AS number 300
 BGP table version is 1, main routing table version 1
 
-Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
-9.1.1.1         4          300       0       0        1    0    0 never    Idle
+Neighbor        V          AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+9.1.1.1         4        300       0       0        0    0    0 never    Active
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show access-lists
@@ -322,17 +299,16 @@ show access-lists
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show version
-Cisco IOS Software, 2800 Software (C2800NM-IPVOICEK9-M), Version 15.1(3)T1, RELEASE SOFTWARE (fc2)
+Cisco IOS Software, 2800 Software (C2800NM-ADVENTERPRISEK9-M), Version 12.4(24)T2, RELEASE SOFTWARE (fc2)
 Technical Support: http://www.cisco.com/techsupport
-Copyright (c) 1986-2011 by Cisco Systems, Inc.
-Compiled Sun 27-Mar-11 06:31 by prod_rel_team
+Copyright (c) 1986-2009 by Cisco Systems, Inc.
+Compiled Mon 19-Oct-09 17:38 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.4(13r)T, RELEASE SOFTWARE (fc1)
 
-R2-22_ISPC-B5 uptime is 5 minutes
-System returned to ROM by reload at 17:57:14 UTC Tue Mar 7 2017
-System image file is "flash:c2800nm-ipvoicek9-mz.151-3.T1.bin"
-Last reload type: Normal Reload
+R2-22_ISPC-B5 uptime is 7 minutes
+System returned to ROM by reload at 17:33:21 UTC Tue Mar 7 2017
+System image file is "flash:c2800nm-adventerprisek9-mz.124-24.T2.bin"
 
 
 This product contains cryptographic features and is subject to United
@@ -350,27 +326,14 @@ http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
 If you require further assistance please contact us by sending email to
 export@cisco.com.
 
-Cisco 2811 (revision 53.51) with 249856K/12288K bytes of memory.
-Processor board ID FHK1048U065
-6 FastEthernet interfaces
-4 Serial(sync/async) interfaces
-1 terminal line
-1 cisco nam sensor(s), nam monitoring on slot 1
+Cisco 2811 (revision 53.50) with 512000K/12288K bytes of memory.
+Processor board ID FCZ120973UR
+2 FastEthernet interfaces
+2 Serial(sync/async) interfaces
+1 Virtual Private Network (VPN) Module
 DRAM configuration is 64 bits wide with parity enabled.
 239K bytes of non-volatile configuration memory.
-1964088K bytes of ATA CompactFlash (Read/Write)
-
-
-License Info:
-
-License UDI:
-
--------------------------------------------------
-Device#	  PID			SN
--------------------------------------------------
-*0  	  CISCO2811             FHK1048U065     
-
-
+62720K bytes of ATA CompactFlash (Read/Write)
 
 Configuration register is 0x2102
 
