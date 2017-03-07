@@ -129,7 +129,7 @@ show cdp neighbors
                   S - Switch, H - Host, I - IGMP, r - Repeater
 
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
-Switch           Fas 0/0            160         S I       WS-C2960S Gig 1/0/24
+Switch           Fas 0/0            163         S I       WS-C2960S Gig 1/0/24
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 ospf 10
@@ -162,7 +162,7 @@ Compiled Fri 07-Sep-07 16:46 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.4(1r) [hqluong 1r], RELEASE SOFTWARE (fc1)
 
-SerVir_Router uptime is 1 day, 5 hours, 23 minutes
+SerVir_Router uptime is 1 day, 6 hours, 3 minutes
 System returned to ROM by reload at 23:44:15 UTC Fri Jun 17 2005
 System image file is "flash:c2800nm-advsecurityk9-mz.124-17.bin"
 
