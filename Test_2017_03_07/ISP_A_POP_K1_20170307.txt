@@ -193,7 +193,7 @@ Compiled Fri 23-Mar-07 19:08 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.3(8r)T9, RELEASE SOFTWARE (fc1)
 
-ISP_A_POP_K1 uptime is 1 day, 6 hours, 21 minutes
+ISP_A_POP_K1 uptime is 1 day, 7 hours, 2 minutes
 System returned to ROM by reload at 11:40:29 UTC Mon Mar 6 2017
 System image file is "flash:c2801-adventerprisek9-mz.124-9.T3.bin"
 
