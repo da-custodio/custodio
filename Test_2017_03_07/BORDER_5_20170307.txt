@@ -1,0 +1,300 @@
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show running-config
+Building configuration...
+
+
+Current configuration : 1925 bytes
+!
+! Last configuration change at 10:56:41 UTC Wed Jan 7 1970 by cisco
+!
+version 15.1
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname BORDER_5
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no logging buffered
+no logging console
+no logging monitor
+!
+no aaa new-model
+!
+dot11 syslog
+ip source-route
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+voice-card 0
+!
+crypto pki token default removal timeout 0
+!
+!
+!
+!
+license udi pid CISCO2801 sn FCZ091413Z5
+username cisco privilege 15 secret 5 $1$Ja83$8HJrs9irZMrVcZ5f/ai4G.
+!
+redundancy
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ description TO_CARRIER_3
+ ip address 10.0.0.5 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface Serial0/2/0
+ no ip address
+ shutdown
+ no fair-queue
+ clock rate 2000000
+!
+interface Serial0/2/1
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+interface FastEthernet0/1/0
+ switchport access vlan 56
+!
+interface FastEthernet0/1/1
+ switchport access vlan 48
+!
+interface FastEthernet0/1/2
+!
+interface FastEthernet0/1/3
+!
+interface Vlan1
+ no ip address
+!
+interface Vlan48
+ description TO_B_POP_CIX
+ ip address 10.0.0.49 255.255.255.252
+!
+interface Vlan56
+ description TO_A_POP_CIX
+ ip address 10.0.0.57 255.255.255.252
+!
+router ospf 1
+ network 10.0.0.4 0.0.0.3 area 1
+ network 10.0.0.48 0.0.0.3 area 1
+ network 10.0.0.56 0.0.0.3 area 1
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+!
+!
+logging esm config
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+mgcp profile default
+!
+!
+!
+!
+!
+banner motd ^CCarrier, Access prohibited^C
+!
+line con 0
+ logging synchronous
+ login local
+line aux 0
+line vty 0 4
+ logging synchronous
+ login local
+ transport input all
+line vty 5 807
+ logging synchronous
+ login local
+ transport input all
+!
+scheduler allocate 20000 1000
+end
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip route
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       + - replicated route, % - next hop override
+
+Gateway of last resort is not set
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 route
+% Specified IPv6 routing table does not exist
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip int brief
+Interface                  IP-Address      OK? Method Status                Protocol
+FastEthernet0/0            unassigned      YES unset  administratively down down    
+FastEthernet0/1            10.0.0.5        YES manual up                    down    
+Serial0/2/0                unassigned      YES unset  administratively down down    
+Serial0/2/1                unassigned      YES unset  administratively down down    
+FastEthernet0/1/0          unassigned      YES unset  down                  down    
+FastEthernet0/1/1          unassigned      YES unset  down                  down    
+FastEthernet0/1/2          unassigned      YES unset  up                    down    
+FastEthernet0/1/3          unassigned      YES unset  up                    down    
+Vlan1                      unassigned      YES unset  up                    down    
+Vlan48                     10.0.0.49       YES manual up                    down    
+Vlan56                     10.0.0.57       YES manual up                    down    
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 int brief
+FastEthernet0/0            [administratively down/down]
+    unassigned
+FastEthernet0/1            [up/down]
+    unassigned
+Serial0/2/0                [administratively down/down]
+    unassigned
+Serial0/2/1                [administratively down/down]
+    unassigned
+FastEthernet0/1/0          [down/down]
+    unassigned
+FastEthernet0/1/1          [down/down]
+    unassigned
+FastEthernet0/1/2          [up/down]
+    unassigned
+FastEthernet0/1/3          [up/down]
+    unassigned
+Vlan1                      [up/down]
+    unassigned
+Vlan48                     [up/down]
+    unassigned
+Vlan56                     [up/down]
+    unassigned
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show cdp neighbors
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone, 
+                  D - Remote, C - CVTA, M - Two-port Mac Relay 
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 ospf 10
+%OSPFv3: No router process 10
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ipv6 ospf 10 neighbor
+%OSPFv3: No router process 10
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip bgp summary
+% BGP not active
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show access-lists
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show version
+Cisco IOS Software, 2801 Software (C2801-ADVENTERPRISEK9-M), Version 15.1(3)T, RELEASE SOFTWARE (fc1)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2010 by Cisco Systems, Inc.
+Compiled Mon 15-Nov-10 22:28 by prod_rel_team
+
+ROM: System Bootstrap, Version 12.3(8r)T8, RELEASE SOFTWARE (fc1)
+
+BORDER_5 uptime is 1 day, 6 hours, 59 minutes
+System returned to ROM by reload at 03:55:42 UTC Tue Jan 6 1970
+System image file is "flash:c2801-adventerprisek9-mz.151-3.T.bin"
+Last reload type: Normal Reload
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+Cisco 2801 (revision 4.1) with 241664K/20480K bytes of memory.
+Processor board ID FCZ091413Z5
+6 FastEthernet interfaces
+2 Serial(sync/async) interfaces
+1 Virtual Private Network (VPN) Module
+1 DSP, 8 Voice resources
+DRAM configuration is 64 bits wide with parity disabled.
+191K bytes of NVRAM.
+507024K bytes of ATA CompactFlash (Read/Write)
+
+
+License Info:
+
+License UDI:
+
+-------------------------------------------------
+Device#	  PID			SN
+-------------------------------------------------
+*0  	  CISCO2801             FCZ091413Z5     
+
+
+
+Configuration register is 0x2102
+
+
+
