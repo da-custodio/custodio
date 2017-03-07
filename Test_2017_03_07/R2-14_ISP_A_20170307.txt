@@ -258,7 +258,7 @@ Compiled Mon 19-Oct-09 17:38 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.4(1r) [hqluong 1r], RELEASE SOFTWARE (fc1)
 
-R2-14_ISP_A uptime is 5 days, 5 hours, 15 minutes
+R2-14_ISP_A uptime is 5 days, 5 hours, 55 minutes
 System returned to ROM by reload at 16:32:32 UTC Thu Mar 2 2017
 System image file is "flash:c2800nm-adventerprisek9-mz.124-24.T2.bin"
 
