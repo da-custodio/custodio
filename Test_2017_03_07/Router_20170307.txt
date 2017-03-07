@@ -2,9 +2,10 @@
 show running-config
 Building configuration...
 
-Current configuration : 983 bytes
+Current configuration : 1206 bytes
 !
-version 12.4
+! Last configuration change at 18:40:51 UTC Tue Mar 7 2017
+version 15.2
 service timestamps debug datetime msec
 service timestamps log datetime msec
 no service password-encryption
@@ -14,84 +15,74 @@ hostname Router
 boot-start-marker
 boot-end-marker
 !
+!
 no logging buffered
 no logging console
 no logging monitor
 !
 no aaa new-model
 !
-!
 ip cef
 !
 !
-ip auth-proxy max-nodata-conns 3
-ip admission max-nodata-conns 3
 !
+!
+
+
+!
+!
+!
+!
+no ipv6 cef
 multilink bundle-name authenticated
 !
 !
-voice-card 0
- no dspfarm
+!
+!
+license udi pid CISCO2901/K9 sn FCZ184492UE
+!
+!
+!
+redundancy
 !
 !
 !
 !
 !
 !
+interface Embedded-Service-Engine0/0
+ no ip address
+ shutdown
 !
-!
-!
-!
-!
-!
-!
-!
-!
-!
-!
-!
-!
-!
-archive
- log config
-  hidekeys
-! 
-!
-!
-!
-!
-!
-!
-!
-interface FastEthernet0/0
+interface GigabitEthernet0/0
  no ip address
  shutdown
  duplex auto
  speed auto
 !
-interface FastEthernet0/1
+interface GigabitEthernet0/1
  no ip address
  shutdown
  duplex auto
  speed auto
 !
-interface Serial0/2/0
+interface FastEthernet0/0/0
  no ip address
  shutdown
- clock rate 2000000
+ duplex auto
+ speed auto
 !
-interface Serial0/2/1
+interface FastEthernet0/0/1
  no ip address
  shutdown
- clock rate 2000000
+ duplex auto
+ speed auto
+!
 !
 ip forward-protocol nd
 !
-!
 no ip http server
 no ip http secure-server
-!
-!
 !
 !
 !
@@ -101,17 +92,17 @@ control-plane
 !
 !
 !
-!
-!
-!
-!
-!
-!
-!
 line con 0
 line aux 0
+line 2
+ no activation-character
+ no exec
+ transport preferred none
+ transport output lat pad telnet rlogin lapb-ta mop udptn v120 ssh
+ stopbits 1
 line vty 0 4
  login
+ transport input all
 !
 scheduler allocate 20000 1000
 !
@@ -120,56 +111,56 @@ end
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ip route
-Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
        D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
        N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
        E1 - OSPF external type 1, E2 - OSPF external type 2
        i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
        ia - IS-IS inter area, * - candidate default, U - per-user static route
-       o - ODR, P - periodic downloaded static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       + - replicated route, % - next hop override
 
 Gateway of last resort is not set
 
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 route
-IPv6 Routing Table 0 - 0 entries
-Codes: C - Connected, L - Local, S - Static, R - RIP, B - BGP
-       U - Per-user Static route, M - MIPv6
-       I1 - ISIS L1, I2 - ISIS L2, IA - ISIS interarea, IS - ISIS summary
-       O - OSPF intra, OI - OSPF inter, OE1 - OSPF ext 1, OE2 - OSPF ext 2
-       ON1 - OSPF NSSA ext 1, ON2 - OSPF NSSA ext 2
-       D - EIGRP, EX - EIGRP external
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ip int brief
 Interface                  IP-Address      OK? Method Status                Protocol
-FastEthernet0/0            unassigned      YES unset  administratively down down    
-FastEthernet0/1            unassigned      YES unset  administratively down down    
-Serial0/2/0                unassigned      YES unset  administratively down down    
-Serial0/2/1                unassigned      YES unset  administratively down down    
+Embedded-Service-Engine0/0 unassigned      YES unset  administratively down down    
+GigabitEthernet0/0         unassigned      YES unset  administratively down down    
+GigabitEthernet0/1         unassigned      YES unset  administratively down down    
+FastEthernet0/0/0          unassigned      YES unset  administratively down down    
+FastEthernet0/0/1          unassigned      YES unset  administratively down down    
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 int brief
-FastEthernet0/0            [administratively down/down]
-FastEthernet0/1            [administratively down/down]
-Serial0/2/0                [administratively down/down]
-Serial0/2/1                [administratively down/down]
+Em0/0                  [administratively down/down]
+    unassigned
+GigabitEthernet0/0     [administratively down/down]
+    unassigned
+GigabitEthernet0/1     [administratively down/down]
+    unassigned
+FastEthernet0/0/0      [administratively down/down]
+    unassigned
+FastEthernet0/0/1      [administratively down/down]
+    unassigned
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show cdp neighbors
 Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
-                  S - Switch, H - Host, I - IGMP, r - Repeater
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone, 
+                  D - Remote, C - CVTA, M - Two-port Mac Relay 
 
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 ospf 10
-%OSPFv3: No router process 10
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 ospf 10 neighbor
-%OSPFv3: No router process 10
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ip bgp summary
@@ -178,20 +169,22 @@ show ip bgp summary
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show access-lists
-
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show version
-Cisco IOS Software, 2800 Software (C2800NM-ADVENTERPRISEK9-M), Version 12.4(15)T4, RELEASE SOFTWARE (fc2)
+Cisco IOS Software, C2900 Software (C2900-UNIVERSALK9-M), Version 15.2(4)M6a, RELEASE SOFTWARE (fc1)
 Technical Support: http://www.cisco.com/techsupport
-Copyright (c) 1986-2008 by Cisco Systems, Inc.
-Compiled Thu 13-Mar-08 03:04 by prod_rel_team
+Copyright (c) 1986-2014 by Cisco Systems, Inc.
+Compiled Tue 15-Apr-14 09:45 by prod_rel_team
 
-ROM: System Bootstrap, Version 12.4(13r)T, RELEASE SOFTWARE (fc1)
+ROM: System Bootstrap, Version 15.0(1r)M16, RELEASE SOFTWARE (fc1)
 
-Router uptime is 4 hours, 9 minutes
-System returned to ROM by power-on
-System image file is "flash:c2800nm-adventerprisek9-mz.124-15.T4.bin"
+Router uptime is 1 day, 2 hours, 33 minutes
+System returned to ROM by reload at 16:05:05 UTC Mon Mar 6 2017
+System image file is "flash0:c2900-universalk9-mz.SPA.152-4.M6a.bin"
+Last reload type: Normal Reload
+Last reload reason: Reload Command
+
 
 
 This product contains cryptographic features and is subject to United
@@ -209,16 +202,39 @@ http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
 If you require further assistance please contact us by sending email to
 export@cisco.com.
 
-Cisco 2811 (revision 53.50) with 512000K/12288K bytes of memory.
-Processor board ID FCZ124671CX
+Cisco CISCO2901/K9 (revision 1.0) with 2506752K/114688K bytes of memory.
+Processor board ID FCZ184492UE
 2 FastEthernet interfaces
-2 Serial(sync/async) interfaces
-1 Virtual Private Network (VPN) Module
-DRAM configuration is 64 bits wide with parity disabled.
-239K bytes of non-volatile configuration memory.
-62720K bytes of ATA CompactFlash (Read/Write)
+2 Gigabit Ethernet interfaces
+1 terminal line
+DRAM configuration is 64 bits wide with parity enabled.
+255K bytes of non-volatile configuration memory.
+255488K bytes of ATA System CompactFlash 0 (Read/Write)
 
-Configuration register is 0x2142 (will be 0x2102 at next reload)
+
+License Info:
+
+License UDI:
+
+-------------------------------------------------
+Device#	  PID			SN
+-------------------------------------------------
+*0  	  CISCO2901/K9          FCZ184492UE     
+
+
+
+Technology Package License Information for Module:'c2900' 
+
+-----------------------------------------------------------------
+Technology    Technology-package           Technology-package
+              Current       Type           Next reboot  
+------------------------------------------------------------------
+ipbase        ipbasek9      Permanent      ipbasek9
+security      None          None           None
+uc            None          None           None
+data          datak9        Permanent      datak9
+
+Configuration register is 0x2102
 
 
 
