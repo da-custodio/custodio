@@ -2,7 +2,7 @@
 show running-config
 Building configuration...
 
-Current configuration : 1336 bytes
+Current configuration : 1326 bytes
 !
 version 12.2
 no service pad
@@ -94,7 +94,6 @@ interface GigabitEthernet0/2
 !
 interface Vlan1
  no ip address
- shutdown
 !
 ip classless
 ip http server
@@ -126,7 +125,7 @@ show ipv6 route
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ip int brief
 Interface              IP-Address      OK? Method Status                Protocol
-Vlan1                  unassigned      YES unset  administratively down down    
+Vlan1                  unassigned      YES unset  up                    down    
 FastEthernet0/1        unassigned      YES unset  down                  down    
 FastEthernet0/2        unassigned      YES unset  down                  down    
 FastEthernet0/3        unassigned      YES unset  down                  down    
@@ -156,7 +155,7 @@ GigabitEthernet0/2     unassigned      YES unset  down                  down
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ipv6 int brief
-Vlan1                      [administratively down/down]
+Vlan1                      [up/down]
     unassigned
 FastEthernet0/1            [down/down]
     unassigned
@@ -247,7 +246,7 @@ Image text-base: 0x01000000, data-base: 0x02D00000
 ROM: Bootstrap program is C3560 boot loader
 BOOTLDR: C3560 Boot Loader (C3560-HBOOT-M) Version 12.2(53r)SEY4, RELEASE SOFTWARE (fc1)
 
-Switch uptime is 25 minutes
+Switch uptime is 3 minutes
 System returned to ROM by power-on
 System image file is "flash:/c3560-ipservicesk9-mz.122-50.SE5/c3560-ipservicesk9-mz.122-50.SE5.bin"
 
