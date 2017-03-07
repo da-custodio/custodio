@@ -306,7 +306,7 @@ Compiled Mon 19-Oct-09 17:38 by prod_rel_team
 
 ROM: System Bootstrap, Version 12.4(13r)T, RELEASE SOFTWARE (fc1)
 
-R2-22_ISPC-B5 uptime is 21 minutes
+R2-22_ISPC-B5 uptime is 23 minutes
 System returned to ROM by reload at 18:22:07 UTC Tue Mar 7 2017
 System image file is "flash:c2800nm-adventerprisek9-mz.124-24.T2.bin"
 
