@@ -4,7 +4,7 @@ show running-config
 
 Current configuration : 1492 bytes
 !
-! Last configuration change at 09:24:02 UTC Tue Mar 21 2017 by cisco
+! Last configuration change at 13:53:50 UTC Tue Mar 21 2017 by cisco
 version 15.2
 service timestamps debug datetime msec
 service timestamps log datetime msec
@@ -173,7 +173,7 @@ Compiled Tue 15-Apr-14 09:45 by prod_rel_team
 
 ROM: System Bootstrap, Version 15.0(1r)M16, RELEASE SOFTWARE (fc1)
 
-Firewall_CIX uptime is 3 days, 19 hours, 56 minutes
+Firewall_CIX uptime is 4 days, 26 minutes
 System returned to ROM by reload at 13:25:41 UTC Fri Mar 17 2017
 System image file is "flash0:c2900-universalk9-mz.SPA.152-4.M6a.bin"
 Last reload type: Normal Reload
