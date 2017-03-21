@@ -2,10 +2,9 @@
 show running-config
 Building configuration...
 
-
-Current configuration : 1598 bytes
+Current configuration : 1311 bytes
 !
-! Last configuration change at 09:19:32 UTC Tue Mar 21 2017 by cisco
+! Last configuration change at 13:49:05 UTC Tue Mar 21 2017 by cisco
 version 15.2
 service timestamps debug datetime msec
 service timestamps log datetime msec
@@ -31,29 +30,26 @@ ip cef
 !
 !
 no ipv6 cef
+!
 multilink bundle-name authenticated
 !
 !
 !
 !
-!
-!
-!
-voice-card 0
-!
-!
-!
-!
-!
-!
-!
-!
-license udi pid CISCO2901/K9 sn FCZ1747C29D
+license udi pid CISCO2901/K9 sn FCZ184492UH
 !
 !
 username cisco privilege 15 password 0 cisco
 !
 redundancy
+!
+!
+!
+!
+!
+! 
+!
+!
 !
 !
 !
@@ -66,6 +62,7 @@ interface Embedded-Service-Engine0/0
 !
 interface GigabitEthernet0/0
  ip address 1.1.1.1 255.255.255.252
+ shutdown
  duplex auto
  speed auto
 !
@@ -74,21 +71,6 @@ interface GigabitEthernet0/1
  shutdown
  duplex auto
  speed auto
-!
-interface FastEthernet0/0/0
- no ip address
-!
-interface FastEthernet0/0/1
- no ip address
-!
-interface FastEthernet0/0/2
- no ip address
-!
-interface FastEthernet0/0/3
- no ip address
-!
-interface Vlan1
- no ip address
 !
 router rip
  version 2
@@ -106,23 +88,8 @@ no ip http secure-server
 !
 control-plane
 !
- !
- !
- !
 !
-!
-!
-mgcp profile default
-!
-!
-!
-!
-!
-gatekeeper
- shutdown
-!
-!
-banner motd ^CAccess Prohibited^C
+banner motd ^CCAccess Prohibited^C
 !
 line con 0
  logging synchronous
@@ -177,13 +144,8 @@ Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
 show ip int brief
 Interface                  IP-Address      OK? Method Status                Protocol
 Embedded-Service-Engine0/0 unassigned      YES unset  administratively down down    
-GigabitEthernet0/0         1.1.1.1         YES manual down                  down    
+GigabitEthernet0/0         1.1.1.1         YES manual administratively down down    
 GigabitEthernet0/1         unassigned      YES unset  administratively down down    
-FastEthernet0/0/0          unassigned      YES unset  down                  down    
-FastEthernet0/0/1          unassigned      YES unset  down                  down    
-FastEthernet0/0/2          unassigned      YES unset  down                  down    
-FastEthernet0/0/3          unassigned      YES unset  down                  down    
-Vlan1                      unassigned      YES unset  down                  down    
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show track
@@ -199,16 +161,16 @@ show route-map
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show version
-Cisco IOS Software, C2900 Software (C2900-UNIVERSALK9-M), Version 15.2(4)M4, RELEASE SOFTWARE (fc2)
+Cisco IOS Software, C2900 Software (C2900-UNIVERSALK9-M), Version 15.2(4)M6a, RELEASE SOFTWARE (fc1)
 Technical Support: http://www.cisco.com/techsupport
-Copyright (c) 1986-2013 by Cisco Systems, Inc.
-Compiled Thu 20-Jun-13 13:06 by prod_rel_team
+Copyright (c) 1986-2014 by Cisco Systems, Inc.
+Compiled Tue 15-Apr-14 09:45 by prod_rel_team
 
 ROM: System Bootstrap, Version 15.0(1r)M16, RELEASE SOFTWARE (fc1)
 
-Core_Gold uptime is 3 days, 19 hours, 56 minutes
-System returned to ROM by reload at 13:21:03 UTC Fri Mar 17 2017
-System image file is "flash0:c2900-universalk9-mz.SPA.152-4.M4.bin"
+Core_Gold uptime is 3 hours, 52 minutes
+System returned to ROM by reload at 09:54:40 UTC Tue Mar 21 2017
+System image file is "flash0:c2900-universalk9-mz.SPA.152-4.M6a.bin"
 Last reload type: Normal Reload
 Last reload reason: Reload Command
 
@@ -229,14 +191,14 @@ http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
 If you require further assistance please contact us by sending email to
 export@cisco.com.
 
-Cisco CISCO2901/K9 (revision 1.0) with 483328K/40960K bytes of memory.
-Processor board ID FCZ1747C29D
-4 FastEthernet interfaces
+Cisco CISCO2901/K9 (revision 1.0) with 487424K/36864K bytes of memory.
+Processor board ID FCZ184492UH
 2 Gigabit Ethernet interfaces
 1 terminal line
+1 Virtual Private Network (VPN) Module
 DRAM configuration is 64 bits wide with parity enabled.
 255K bytes of non-volatile configuration memory.
-250880K bytes of ATA System CompactFlash 0 (Read/Write)
+255488K bytes of ATA System CompactFlash 0 (Read/Write)
 
 
 License Info:
@@ -246,7 +208,7 @@ License UDI:
 -------------------------------------------------
 Device#	  PID			SN
 -------------------------------------------------
-*0  	  CISCO2901/K9          FCZ1747C29D     
+*0  	  CISCO2901/K9          FCZ184492UH     
 
 
 
@@ -257,8 +219,8 @@ Technology    Technology-package           Technology-package
               Current       Type           Next reboot  
 ------------------------------------------------------------------
 ipbase        ipbasek9      Permanent      ipbasek9
-security      None          None           None
-uc            uck9          Permanent      uck9
+security      securityk9    Permanent      securityk9
+uc            None          None           None
 data          None          None           None
 
 Configuration register is 0x2102
