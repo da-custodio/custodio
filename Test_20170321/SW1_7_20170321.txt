@@ -195,7 +195,7 @@ Image text-base: 0x00003000, data-base: 0x00D40000
 ROM: Bootstrap program is C2960 boot loader
 BOOTLDR: C2960 Boot Loader (C2960-HBOOT-M) Version 12.2(25r)SEE6, RELEASE SOFTWARE (fc1)
 
-SW1_7 uptime is 4 days, 11 minutes
+SW1_7 uptime is 4 days, 4 hours, 40 minutes
 System returned to ROM by power-on
 System image file is "flash:c2960-lanbase-mz.122-35.SE5/c2960-lanbase-mz.122-35.SE5.bin"
 
