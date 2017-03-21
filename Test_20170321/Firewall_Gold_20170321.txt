@@ -4,7 +4,7 @@ show running-config
 
 Current configuration : 2007 bytes
 !
-! Last configuration change at 09:24:15 UTC Tue Mar 21 2017 by cisco
+! Last configuration change at 09:57:42 UTC Tue Mar 21 2017 by cisco
 version 15.2
 service timestamps debug datetime msec
 service timestamps log datetime msec
@@ -200,7 +200,7 @@ Compiled Tue 15-Apr-14 09:45 by prod_rel_team
 
 ROM: System Bootstrap, Version 15.0(1r)M16, RELEASE SOFTWARE (fc1)
 
-Firewall_Gold uptime is 3 days, 19 hours, 55 minutes
+Firewall_Gold uptime is 3 days, 20 hours, 29 minutes
 System returned to ROM by reload at 13:26:40 UTC Fri Mar 17 2017
 System image file is "flash0:c2900-universalk9-mz.SPA.152-4.M6a.bin"
 Last reload type: Normal Reload
