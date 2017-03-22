@@ -1,0 +1,176 @@
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+sh run
+Building configuration...
+
+
+Current configuration : 2114 bytes
+!
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname VIX_R2-14
+!
+boot-start-marker
+boot-end-marker
+!
+logging message-counter syslog
+no logging buffered
+no logging console
+no logging monitor
+!
+no aaa new-model
+!
+dot11 syslog
+ip source-route
+!
+!
+ip cef
+!
+!
+no ip domain lookup
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+voice-card 0
+!
+!
+!
+!
+!
+username cisco privilege 15 secret 5 $1$gzeK$SxjpFBWHsxG8mA6A8iodw/
+archive
+ log config
+  hidekeys
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ description Google
+ ip address 8.8.8.8 255.255.255.255
+!
+interface Loopback1
+ description BGP_Loopback
+ ip address 6.6.6.6 255.255.255.255
+!
+interface FastEthernet0/0
+ description to_ISP-A
+ ip address 200.0.0.254 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ description to_ISP-B
+ ip address 201.0.0.254 255.255.255.0
+ duplex auto
+ speed auto
+ mpls ip
+!
+interface FastEthernet0/0/0
+!
+interface FastEthernet0/0/1
+!
+interface FastEthernet0/0/2
+!
+interface FastEthernet0/0/3
+!
+interface BRI0/3/0
+ no ip address
+ encapsulation hdlc
+ shutdown
+!
+interface Vlan1
+ no ip address
+!
+router bgp 4
+ no synchronization
+ bgp log-neighbor-changes
+ network 8.8.8.8 mask 255.255.255.255
+ neighbor 4.4.4.4 remote-as 3
+ neighbor 4.4.4.4 ebgp-multihop 2
+ neighbor 4.4.4.4 update-source Loopback1
+ neighbor 5.5.5.5 remote-as 2
+ neighbor 5.5.5.5 ebgp-multihop 2
+ neighbor 5.5.5.5 update-source Loopback1
+ no auto-summary
+!
+ip forward-protocol nd
+ip route 4.4.4.4 255.255.255.255 201.0.0.1
+ip route 5.5.5.5 255.255.255.255 200.0.0.1
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+telephony-service
+ max-conferences 8 gain -6
+ transfer-system full-consult
+ create cnf-files version-stamp Jan 01 2002 00:00:00
+!
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+ login local
+line aux 0
+line vty 0 4
+ exec-timeout 0 0
+ logging synchronous
+ login local
+line vty 5 15
+ exec-timeout 0 0
+ logging synchronous
+ login local
+!
+scheduler allocate 20000 1000
+end
+
+
+
