@@ -1,0 +1,147 @@
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show running-config
+Building configuration...
+
+Current configuration : 1649 bytes
+!
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname B_POP_CIX
+!
+boot-start-marker
+boot-end-marker
+!
+no logging buffered
+no logging console
+no logging monitor
+!
+no aaa new-model
+!
+resource policy
+!
+ip cef
+!
+!
+!
+!
+no ip domain lookup
+!
+!
+!
+voice-card 0
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+username cisco privilege 15 secret 5 $1$ZDe8$j/dd3i6U.Syh1KqGMEPdh/
+!
+! 
+!
+!
+!
+!
+!
+interface Tunnel6
+ description TO_ISP_B
+ ip address 9.2.3.2 255.255.255.252
+ tunnel source 10.0.0.50
+ tunnel destination 10.0.0.54
+!
+interface FastEthernet0/0
+ description TO_CIX_LAN
+ ip address 8.8.8.3 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ description TO_BORDER_5
+ ip address 10.0.0.50 255.255.255.252
+ duplex auto
+ speed auto
+ mpls ip
+!
+interface FastEthernet0/3/0
+!
+interface FastEthernet0/3/1
+!
+interface FastEthernet0/3/2
+!
+interface FastEthernet0/3/3
+!
+interface Serial0/1/0
+ no ip address
+ shutdown
+ no fair-queue
+ clock rate 2000000
+!
+interface Serial0/1/1
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+interface Vlan1
+ no ip address
+!
+router rip
+ version 2
+ network 9.0.0.0
+ default-information originate
+ no auto-summary
+!
+ip route 9.1.0.0 255.255.0.0 FastEthernet0/0 8.8.8.2
+ip route 10.0.0.52 255.255.255.252 FastEthernet0/1 10.0.0.49
+!
+!
+ip http server
+no ip http secure-server
+!
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+!
+banner motd ^CCarrier, Access prohibited^C
+!
+line con 0
+ logging synchronous
+ login local
+line aux 0
+line vty 0 4
+ logging synchronous
+ login local
+line vty 5 807
+ logging synchronous
+ login local
+!
+scheduler allocate 20000 1000
+end
+
+
+
