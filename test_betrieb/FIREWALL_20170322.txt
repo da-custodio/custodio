@@ -1,0 +1,97 @@
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show running-config
+Building configuration...
+
+Current configuration : 1319 bytes
+!
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname FIREWALL
+!
+boot-start-marker
+boot-end-marker
+!
+no logging buffered
+no logging console
+no logging monitor
+!
+no aaa new-model
+!
+!
+ip cef
+!
+!
+!
+!
+!
+!
+username cisco privilege 15 secret 5 $1$hTDM$wgaSJAo05gqt4M.Sov/ko/
+!
+!
+! 
+!
+crypto isakmp policy 10
+ encr 3des
+ authentication pre-share
+ group 5
+crypto isakmp key VPN_KEY address 10.0.0.1
+!
+!
+crypto ipsec transform-set VPN_SET esp-3des esp-sha-hmac 
+!
+crypto map VPN_MAP 10 ipsec-isakmp 
+ set peer 10.0.0.1
+ set transform-set VPN_SET 
+ match address VPN_ACL
+!
+!
+!
+interface FastEthernet0/0
+ description to_FORTIGATE
+ ip address 10.0.1.2 255.255.255.0
+ duplex auto
+ speed auto
+ crypto map VPN_MAP
+!
+interface FastEthernet0/1
+ description to_SWITCH
+ ip address 172.16.0.254 255.255.255.0
+ duplex auto
+ speed auto
+!
+ip forward-protocol nd
+ip route 0.0.0.0 0.0.0.0 10.0.1.1
+!
+ip http server
+no ip http secure-server
+!
+ip access-list extended VPN_ACL
+ permit icmp 172.16.0.0 0.0.0.255 192.168.1.0 0.0.0.255
+ deny   ip any any
+!
+!
+!
+control-plane
+!
+!
+!
+line con 0
+ logging synchronous
+ login local
+line aux 0
+line vty 0 4
+ logging synchronous
+ login local
+line vty 5 15
+ logging synchronous
+ login local
+!
+scheduler allocate 20000 1000
+!
+end
+
+
+
