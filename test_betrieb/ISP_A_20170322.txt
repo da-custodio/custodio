@@ -1,28 +1,114 @@
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
-sh version
-Cisco Internetwork Operating System Software 
-IOS (tm) C2600 Software (C2600-IPBASE-M), Version 12.3(6a), RELEASE SOFTWARE (fc4)
-Copyright (c) 1986-2004 by cisco Systems, Inc.
-Compiled Fri 02-Apr-04 19:17 by kellythw
-Image text-base: 0x80008098, data-base: 0x80ECF498
+sh run
+Building configuration...
 
-ROM: System Bootstrap, Version 12.2(8r) [cmong 8r], RELEASE SOFTWARE (fc1)
-
-ISP_A uptime is 2 days, 4 hours, 1 minute
-System returned to ROM by reload
-System image file is "flash:c2600-ipbase-mz.123-6a.bin"
-
-cisco 2621XM (MPC860P) processor (revision 0x300) with 93184K/5120K bytes of memory.
-Processor board ID JAE0813A9X5 (1206693379)
-M860 processor: part number 5, mask 2
-Bridging software.
-X.25 software, Version 3.0.0.
-2 FastEthernet/IEEE 802.3 interface(s)
-4 Serial(sync/async) network interface(s)
-32K bytes of non-volatile configuration memory.
-16384K bytes of processor board System flash (Read/Write)
-
-Configuration register is 0x2142
+Current configuration : 1820 bytes
+!
+version 12.3
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname ISP_A
+!
+boot-start-marker
+boot-end-marker
+!
+no logging buffered
+no logging console
+no logging monitor
+!
+username cisco privilege 15 secret 5 $1$fJJ6$07//OKzEBII5IwigG3llb.
+no network-clock-participate slot 1 
+no network-clock-participate wic 0 
+no aaa new-model
+ip subnet-zero
+ip cef
+!
+!
+!
+no ip domain lookup
+no ftp-server write-enable
+!
+!
+!
+!
+interface Tunnel1
+ description to_POP_K1
+ ip address 9.1.1.1 255.255.255.252
+ tunnel source 10.0.0.46
+ tunnel destination 10.0.0.41
+!
+interface Tunnel2
+ description to_POP_K2
+ ip address 9.1.2.1 255.255.255.252
+ tunnel source 10.0.0.46
+ tunnel destination 10.0.0.37
+!
+interface Tunnel3
+ description to_A_POP_CIX
+ ip address 9.1.3.1 255.255.255.252
+ tunnel source 10.0.0.46
+ tunnel destination 10.0.0.58
+!
+interface FastEthernet0/0
+ description to_DNS
+ ip address 9.1.4.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface Serial0/0
+ no ip address
+ shutdown
+!
+interface FastEthernet0/1
+ description to_Border_2
+ ip address 10.0.0.46 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface Serial0/1
+ no ip address
+ shutdown
+!
+interface Serial0/2
+ no ip address
+ shutdown
+!
+interface Serial0/3
+ no ip address
+ shutdown
+!
+router eigrp 1
+ passive-interface FastEthernet0/0
+ network 9.1.1.0 0.0.0.3
+ network 9.1.2.0 0.0.0.3
+ network 9.1.3.0 0.0.0.3
+ network 9.1.4.0 0.0.0.3
+ no auto-summary
+!
+ip classless
+ip route 10.0.0.36 255.255.255.252 10.0.0.45
+ip route 10.0.0.40 255.255.255.252 10.0.0.45
+ip route 10.0.0.56 255.255.255.252 10.0.0.45
+ip http server
+!
+banner motd ^CNo Access!^C
+!
+line con 0
+ logging synchronous
+ login local
+line aux 0
+line vty 0 4
+ logging synchronous
+ login local
+line vty 5 181
+ logging synchronous
+ login local
+!
+!
+!
+end
 
 
 
