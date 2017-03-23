@@ -7,7 +7,7 @@ Compiled Wed 01-Jun-11 16:54 by prod_rel_team
 
 ROM: System Bootstrap, Version 15.0(1r)M9, RELEASE SOFTWARE (fc1)
 
-Border_3 uptime is 3 days, 7 hours, 21 minutes
+Border_3 uptime is 3 days, 7 hours, 27 minutes
 System returned to ROM by reload at 08:45:50 UTC Mon Mar 20 2017
 System restarted at 08:47:05 UTC Mon Mar 20 2017
 System image file is "flash0:c2900-universalk9-mz.SPA.150-1.M6.bin"
@@ -72,7 +72,7 @@ sh run
 
 Current configuration : 1652 bytes
 !
-! Last configuration change at 16:08:53 UTC Thu Mar 23 2017 by cisco
+! Last configuration change at 16:14:29 UTC Thu Mar 23 2017 by cisco
 ! NVRAM config last updated at 09:09:42 UTC Mon Mar 20 2017
 !
 version 15.0
@@ -137,7 +137,7 @@ redundancy
 !
 interface GigabitEthernet0/0
  description to_Carrier_2
- ip address 10.0.0.21 255.255.255.252
+ ip address 10.10.10.10 255.255.255.0
  duplex auto
  speed auto
  !
@@ -209,22 +209,8 @@ end
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 sh ip int br
 Interface                  IP-Address      OK? Method Status                Protocol
-GigabitEthernet0/0         10.0.0.21       YES manual down                  down    
+GigabitEthernet0/0         10.10.10.10     YES manual down                  down    
 GigabitEthernet0/1         10.0.0.42       YES manual down                  down    
 GigabitEthernet0/2         10.0.0.38       YES manual down                  down    
-
-! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show access-lists
-
-
-! -------------------------------------------------------------------------------------------------------------------------------- ! 
-sh track
-
-! -------------------------------------------------------------------------------------------------------------------------------- ! 
-sh cdp neigh
-Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
-                  S - Switch, H - Host, I - IGMP, r - Repeater
-
-Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
 
 
