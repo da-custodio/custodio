@@ -119,12 +119,4 @@ scheduler allocate 20000 1000
 end
 
 
-! -------------------------------------------------------------------------------------------------------------------------------- ! 
-show ip interface brief
-Interface                  IP-Address      OK? Method Status                Protocol
-FastEthernet0/0            unassigned      YES unset  up                    up      
-FastEthernet0/0.10         192.168.10.1    YES manual up                    up      
-FastEthernet0/0.20         192.168.0.1     YES manual up                    up      
-FastEthernet0/1            unassigned      YES unset  administratively down down    
-
 
