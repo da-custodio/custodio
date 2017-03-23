@@ -1,15 +1,15 @@
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
-sh version
-Cisco IOS Software, 2800 Software (C2800NM-ADVENTERPRISEK9-M), Version 12.4(24)T2, RELEASE SOFTWARE (fc2)
+show version
+Cisco IOS Software, 2801 Software (C2801-ADVENTERPRISEK9-M), Version 12.4(9)T3, RELEASE SOFTWARE (fc3)
 Technical Support: http://www.cisco.com/techsupport
-Copyright (c) 1986-2009 by Cisco Systems, Inc.
-Compiled Mon 19-Oct-09 17:38 by prod_rel_team
+Copyright (c) 1986-2007 by Cisco Systems, Inc.
+Compiled Fri 23-Mar-07 19:08 by prod_rel_team
 
-ROM: System Bootstrap, Version 12.4(1r) [hqluong 1r], RELEASE SOFTWARE (fc1)
+ROM: System Bootstrap, Version 12.3(8r)T9, RELEASE SOFTWARE (fc1)
 
-ISP_B-R2_16 uptime is 6 days, 9 minutes
-System returned to ROM by reload at 17:44:57 UTC Thu Mar 16 2017
-System image file is "flash:c2800nm-adventerprisek9-mz.124-24.T2.bin"
+B_POP_CIX uptime is 2 days, 4 hours, 22 minutes
+System returned to ROM by reload at 09:54:45 UTC Mon Mar 20 2017
+System image file is "flash:c2801-adventerprisek9-mz.124-9.T3.bin"
 
 
 This product contains cryptographic features and is subject to United
@@ -27,12 +27,13 @@ http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
 If you require further assistance please contact us by sending email to
 export@cisco.com.
 
-Cisco 2811 (revision 53.51) with 509952K/14336K bytes of memory.
-Processor board ID FCZ1001720L
+Cisco 2801 (revision 6.0) with 119808K/11264K bytes of memory.
+Processor board ID FCZ110812Q3
 6 FastEthernet interfaces
+2 Serial(sync/async) interfaces
 1 Virtual Private Network (VPN) Module
 DRAM configuration is 64 bits wide with parity disabled.
-239K bytes of non-volatile configuration memory.
+191K bytes of NVRAM.
 62720K bytes of ATA CompactFlash (Read/Write)
 
 Configuration register is 0x2102

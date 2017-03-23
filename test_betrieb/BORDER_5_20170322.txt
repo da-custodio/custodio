@@ -1,0 +1,166 @@
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+sh run
+Building configuration...
+
+
+Current configuration : 2007 bytes
+!
+! Last configuration change at 06:13:51 UTC Thu Jan 22 1970 by cisco
+!
+version 15.1
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname BORDER_5
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no logging buffered
+no logging console
+no logging monitor
+!
+no aaa new-model
+!
+dot11 syslog
+ip source-route
+!
+!
+!
+!
+!
+ip cef
+no ip domain lookup
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+voice-card 0
+!
+crypto pki token default removal timeout 0
+!
+!
+!
+!
+license udi pid CISCO2801 sn FCZ091413Z5
+username cisco privilege 15 secret 5 $1$psld$7wrGYja3RiXfRND4MJyCm0
+!
+redundancy
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ description TO_CARRIER_3
+ ip address 10.0.0.5 255.255.255.252
+ duplex auto
+ speed auto
+ mpls ip
+!
+interface Serial0/2/0
+ no ip address
+ shutdown
+ no fair-queue
+ clock rate 2000000
+!
+interface Serial0/2/1
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+interface FastEthernet0/1/0
+ switchport access vlan 56
+!
+interface FastEthernet0/1/1
+ switchport access vlan 48
+!
+interface FastEthernet0/1/2
+!
+interface FastEthernet0/1/3
+!
+interface Vlan1
+ no ip address
+!
+interface Vlan48
+ description TO_B_POP_CIX
+ ip address 10.0.0.49 255.255.255.252
+!
+interface Vlan56
+ description TO_A_POP_CIX
+ ip address 10.0.0.57 255.255.255.252
+!
+router ospf 1
+ passive-interface Vlan48
+ passive-interface Vlan56
+ network 10.0.0.4 0.0.0.3 area 1
+ network 10.0.0.48 0.0.0.3 area 1
+ network 10.0.0.56 0.0.0.3 area 1
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+!
+!
+logging esm config
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+mgcp profile default
+!
+!
+!
+!
+!
+banner motd ^CCarrier, Access prohibited^C
+!
+line con 0
+ logging synchronous
+ login local
+line aux 0
+line vty 0 4
+ logging synchronous
+ login local
+ transport input all
+line vty 5 807
+ logging synchronous
+ login local
+ transport input all
+!
+scheduler allocate 20000 1000
+end
+
+
+
