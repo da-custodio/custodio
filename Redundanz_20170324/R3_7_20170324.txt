@@ -4,7 +4,7 @@ show running-config
 
 Current configuration : 1686 bytes
 !
-! Last configuration change at 15:02:45 UTC Fri Mar 24 2017 by cisco
+! Last configuration change at 15:05:22 UTC Fri Mar 24 2017 by cisco
 version 15.2
 service timestamps debug datetime msec
 service timestamps log datetime msec
@@ -138,35 +138,22 @@ Gateway of last resort is not set
 
       1.0.0.0/32 is subnetted, 1 subnets
 C        1.1.1.1 is directly connected, Loopback0
-      2.0.0.0/32 is subnetted, 1 subnets
-S        2.2.2.2 [1/0] via 10.10.0.1
-      3.0.0.0/32 is subnetted, 1 subnets
-B        3.3.3.3 [200/0] via 2.2.2.2, 00:39:09
-      10.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
-C        10.10.0.0/24 is directly connected, GigabitEthernet0/0
-L        10.10.0.254/32 is directly connected, GigabitEthernet0/0
-B     201.0.0.0/24 [200/0] via 2.2.2.2, 00:39:09
-B     202.0.0.0/24 [200/0] via 2.2.2.2, 00:39:09
-      203.0.0.0/24 is variably subnetted, 2 subnets, 2 masks
-C        203.0.0.0/24 is directly connected, GigabitEthernet0/1
-L        203.0.0.254/32 is directly connected, GigabitEthernet0/1
-B     204.0.0.0/24 [200/0] via 2.2.2.2, 00:39:09
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ip bgp summary
 BGP router identifier 1.1.1.1, local AS number 10
-BGP table version is 78, main routing table version 78
-5 network entries using 740 bytes of memory
-5 path entries using 320 bytes of memory
-4/4 BGP path/bestpath attribute entries using 544 bytes of memory
+BGP table version is 84, main routing table version 84
+4 network entries using 592 bytes of memory
+4 path entries using 256 bytes of memory
+2/0 BGP path/bestpath attribute entries using 272 bytes of memory
 2 BGP AS-PATH entries using 48 bytes of memory
 0 BGP route-map cache entries using 0 bytes of memory
 0 BGP filter-list cache entries using 0 bytes of memory
-BGP using 1652 total bytes of memory
-BGP activity 24/19 prefixes, 26/21 paths, scan interval 60 secs
+BGP using 1168 total bytes of memory
+BGP activity 24/20 prefixes, 26/22 paths, scan interval 60 secs
 
 Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
-2.2.2.2         4           10      61      67       78    0    0 00:54:37        4
+2.2.2.2         4           10      63      71        1    0    0 00:57:14        4
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show cdp neighb
@@ -175,15 +162,13 @@ show cdp neighb
                   D - Remote, C - CVTA, M - Two-port Mac Relay 
 
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
-R3_3             Gig 0/1            135            R S I  CISCO2901 Fas 0/0/0
-R2_1             Gig 0/0            169             R S   2621XM    Fas 0/0
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
 show ip int brief
 Interface                  IP-Address      OK? Method Status                Protocol
 Embedded-Service-Engine0/0 unassigned      YES unset  administratively down down    
-GigabitEthernet0/0         10.10.0.254     YES manual up                    up      
-GigabitEthernet0/1         203.0.0.254     YES manual up                    up      
+GigabitEthernet0/0         10.10.0.254     YES manual down                  down    
+GigabitEthernet0/1         203.0.0.254     YES manual down                  down    
 Loopback0                  1.1.1.1         YES manual up                    up      
 
 ! -------------------------------------------------------------------------------------------------------------------------------- ! 
@@ -207,7 +192,7 @@ Compiled Tue 15-Apr-14 09:45 by prod_rel_team
 
 ROM: System Bootstrap, Version 15.0(1r)M16, RELEASE SOFTWARE (fc1)
 
-R3_7 uptime is 2 hours, 3 minutes
+R3_7 uptime is 2 hours, 5 minutes
 System returned to ROM by power-on
 System image file is "flash0:c2900-universalk9-mz.SPA.152-4.M6a.bin"
 Last reload type: Normal Reload
