@@ -9,7 +9,7 @@ Image text-base: 0x8000809C, data-base: 0x81673E2C
 
 ROM: System Bootstrap, Version 12.2(7r) [cmong 7r], RELEASE SOFTWARE (fc1)
 
-VIX_5554 uptime is 1 day, 4 minutes
+VIX_5554 uptime is 1 day, 5 minutes
 System returned to ROM by reload
 System image file is "flash:c2600-is-mz.122-11.T9.bin"
 
