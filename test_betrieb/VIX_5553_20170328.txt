@@ -48,7 +48,7 @@ interface Serial0/0
  no fair-queue
 !
 interface FastEthernet0/1
- ip address 10.10.10.1 255.255.255.0
+ ip address 10.20.20.1 255.255.255.0
  duplex auto
  speed auto
 !
@@ -90,7 +90,7 @@ Image text-base: 0x8000809C, data-base: 0x81673E2C
 
 ROM: System Bootstrap, Version 12.2(7r) [cmong 7r], RELEASE SOFTWARE (fc1)
 
-VIX_5553 uptime is 1 day, 8 minutes
+VIX_5553 uptime is 1 day, 9 minutes
 System returned to ROM by reload
 System image file is "flash:c2600-is-mz.122-11.T9.bin"
 
