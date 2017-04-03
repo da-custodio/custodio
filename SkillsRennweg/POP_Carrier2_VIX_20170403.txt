@@ -1,0 +1,437 @@
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip bgp
+BGP table version is 5, local router ID is 1.2.3.4
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale
+Origin codes: i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight Path
+*>i172.17.0.0/30    2.3.4.5                  0    100      0 i
+*> 172.17.0.4/30    0.0.0.0                  0         32768 i
+*>i172.17.0.8/30    3.4.5.6                  0    100      0 i
+*> 209.225.100.0    200.2.2.2                0             0 200 i
+* i209.225.254.0    200.1.1.1                0    100      0 200 i
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip bgp summary
+BGP router identifier 1.2.3.4, local AS number 20
+BGP table version is 5, main routing table version 5
+5 network entries using 645 bytes of memory
+5 path entries using 260 bytes of memory
+5/3 BGP path/bestpath attribute entries using 620 bytes of memory
+1 BGP AS-PATH entries using 24 bytes of memory
+0 BGP route-map cache entries using 0 bytes of memory
+0 BGP filter-list cache entries using 0 bytes of memory
+BGP using 1549 total bytes of memory
+BGP activity 12/7 prefixes, 14/9 paths, scan interval 60 secs
+
+Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+2.3.4.5         4    20     110     114        5    0    0 00:36:19        2
+3.4.5.6         4    20     114     114        5    0    0 00:36:21        1
+200.2.2.2       4   200      32      30        5    0    0 00:24:33        1
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip bgp neighbors
+BGP neighbor is 2.3.4.5,  remote AS 20, internal link
+  BGP version 4, remote router ID 2.3.4.5
+  BGP state = Established, up for 00:36:20
+  Last read 00:00:20, last write 00:00:20, hold time is 180, keepalive interval is 60 seconds
+  Neighbor capabilities:
+    Route refresh: advertised and received(old & new)
+    Address family IPv4 Unicast: advertised and received
+  Message statistics:
+    InQ depth is 0
+    OutQ depth is 0
+                         Sent       Rcvd
+    Opens:                  4          4
+    Notifications:          0          0
+    Updates:                8          4
+    Keepalives:           102        102
+    Route Refresh:          0          0
+    Total:                114        110
+  Default minimum time between advertisement runs is 0 seconds
+
+ For address family: IPv4 Unicast
+  BGP table version 5, neighbor version 5/0
+ Output queue size : 0
+  Index 1, Offset 0, Mask 0x2
+  1 update-group member
+                                 Sent       Rcvd
+  Prefix activity:               ----       ----
+    Prefixes Current:               2          2 (Consumes 104 bytes)
+    Prefixes Total:                 2          2
+    Implicit Withdraw:              0          0
+    Explicit Withdraw:              0          0
+    Used as bestpath:             n/a          1
+    Used as multipath:            n/a          0
+
+                                   Outbound    Inbound
+  Local Policy Denied Prefixes:    --------    -------
+    Bestpath from this peer:              1        n/a
+    Bestpath from iBGP peer:              1        n/a
+    Total:                                2          0
+  Number of NLRIs in the update sent: max 1, min 0
+
+  Connections established 4; dropped 3
+  Last reset 00:36:23, due to User reset
+Connection state is ESTAB, I/O status: 1, unread input bytes: 0            
+Connection is ECN Disabled, Mininum incoming TTL 0, Outgoing TTL 255
+Local host: 1.2.3.4, Local port: 51110
+Foreign host: 2.3.4.5, Foreign port: 179
+Connection tableid (VRF): 0
+
+Enqueued packets for retransmit: 0, input: 0  mis-ordered: 0 (0 bytes)
+
+Event Timers (current time is 0x68CAF8):
+Timer          Starts    Wakeups            Next
+Retrans            42          0             0x0
+TimeWait            0          0             0x0
+AckHold            38          1             0x0
+SendWnd             0          0             0x0
+KeepAlive           0          0             0x0
+GiveUp              0          0             0x0
+PmtuAger            0          0             0x0
+DeadWait            0          0             0x0
+Linger              0          0             0x0
+ProcessQ            0          0             0x0
+
+iss: 1399737640  snduna: 1399738542  sndnxt: 1399738542     sndwnd:  16023
+irs:  178368608  rcvnxt:  178369510  rcvwnd:      16023  delrcvwnd:    361
+
+SRTT: 299 ms, RTTO: 309 ms, RTV: 10 ms, KRTT: 0 ms
+minRTT: 0 ms, maxRTT: 300 ms, ACK hold: 200 ms
+Status Flags: active open
+Option Flags: nagle
+IP Precedence value : 6
+
+Datagrams (max data segment is 536 bytes):
+Rcvd: 79 (out of order: 0), with data: 39, total data bytes: 901
+Sent: 45 (retransmit: 0, fastretransmit: 0, partialack: 0, Second Congestion: 0), with data: 41, total data bytes: 901
+ Packets received in fast path: 0, fast processed: 0, slow path: 0
+ fast lock acquisition failures: 0, slow path: 0
+
+BGP neighbor is 3.4.5.6,  remote AS 20, internal link
+  BGP version 4, remote router ID 3.4.5.6
+  BGP state = Established, up for 00:36:25
+  Last read 00:00:25, last write 00:00:25, hold time is 180, keepalive interval is 60 seconds
+  Neighbor capabilities:
+    Route refresh: advertised and received(old & new)
+    Address family IPv4 Unicast: advertised and received
+  Message statistics:
+    InQ depth is 0
+    OutQ depth is 0
+                         Sent       Rcvd
+    Opens:                  4          4
+    Notifications:          0          0
+    Updates:                8          8
+    Keepalives:           102        102
+    Route Refresh:          0          0
+    Total:                114        114
+  Default minimum time between advertisement runs is 0 seconds
+
+ For address family: IPv4 Unicast
+  BGP table version 5, neighbor version 5/0
+ Output queue size : 0
+  Index 1, Offset 0, Mask 0x2
+  1 update-group member
+                                 Sent       Rcvd
+  Prefix activity:               ----       ----
+    Prefixes Current:               2          1 (Consumes 52 bytes)
+    Prefixes Total:                 2          1
+    Implicit Withdraw:              0          0
+    Explicit Withdraw:              0          0
+    Used as bestpath:             n/a          1
+    Used as multipath:            n/a          0
+
+                                   Outbound    Inbound
+  Local Policy Denied Prefixes:    --------    -------
+    Bestpath from this peer:              1        n/a
+    Bestpath from iBGP peer:              1        n/a
+    Total:                                2          0
+  Number of NLRIs in the update sent: max 1, min 0
+
+  Connections established 4; dropped 3
+  Last reset 00:36:28, due to User reset
+Connection state is ESTAB, I/O status: 1, unread input bytes: 0            
+Connection is ECN Disabled, Mininum incoming TTL 0, Outgoing TTL 255
+Local host: 1.2.3.4, Local port: 18475
+Foreign host: 3.4.5.6, Foreign port: 179
+Connection tableid (VRF): 0
+
+Enqueued packets for retransmit: 0, input: 0  mis-ordered: 0 (0 bytes)
+
+Event Timers (current time is 0x68D440):
+Timer          Starts    Wakeups            Next
+Retrans            42          0             0x0
+TimeWait            0          0             0x0
+AckHold            38          1             0x0
+SendWnd             0          0             0x0
+KeepAlive           0          0             0x0
+GiveUp              0          0             0x0
+PmtuAger            0          0             0x0
+DeadWait            0          0             0x0
+Linger              0          0             0x0
+ProcessQ            0          0             0x0
+
+iss: 1807216059  snduna: 1807216961  sndnxt: 1807216961     sndwnd:  16023
+irs: 3711270646  rcvnxt: 3711271489  rcvwnd:      16080  delrcvwnd:    304
+
+SRTT: 299 ms, RTTO: 309 ms, RTV: 10 ms, KRTT: 0 ms
+minRTT: 0 ms, maxRTT: 300 ms, ACK hold: 200 ms
+Status Flags: active open
+Option Flags: nagle
+IP Precedence value : 6
+
+Datagrams (max data segment is 536 bytes):
+Rcvd: 79 (out of order: 0), with data: 39, total data bytes: 842
+Sent: 45 (retransmit: 0, fastretransmit: 0, partialack: 0, Second Congestion: 0), with data: 41, total data bytes: 901
+ Packets received in fast path: 0, fast processed: 0, slow path: 0
+ fast lock acquisition failures: 0, slow path: 0
+
+BGP neighbor is 200.2.2.2,  remote AS 200, external link
+  BGP version 4, remote router ID 200.2.2.2
+  BGP state = Established, up for 00:24:42
+  Last read 00:00:29, last write 00:00:41, hold time is 180, keepalive interval is 60 seconds
+  Neighbor capabilities:
+    Route refresh: advertised and received(old & new)
+    Address family IPv4 Unicast: advertised and received
+  Message statistics:
+    InQ depth is 0
+    OutQ depth is 0
+                         Sent       Rcvd
+    Opens:                  1          1
+    Notifications:          0          0
+    Updates:                2          2
+    Keepalives:            27         29
+    Route Refresh:          0          0
+    Total:                 30         32
+  Default minimum time between advertisement runs is 30 seconds
+
+ For address family: IPv4 Unicast
+  BGP table version 5, neighbor version 5/0
+ Output queue size : 0
+  Index 2, Offset 0, Mask 0x4
+  2 update-group member
+  NEXT_HOP is always this router
+                                 Sent       Rcvd
+  Prefix activity:               ----       ----
+    Prefixes Current:               3          1 (Consumes 52 bytes)
+    Prefixes Total:                 3          1
+    Implicit Withdraw:              0          0
+    Explicit Withdraw:              0          0
+    Used as bestpath:             n/a          1
+    Used as multipath:            n/a          0
+
+                                   Outbound    Inbound
+  Local Policy Denied Prefixes:    --------    -------
+    Bestpath from this peer:              1        n/a
+    Total:                                1          0
+  Number of NLRIs in the update sent: max 2, min 1
+
+  Connections established 1; dropped 0
+  Last reset never
+  External BGP neighbor may be up to 10 hops away.
+Connection state is ESTAB, I/O status: 1, unread input bytes: 0            
+Connection is ECN Disabled, Mininum incoming TTL 0, Outgoing TTL 10
+Local host: 1.2.3.4, Local port: 179
+Foreign host: 200.2.2.2, Foreign port: 18684
+Connection tableid (VRF): 0
+
+Enqueued packets for retransmit: 0, input: 0  mis-ordered: 0 (0 bytes)
+
+Event Timers (current time is 0x68E6C8):
+Timer          Starts    Wakeups            Next
+Retrans            27          0             0x0
+TimeWait            0          0             0x0
+AckHold            30         26             0x0
+SendWnd             0          0             0x0
+KeepAlive           0          0             0x0
+GiveUp              0          0             0x0
+PmtuAger            0          0             0x0
+DeadWait            0          0             0x0
+Linger              0          0             0x0
+ProcessQ            0          0             0x0
+
+iss: 1517012863  snduna: 1517013526  sndnxt: 1517013526     sndwnd:  16270
+irs:  499990591  rcvnxt:  499991275  rcvwnd:      16251  delrcvwnd:    133
+
+SRTT: 292 ms, RTTO: 359 ms, RTV: 67 ms, KRTT: 0 ms
+minRTT: 0 ms, maxRTT: 300 ms, ACK hold: 200 ms
+Status Flags: passive open, gen tcbs
+Option Flags: nagle
+IP Precedence value : 6
+
+Datagrams (max data segment is 536 bytes):
+Rcvd: 58 (out of order: 0), with data: 31, total data bytes: 683
+Sent: 55 (retransmit: 0, fastretransmit: 0, partialack: 0, Second Congestion: 0), with data: 27, total data bytes: 662
+ Packets received in fast path: 0, fast processed: 0, slow path: 0
+ fast lock acquisition failures: 0, slow path: 0
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show running-config
+Building configuration...
+
+Current configuration : 1536 bytes
+!
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname POP_Carrier2_VIX
+!
+boot-start-marker
+boot-end-marker
+!
+no logging buffered
+no logging console
+no logging monitor
+!
+no aaa new-model
+!
+resource policy
+!
+ip cef
+!
+!
+!
+!
+!
+!
+!
+voice-card 0
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+! 
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 1.2.3.4 255.255.255.255
+!
+interface FastEthernet0/0
+ description TO-POP_ISP2_VIX
+ ip address 172.17.0.6 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ description TO-Carrier2
+ ip address 10.2.0.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface Serial0/1/0
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+interface Serial0/1/1
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+router bgp 20
+ no synchronization
+ bgp log-neighbor-changes
+ network 172.17.0.4 mask 255.255.255.252
+ neighbor 2.3.4.5 remote-as 20
+ neighbor 2.3.4.5 update-source Loopback0
+ neighbor 3.4.5.6 remote-as 20
+ neighbor 3.4.5.6 update-source Loopback0
+ neighbor 200.2.2.2 remote-as 200
+ neighbor 200.2.2.2 ebgp-multihop 10
+ neighbor 200.2.2.2 update-source Loopback0
+ neighbor 200.2.2.2 next-hop-self
+ no auto-summary
+!
+ip route 2.3.4.5 255.255.255.255 FastEthernet0/1
+ip route 3.4.5.6 255.255.255.255 FastEthernet0/1
+ip route 200.2.2.2 255.255.255.255 FastEthernet0/0
+!
+!
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+line aux 0
+line vty 0 4
+ login
+!
+scheduler allocate 20000 1000
+end
+
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip interface brief
+Interface                  IP-Address      OK? Method Status                Protocol
+FastEthernet0/0            172.17.0.6      YES manual up                    up      
+FastEthernet0/1            10.2.0.1        YES manual up                    up      
+Serial0/1/0                unassigned      YES NVRAM  administratively down down    
+Serial0/1/1                unassigned      YES NVRAM  administratively down down    
+Loopback0                  1.2.3.4         YES manual up                    up      
+
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+     1.0.0.0/32 is subnetted, 1 subnets
+C       1.2.3.4 is directly connected, Loopback0
+     2.0.0.0/32 is subnetted, 1 subnets
+S       2.3.4.5 is directly connected, FastEthernet0/1
+     3.0.0.0/32 is subnetted, 1 subnets
+S       3.4.5.6 is directly connected, FastEthernet0/1
+     200.2.2.0/32 is subnetted, 1 subnets
+S       200.2.2.2 is directly connected, FastEthernet0/0
+     172.17.0.0/30 is subnetted, 3 subnets
+B       172.17.0.8 [200/0] via 3.4.5.6, 00:36:04
+C       172.17.0.4 is directly connected, FastEthernet0/0
+B       172.17.0.0 [200/0] via 2.3.4.5, 00:36:04
+     10.0.0.0/24 is subnetted, 1 subnets
+C       10.2.0.0 is directly connected, FastEthernet0/1
+B    209.225.100.0/24 [20/0] via 200.2.2.2, 00:24:51
+
+
