@@ -1,0 +1,140 @@
+! -------------------------------------------------------------------------------------------------------------------------------- ! 
+show running-config
+Building configuration...
+
+Current configuration : 2175 bytes
+!
+version 12.2
+no service pad
+service timestamps debug uptime
+service timestamps log uptime
+service password-encryption
+!
+hostname Switch1
+!
+no logging buffered
+no logging console
+no logging monitor
+enable secret 5 $1$7eUr$H8QFD8zYtHKGno7KeZgME.
+!
+username cisco privilege 15 password 7 094F471A1A0A
+no aaa new-model
+ip subnet-zero
+!
+no ip domain-lookup
+ip domain-name cisco.com
+!
+!
+!
+no file verify auto
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+interface Port-channel1
+ switchport mode trunk
+!
+interface Port-channel3
+ switchport mode trunk
+!
+interface FastEthernet0/1
+ switchport mode trunk
+ channel-protocol lacp
+ channel-group 1 mode active
+!
+interface FastEthernet0/2
+ switchport mode trunk
+ channel-protocol lacp
+ channel-group 1 mode active
+!
+interface FastEthernet0/3
+ switchport mode trunk
+ channel-protocol lacp
+ channel-group 3 mode active
+!
+interface FastEthernet0/4
+ switchport mode trunk
+ channel-protocol lacp
+ channel-group 3 mode active
+!
+interface FastEthernet0/5
+!
+interface FastEthernet0/6
+!
+interface FastEthernet0/7
+!
+interface FastEthernet0/8
+!
+interface FastEthernet0/9
+!
+interface FastEthernet0/10
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+!
+interface FastEthernet0/23
+!
+interface FastEthernet0/24
+!
+interface GigabitEthernet0/1
+ switchport mode trunk
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ no ip address
+ no ip route-cache
+ shutdown
+!
+interface Vlan99
+ ip address 192.168.99.1 255.255.255.0
+ no ip route-cache
+!
+ip http server
+!
+control-plane
+!
+banner motd ^CWarning! This is a private system!^C
+!
+line con 0
+ exec-timeout 0 0
+ password 7 02050D480809
+ logging synchronous
+ login local
+line vty 0 4
+ exec-timeout 0 0
+ password 7 121A0C041104
+ logging synchronous
+ login local
+line vty 5 15
+ exec-timeout 0 0
+ password 7 121A0C041104
+ logging synchronous
+ login local
+!
+end
+
+
+
